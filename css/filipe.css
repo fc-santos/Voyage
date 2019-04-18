@@ -10,6 +10,18 @@ body {
 
 @media only screen and (max-width: 600px) {
     .bg-blue {
-        background: linear-gradient(to right, #fff,#fff,#fff, #a9ecff, #76e0ff,#00ABDC);
+        background: linear-gradient(to right, #fff, #fff, #fff, #a9ecff, #76e0ff, #00ABDC);
     }
-  }
+}
+
+.my-carousel-caption {
+    position: absolute;
+    right: 15%;
+    top: 8rem;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    text-align: center
+}
