@@ -18,7 +18,7 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-blue pt-0 pb-0 pr-5 pl-5">
+  <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-blue pt-0 pb-0 pr-5 pl-5">
     <a class="navbar-brand" href="#"><img src="assets/images/logo.png" style="width:100px;" alt=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -61,20 +61,22 @@
       </ul>
     </div>
   </nav>
-  </div>
 
-  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-      <div class="carousel-item active" data-interval="5000">
-        <img src="assets/images/island.jpg" class="d-block w-100" alt="La plage">
+  <!-- Mettre les styles dans le fichier css -->
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-pause="false" style="height: 100vh;">
+    <div class="carousel-inner" style="height: 100%">
+      <div class="carousel-item active" data-interval="5000" style="height: 100%">
+        <img src="assets/images/island.jpg" class="w-100" alt="La plage" style="height: 100%">
       </div>
-      <div class="carousel-item" data-interval="5000">
-        <img src="assets/images/mountain.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-item" data-interval="5000" style="height: 100%">
+        <img src="assets/images/mountain.jpg" class="w-100" alt="..." style="height: 100%">
       </div>
-      <div class="carousel-item" data-interval="5000">
-        <img src="assets/images/village.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-item" data-interval="5000" style="height: 100%">
+        <img src="assets/images/village.jpg" class="w-100" alt="..." style="height: 100%">
       </div>
     </div>
+
+  </div>
 
     <div class="container mt-4">
       <div class="row">
@@ -111,7 +113,6 @@
           </div>
         </div>
       </div>
-    </div>
 
 
     <!-- Optional JavaScript -->
