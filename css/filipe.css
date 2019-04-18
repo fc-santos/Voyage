@@ -1,0 +1,7 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.bg-blue {
+    background: linear-gradient(to right, #fff, #fff, #a9ecff, #76e0ff, #76e0ff, #43d5ff, #10caff, #00ABDC);
+}
