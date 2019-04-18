@@ -63,7 +63,7 @@
   </nav>
 
   <!-- Mettre les styles dans le fichier css -->
-  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-pause="false" style="height: 100vh;">
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-pause="false">
     <div class="carousel-inner" style="height: 100%">
       <div class="carousel-item active" data-interval="5000" style="height: 100%">
         <img src="assets/images/island.jpg" class="w-100" alt="La plage" style="height: 100%">
