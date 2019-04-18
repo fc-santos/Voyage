@@ -13,3 +13,27 @@ body {
         background: linear-gradient(to right, #fff,#fff,#fff, #a9ecff, #76e0ff,#00ABDC);
     }
   }
+
+
+  /*Region recherche*/
+.search-content{
+    display: flex; 
+    position: absolute; 
+    top: 0%; 
+    left: 0%; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100%; 
+    min-width: 100%;
+}
+
+.search{
+    position: relative;
+    margin: 0; 
+    padding: 0;    
+    width: 70%; 
+    height: 200px; 
+    z-index: 10; 
+    background: rgba(0,0,0,.80);
+}
+  /* end region recherche*/

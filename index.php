@@ -75,6 +75,11 @@
         <img src="assets/images/village.jpg" class="w-100" alt="..." style="height: 100%">
       </div>
     </div>
+    <div class="search-content">
+      <div class="search" >
+
+      </div>
+    </div>
 
   </div>
 
