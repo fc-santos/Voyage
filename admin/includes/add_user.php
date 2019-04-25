@@ -3,14 +3,14 @@
 
    if(isset($_POST['create_user'])) {
        
-            
+           /* 
             $user_firstname    = escape($_POST['user_firstname']);
             $user_lastname     = escape($_POST['user_lastname']);
             $user_role         = escape($_POST['user_role']);
             $username          = escape($_POST['username']);
             $user_email        = escape($_POST['user_email']);
             $user_password     = escape($_POST['user_password']);
-
+*/
 
 
             /*$user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 10));    
