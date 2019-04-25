@@ -75,7 +75,7 @@
                         <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-plane"></i>Circuits <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="posts_dropdown" class="collapse">
                             <li>
-                                <a href="./posts.php"> Créer un circuit</a>
+                                <a href="./addcircuit.php"> Créer un circuit</a>
                             </li>
                             <li>
                                 <a href="posts.php?source=add_post">Modifier un circuit</a>
