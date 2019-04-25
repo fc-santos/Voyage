@@ -1,13 +1,16 @@
 <?php include "includes/admin_header.php";?>
     <div id="wrapper">
-
-
-
+       
+       
+   
+    
         <!-- Navigation -->
  
         <?php include "includes/admin_navigation.php" ?>
         
-   
+        
+    
+
         <div id="page-wrapper">
 
             <div class="container-fluid">
@@ -21,43 +24,21 @@
                             Welcome to admin
                             
                             
-                            <small> <?php 
-
-                            if(isset($_SESSION['username'])) {
-
-                            echo $_SESSION['username'];
-
-
-
-
-                            }
-
-
-                            // if(is_admin($_SESSION['username'])){
-
-                            //     echo " -- is admin too";
-
-                            // } else {
-
-                            //     echo " ---is not";
-
-                            // }
-
-
-
-
-
-                            ?></small>
+                            <small> <?php echo $_SESSION['username'] ?></small>
                         </h1>
-
-
+              
      
                     </div>
                 </div>
        
                 <!-- /.row -->
                 
-       
+                
+                
+                
+                
+                
+                
                 <div class="row">
     <div class="col-lg-3 col-md-6">
         <div class="panel panel-primary">
@@ -68,15 +49,15 @@
                     </div>
                     <div class="col-xs-9 text-right">
                       
-                      <?php 
+  <?php 
 
-                        $query = "SELECT * FROM posts";
-                        $select_all_post = mysqli_query($connection,$query);
-                        $post_count = mysqli_num_rows($select_all_post);
+    $query = "SELECT * FROM posts";
+    $select_all_post = mysqli_query($connection,$query);
+    $post_count = mysqli_num_rows($select_all_post);
 
-                      echo  "<div class='huge'>{$post_count}</div>"
+  echo  "<div class='huge'>{$post_count}</div>"
 
-                        ?>
+    ?>
 
 
                         <div>Posts</div>
@@ -101,15 +82,15 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
 
-                                      <?php 
+      <?php 
 
-                                    $query = "SELECT * FROM comments";
-                                    $select_all_comments = mysqli_query($connection,$query);
-                                    $comment_count = mysqli_num_rows( $select_all_comments);
+    $query = "SELECT * FROM comments";
+    $select_all_comments = mysqli_query($connection,$query);
+    $comment_count = mysqli_num_rows( $select_all_comments);
 
-                                  echo  "<div class='huge'>{$comment_count}</div>"
+  echo  "<div class='huge'>{$comment_count}</div>"
 
-                                    ?>
+    ?>
 
            
                                       <div>Comments</div>
@@ -134,15 +115,15 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
 
-                                       <?php 
+   <?php 
 
-                                        $query = "SELECT * FROM users";
-                                        $select_all_users = mysqli_query($connection,$query);
-                                        $user_count = mysqli_num_rows($select_all_users);
+    $query = "SELECT * FROM users";
+    $select_all_users = mysqli_query($connection,$query);
+    $user_count = mysqli_num_rows($select_all_users);
 
-                                      echo  "<div class='huge'>{$user_count}</div>"
+  echo  "<div class='huge'>{$user_count}</div>"
 
-                                        ?>
+    ?>
 
                                        
                                         <div> Users</div>
@@ -167,17 +148,18 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
 
-                                     <?php 
+     <?php 
 
-                                    $query = "SELECT * FROM categories";
-                                    $select_all_categories = mysqli_query($connection,$query);
-                                    $category_count = mysqli_num_rows($select_all_categories);
+    $query = "SELECT * FROM categories";
+    $select_all_categories = mysqli_query($connection,$query);
+    $category_count = mysqli_num_rows($select_all_categories);
 
-                                  echo  "<div class='huge'>{$category_count}</div>"
+  echo  "<div class='huge'>{$category_count}</div>"
 
-                                    ?>
+    ?>
+                                       
 
-                                   <div>Categories</div>
+                                        <div>Categories</div>
                                     </div>
                                 </div>
                             </div>
@@ -193,32 +175,13 @@
                 </div>
                 <!-- /.row -->
                 
+
+               
+               
+               
                 
-    <?php 
-
- $query = "SELECT * FROM posts WHERE post_status = 'published' ";
-$select_all_published_posts = mysqli_query($connection,$query);
-$post_published_count = mysqli_num_rows($select_all_published_posts);
-                                     
-
-                                      
-$query = "SELECT * FROM posts WHERE post_status = 'draft' ";
-$select_all_draft_posts = mysqli_query($connection,$query);
-$post_draft_count = mysqli_num_rows($select_all_draft_posts);
-
-
-$query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
-$unapproved_comments_query = mysqli_query($connection,$query);
-$unapproved_comment_count = mysqli_num_rows($unapproved_comments_query);
-
-
-$query = "SELECT * FROM users WHERE user_role = 'subscriber'";
-$select_all_subscribers = mysqli_query($connection,$query);
-$subscriber_count = mysqli_num_rows($select_all_subscribers);
-
-
-
-    ?>
+                
+                
                 
                 
                 
@@ -234,29 +197,33 @@ $subscriber_count = mysqli_num_rows($select_all_subscribers);
         var data = google.visualization.arrayToDataTable([
           ['Data', 'Count'],
             
-            <?php
-                                      
-    $element_text = ['All Posts','Active Posts','Draft Posts', 'Comments','Pending Comments', 'Users','Subscribers', 'Categories'];       
-    $element_count = [$post_count,$post_published_count, $post_draft_count, $comment_count,$unapproved_comment_count, $user_count,$subscriber_count,$category_count];
+              <?php 
+
+          // $days1 = ['Mon','Tuesday','Wed','Thu','Fri','Sat','Sun'];
+  $elements = ['Active Posts','Categories','Users',' Comments'];
+    $element_data = [$post_count,$category_count, $user_count,$comment_count];
 
 
-    for($i =0;$i < 8; $i++) {
-    
-        echo "['{$element_text[$i]}'" . "," . "{$element_count[$i]}],";
-     
-    
-    
-    }
-                                                            
+          for($i=0;$i<4; $i++){
+        
+
+           
+                echo   "['{$elements[$i]}'" . "," . "{$element_data[$i]}],";
+
+        
+
+
+                }
+             
+
             ?>
-               
-     
+ 
         ]);
 
         var options = {
           chart: {
-            title: '',
-            subtitle: '',
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
           }
         };
 
@@ -267,7 +234,7 @@ $subscriber_count = mysqli_num_rows($select_all_subscribers);
     </script>
                    
                    
-  <div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
+<div id="columnchart_material" style="width: 'auto'; height: 500px;"></div>
                     
                     
                     
@@ -275,56 +242,29 @@ $subscriber_count = mysqli_num_rows($select_all_subscribers);
                     
                 </div>
 
-  
+
+
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 
             </div>
             <!-- /.container-fluid -->
 
         </div>
         
-    
+        
+        
+     
+        
         <!-- /#page-wrapper -->
         
     <?php include "includes/admin_footer.php" ?>
-
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-        <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
-
-
-
-        <script>
-
-            $(document).ready(function(){
-
-
-              var pusher =   new Pusher('a202fba63a209863ab62', {
-
-                  cluster: 'us2',
-                  encrypted: true
-              });
-
-
-              var notificationChannel =  pusher.subscribe('notifications');
-
-
-                notificationChannel.bind('new_user', function(notification){
-
-                    var message = notification.message;
-
-                    toastr.success(`${message} just registered`);
-
-                });
-
-
-
-            });
-
-
-
-        </script>
-
-
-
-
-
