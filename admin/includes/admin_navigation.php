@@ -1,4 +1,4 @@
-       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+       <nav class="navbar navbar-inverse navbar-fixed-top bg-orange pr-2 pl-2" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -7,16 +7,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CMS Admin</a>
+                <a href="index.php"><img class="icon-brand" src="../assets/images/logo.png"  alt=""></a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
-
+                <li>
+                    <a href="../includes/logout.php"><i id="envelope" class="fa fa-fw fa-envelope"></i></a>
+                </li>
+                <li>
+                    <a href="../includes/logout.php"><i id="notification" class="fa fa-fw fa-bell"></i></a>
+                </li>
               <!--   <li><a href="">Users Online: <?php //echo users_online(); ?></a></li> -->
 
-                <li><a href="">Users Online: <span class="usersonline"></span></a></li>
+                <!--<li><a href="">Users Online: <span class="usersonline"></span></a></li>
 
-               <li><a href="../index.php">HOME SITE</a></li>
+               <li><a href="../index.php">Acceuil</a></li>-->
                
                
                
@@ -26,13 +31,13 @@
                     
 <?php
 
-if(isset($_SESSION['username'])) {
+//if(isset($_SESSION['username'])) {
 
     
-    echo $_SESSION['username'];
+    echo 'abdel.hidalgo@gmail.com'; //$_SESSION['username'];
 
 
-}
+//}
 
 
 
@@ -47,11 +52,11 @@ if(isset($_SESSION['username'])) {
                            
                            
                            
-                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                            <a href="#"><i class="fa fa-fw fa-user"></i>Profil</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                            <a href="../includes/logout.php"><i class="fa fa-fw fa-power-off"></i> Déconnexion</a>
                         </li>
                     </ul>
                 </li>
@@ -63,26 +68,37 @@ if(isset($_SESSION['username'])) {
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li>
-                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                        <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Accueil</a>
                     </li>
                 
                      <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-arrows-v"></i>Posts <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown"><i class="fa fa-fw fa-plane"></i>Circuits <i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="posts_dropdown" class="collapse">
                             <li>
-                                <a href="./posts.php"> View All Posts</a>
+                                <a href="./posts.php"> Créer un circuit</a>
                             </li>
                             <li>
-                                <a href="posts.php?source=add_post">Add Posts</a>
+                                <a href="posts.php?source=add_post">Modifier un circuit</a>
+                            </li>
+                            <li>
+                                <a href="posts.php?source=add_post">Supprimer un circuit</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Categories</a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#posts_dropdown1"><i class="fa fa-fw fa-users"></i> Utilisateurs <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="posts_dropdown1" class="collapse">
+                            <li>
+                                <a href="./posts.php"> Créer admin</a>
+                            </li>
+                            <li>
+                                <a href="posts.php?source=add_post">Désactiver compte client</a>
+                            </li>
+                        </ul>
                     </li>
                    
                     <li class="">
-                        <a href="comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
+                        <a href="comments.php"><i class="fa fa-fw fa-money"></i> Promotion</a>
                     </li>
                     
                     <li>
