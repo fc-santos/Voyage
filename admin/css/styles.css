@@ -20,3 +20,49 @@ background-repeat: no-repeat;
 background-position: center;
 
 }
+
+/*navbar menu*/
+
+.bg-orange {
+    background: linear-gradient(to right, #111, #111, #fff, #fff, #fbd9ae, #fbd9ae, #f9c27e, #f9c27e, #f7ab4d, #F5941C);
+}
+
+.icon-brand {
+    height: 50px;
+    display: block;
+}
+
+.pr-2 {
+    padding-right: 2rem;
+} 
+.pl-2 {
+    padding-left: 2rem;
+}
+
+#envelope::after {
+    content: "1";
+    position: absolute;
+    left: 28px;
+    top: 11px;
+    height: 11px;
+    width: 11px;
+    border-radius: 10%;
+    background: red;
+    color: black;
+    font-size: 8pt;
+    font-weight: bold;
+}
+
+#notification::after {
+    content: "1";
+    position: absolute;
+    left: 28px;
+    top: 11px;
+    height: 11px;
+    width: 11px;
+    border-radius: 10%;
+    background: red;
+    color: black;
+    font-size: 8pt;
+    font-weight: bold;
+}
