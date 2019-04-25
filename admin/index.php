@@ -1,4 +1,5 @@
-<?php include "includes/admin_header.php";?>
+<?php 
+    include "includes/admin_header.php";?>
     <div id="wrapper">
 
 
@@ -69,7 +70,7 @@
                     <div class="col-xs-9 text-right">
                       
                       <?php 
-
+/*
                         $query = "SELECT * FROM posts";
                         $select_all_post = mysqli_query($connection,$query);
                         $post_count = mysqli_num_rows($select_all_post);
@@ -174,7 +175,7 @@
                                     $category_count = mysqli_num_rows($select_all_categories);
 
                                   echo  "<div class='huge'>{$category_count}</div>"
-
+*/
                                     ?>
 
                                    <div>Categories</div>
@@ -195,7 +196,7 @@
                 
                 
     <?php 
-
+/*
  $query = "SELECT * FROM posts WHERE post_status = 'published' ";
 $select_all_published_posts = mysqli_query($connection,$query);
 $post_published_count = mysqli_num_rows($select_all_published_posts);
@@ -217,7 +218,7 @@ $select_all_subscribers = mysqli_query($connection,$query);
 $subscriber_count = mysqli_num_rows($select_all_subscribers);
 
 
-
+*/
     ?>
                 
                 
@@ -235,7 +236,7 @@ $subscriber_count = mysqli_num_rows($select_all_subscribers);
           ['Data', 'Count'],
             
             <?php
-                                      
+                 /*                     
     $element_text = ['All Posts','Active Posts','Draft Posts', 'Comments','Pending Comments', 'Users','Subscribers', 'Categories'];       
     $element_count = [$post_count,$post_published_count, $post_draft_count, $comment_count,$unapproved_comment_count, $user_count,$subscriber_count,$category_count];
 
@@ -247,7 +248,7 @@ $subscriber_count = mysqli_num_rows($select_all_subscribers);
     
     
     }
-                                                            
+             */                                               
             ?>
                
      

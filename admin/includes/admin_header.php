@@ -1,5 +1,5 @@
 <?php ob_start(); ?>
-<?php include "../includes/db.php"; ?>
+<?php /*include "../includes/db.php"; */?>
 <?php include "functions.php"; ?>
 
 
@@ -12,7 +12,7 @@
 
 
 
-if(isset($_SESSION['user_role'])) {
+/*if(isset($_SESSION['user_role'])) {
 
 
 
@@ -21,7 +21,7 @@ if(isset($_SESSION['user_role'])) {
 header("location: ../index.php");
 
 
-}
+}*/
 
 
 

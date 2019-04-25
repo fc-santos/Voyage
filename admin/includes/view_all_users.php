@@ -16,7 +16,7 @@
                       
 
   <?php 
-    
+    /*
     $query = "SELECT * FROM users";
     $select_users = mysqli_query($connection,$query);  
     while($row = mysqli_fetch_assoc($select_users)) {
@@ -144,7 +144,7 @@ if(isset($_GET['delete'])){
 
 
 
-
+*/
 ?>     
             
             

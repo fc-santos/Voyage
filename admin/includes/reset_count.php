@@ -3,7 +3,7 @@
 
 if(isset($_GET['p_id'])) {
 
-		$the_post_id = escape($_GET['p_id']);
+	/*	$the_post_id = escape($_GET['p_id']);
 
 		$query = "DELETE post_views_count FROM posts WHERE post_id = $the_post_id ";
 		$send_query = mysqli_query($connection, $query);
@@ -16,7 +16,7 @@ if(isset($_GET['p_id'])) {
 
 		header("Location: view_all_posts.php");
 
-
+*/
 
 	}
 

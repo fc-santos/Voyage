@@ -7,7 +7,7 @@
 
         if(isset($_GET['edit'])){
 
-            $cat_id = escape($_GET['edit']);
+         /*   $cat_id = escape($_GET['edit']);
 
 
 
@@ -52,7 +52,7 @@
 
 
                      redirect("categories.php");
-          
+          */
          }
 
     ?>

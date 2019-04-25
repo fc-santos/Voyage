@@ -5,7 +5,7 @@ include("delete_modal.php");
 
 if(isset($_POST['checkBoxArray'])) {
 
-
+/*
     
     foreach($_POST['checkBoxArray'] as $postValueId ){
         
@@ -95,7 +95,7 @@ confirmQuery($update_to_delete_status);
     
     } 
 
-
+*/
 
 }
 
@@ -157,7 +157,7 @@ confirmQuery($update_to_delete_status);
                       
 
   <?php 
-    
+    /*
     $query = "SELECT * FROM posts ORDER BY post_id DESC ";
     $select_posts = mysqli_query($connection,$query);  
 
@@ -280,7 +280,7 @@ echo "<td><img width='100' src='../images/$post_image' alt='image'></td>";
    
     }
 
-
+*/
 
       ?>
 

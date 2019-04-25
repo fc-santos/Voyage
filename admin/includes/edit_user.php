@@ -6,7 +6,7 @@
 if(isset($_GET['edit_user'])){
 
 
-    $the_user_id =  escape($_GET['edit_user']);
+    /*$the_user_id =  escape($_GET['edit_user']);
     
 
     $query = "SELECT * FROM users WHERE user_id = $the_user_id ";
@@ -26,7 +26,7 @@ if(isset($_GET['edit_user'])){
       }
       
     
-    
+    */
     
 ?>
   

@@ -48,7 +48,7 @@ function checkIfUserIsLoggedInAndRedirect($redirectLocation=null){
 
 
 
-
+/*
 function escape($string) {
 
 global $connection;
@@ -58,7 +58,7 @@ return mysqli_real_escape_string($connection, trim($string));
 
 }
 
-
+*/
 
 function set_message($msg){
 
@@ -88,7 +88,7 @@ function display_message() {
 }
 
 
-
+/*
 
 function users_online() {
 
@@ -423,7 +423,7 @@ function register_user($username, $email, $password){
 
  }
 
-
+*/
 
 
 

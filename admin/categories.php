@@ -37,7 +37,7 @@
 
             <div class="col-xs-6">
             
-            <?php insert_categories();  ?>
+            <?php /*insert_categories(); */ ?>
     
     <form action="" method="post">
       <div class="form-group">
@@ -81,7 +81,7 @@
 
         <?php 
 
-
+/*
     $query = "SELECT * FROM categories";
     $select_categories = mysqli_query($connection,$query);  
 
@@ -101,7 +101,7 @@
 
 
 
-
+*/
 ?>
         
 
@@ -128,9 +128,9 @@
 
 
 <?php 
-
+/*
 deleteCategories();
-
+*/
  ?>
 
   
