@@ -71,7 +71,9 @@
 
 /*circuit*/
 
-
+#descriptioncircuit{
+    resize: none !important;
+}
 
 
 

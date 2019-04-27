@@ -1,9 +1,5 @@
 <?php
 
-
-
-
-
 ?>
 
 <form class="mt-3">
@@ -13,7 +9,7 @@
   </div>
   <div class="form-group">
     <label for="descriptioncircuit">Description</label>
-    <textarea class="form-control" id="descriptioncircuit" rows="3"></textarea>
+    <textarea class="form-control" id="descriptioncircuit" rows="10"></textarea>
   </div>
   <div class="form-group">
     <label for="imagecircuit">Image</label>
