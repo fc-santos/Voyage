@@ -54,6 +54,7 @@ body {
     }
 
     /*#endregion menu*/
+
 }
 
 
@@ -99,12 +100,14 @@ body {
 
     /*#region login form */
     .box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: relative;
+        top: -85%;
+        left: 25%;
+        height: 80vh;
+        z-index: 20px;
+        min-height: 450px;
         width: 600px;
-        padding: 40px;
+        padding: 30px;
         background: rgba(0, 0, 0, .8);
         box-sizing: border-box;
         box-shadow: 0 15px 25px rgba(0, 0, 0.5);
@@ -113,7 +116,7 @@ body {
 
     .box h2 {
         margin: 0 0 30px;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         padding: 0;
         color: #fff;
         text-align: center;
@@ -141,7 +144,7 @@ body {
         font-size: 14px;
         letter-spacing: 1px;
         color: #fff;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         border: none;
         border-bottom: 1px solid #fff;
         outline: none;
@@ -182,6 +185,33 @@ body {
     .box input[type="submit"]:focus,
     .box input[type="submit"]:hover {
         background: #007698;
+    }
+
+    .btn-facebook {
+        color: white;
+        margin-top: 0;
+        background-color: #3b5998;
+    }
+
+    hr.style-one {
+        border: 0;
+        height: 1px;
+        margin-top: 25px;
+        margin-bottom: 0;
+        background-image: linear-gradient(to right, #ccc, #333, #ccc);
+    }
+
+    .or {
+        position: relative;
+        top: -27px;
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: #efefefef;
+        line-height: 50px;
+        text-align: center;
+        font-weight: bold;
     }
 
     /*#endregion login form */
