@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Voyage GoAbroad | À propos";
 $nav = "about";
 include 'includes/header.php'; ?>

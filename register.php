@@ -2,6 +2,7 @@
 $title = "S'enregistrer";
 $nav = "register";
 include 'includes/header.php';
+include 'face.php';
 ?>
 
 <div style="height:100vh; width:100%">
