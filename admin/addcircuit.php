@@ -1,6 +1,8 @@
 <?php
     include "../controlleur/connexionDB.php";
-    session_start();
+    if (!session_id()) {
+        @ session_start();
+    }
 ?>
 
 <?php include "includes/admin_header.php" ?>
@@ -59,4 +61,5 @@
     </script>
 <?php endif ?>
 <!-- /#page-wrapper -->
-<?php include "includes/admin_footer.php" ?>
+<?php
+include "includes/admin_footer.php" ?>
