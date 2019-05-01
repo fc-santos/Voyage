@@ -1,7 +1,6 @@
 <?php
 ?>
 
-<?= $idCircuit ?>
 <h2>Créer des étapes</h2>
 <form class="mt-3" action="addcircuit.php" method="POST">
   <div class="form-group">
@@ -21,7 +20,7 @@
         <input type="number" class="form-control" id="nbjours" name="nbjours" value="0">
     </div>
     <div class="form-group" id="detailsJours" visibility="hidden">
-    </div>
+</div>
     <button type="submit" class="btn btn-default">Ajouter une autre étape</button>
     <button class="btn btn-primary">Terminer</button>
 </form>
