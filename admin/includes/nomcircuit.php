@@ -15,12 +15,19 @@ $correct = false;
          $stmt = $conn->prepare($sql);
          $stmt->execute(['titre' => $nomCircuit, 'description' => $descriptionCircuit]);
          $correctNomCircuit = true;
-         $_SESSION['actionPage'] = 'Ajouter des étapes';
+
+         $sql2 = 'SELECT id FROM circuit WHERE titre = :titre';
+         $stmt = $pdo->prepare($sql2);
+         $stmt->execute(['id' => $id]);
+         $post = $stmt->fetch();
      } catch (Exception $r) {
      }
  }
+
+
 ?>
 
+<h2>Créer circuit</h2>
 <form class="mt-3" action="addcircuit.php" method="POST" id="formCreateCircuit")">
   <div class="form-group">
     <label for="titrecircuit">Titre</label>

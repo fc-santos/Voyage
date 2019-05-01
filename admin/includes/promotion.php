@@ -1,11 +1,7 @@
 <?php
 
-
-
-
-
 ?>
-
+<h2>Ajouter promotion</h2>
 <form class="mt-3">
     <div class="form-group">
         <label for="titrepromo">Titre</label>

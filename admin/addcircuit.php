@@ -9,11 +9,7 @@
     <!-- Navigation -->
     <?php include "includes/admin_navigation.php" ?>
     <div id="page-wrapper">
-        <h2><?php if (isset($_SESSION['actionPage'])) {
-    echo $_SESSION['actionPage'];
-} else {
-    echo 'Créer circuit';
-} ?></h2>
+
         <ul class="nav nav-tabs">
             <li class="nav-item active" id="li-nomcircuit">
                 <a href="#nomcircuit" class="nav-link" role="tab" data-toggle="tab">Nom circuit</a>

@@ -1,6 +1,6 @@
 <?php
 ?>
-
+<h2>Créer des étapes</h2>
 <form class="mt-3">
     <div class="form-group">
         <label for="titreetape">Titre</label>
@@ -17,4 +17,5 @@
         </div>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
+    <button class="btn btn-primary">Ajouter une autre étape</button>
 </form>
