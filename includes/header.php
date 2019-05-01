@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -22,7 +24,6 @@
 </head>
 
 <body style="min-height: 700px;">
-
     <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-blue pt-0 pb-0 pr-5 pl-5">
         <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" style="width:100px;" alt=""></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,10 +32,6 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
-                <!--
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Accueil <span class="sr-only">(current)</span></a>
-        </li>-->
                 <li class="nav-item mr-4">
                     <a class="nav-link" href="#">Message aux clients</a>
                 </li>
@@ -56,13 +53,29 @@
                     <a class="nav-link" href="about.php">À propos</a>
                 </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
-                    <a class="nav-link" href="login.php">Connexion</a>
-                </li>
-                <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
-                    <a class="nav-link" href="register.php">S'enregistrer</a>
-                </li>
-            </ul>
+            <?php if (!isset($_SESSION['nomMembre'])) : ?>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
+                        <a class="nav-link" href="login.php">Connexion</a>
+                    </li>
+                    <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
+                        <a class="nav-link" href="register.php">S'enregistrer</a>
+                    </li>
+                </ul>
+            <?php else : ?>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown mr-4">
+                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Bonjour <?php echo $_SESSION['nomMembre']; ?> <i class="fas fa-caret-down"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
+                            <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
+                        </div>
+                    </li>
+                </ul>
+            <?php endif; ?>
         </div>
     </nav>
