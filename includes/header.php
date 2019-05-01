@@ -13,12 +13,15 @@
     <!-- Goggle Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
 
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
     <title>
         <?php echo $title; ?>
     </title>
 </head>
 
-<body>
+<body style="min-height: 700px;">
 
     <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-blue pt-0 pb-0 pr-5 pl-5">
         <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" style="width:100px;" alt=""></a>

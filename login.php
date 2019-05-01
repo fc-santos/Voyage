@@ -4,16 +4,18 @@ $nav = "login";
 include 'includes/header.php' ?>
 
 <!-- Mettre les styles dans le fichier css -->
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-pause="false">
-    <div class="carousel-inner" style="height: 100%">
-        <div class="carousel-item active" data-interval="5000" style="height: 100%">
-            <img src="assets/images/island.jpg" class="w-100" alt="La plage" style="height: 100%">
-        </div>
-        <div class="carousel-item" data-interval="5000" style="height: 100%">
-            <img src="assets/images/mountain.jpg" class="w-100" alt="..." style="height: 100%;">
-        </div>
-        <div class="carousel-item" data-interval="5000" style="height: 100%">
-            <img src="assets/images/village.jpg" class="w-100" alt="..." style="height: 100%">
+<div style="height:100vh; width:100%">
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-pause="false">
+        <div class="carousel-inner" style="height: 100%">
+            <div class="carousel-item active" data-interval="5000" style="height: 100%">
+                <img src="assets/images/island.jpg" class="w-100" alt="La plage" style="height: 100%">
+            </div>
+            <div class="carousel-item" data-interval="5000" style="height: 100%">
+                <img src="assets/images/mountain.jpg" class="w-100" alt="..." style="height: 100%;">
+            </div>
+            <div class="carousel-item" data-interval="5000" style="height: 100%">
+                <img src="assets/images/village.jpg" class="w-100" alt="..." style="height: 100%">
+            </div>
         </div>
     </div>
     <div class="box">
@@ -29,7 +31,12 @@ include 'includes/header.php' ?>
             </div>
             <input type="submit" name="" value="Se connecter">
         </form>
+        <hr class="style-one">
+        <div style="color:#fff" class="or">OU</div>
+        <button class="btn btn-lg btn-facebook btn-block text-uppercase" type="submit"><i class="fab fa-facebook-f mr-2"></i> Login avec Facebook</button>
         <p>Vous n'avez pas de compte?<a href="register.php"> S'enregistrer</a></p>
     </div>
+</div>
 
-    <?php include 'includes/footer.php' ?>
+
+<?php include 'includes/footer.php' ?>
