@@ -2,7 +2,7 @@
 $title = "Voyage GoAbroad | Connexion";
 $nav = "login";
 include 'includes/header.php';
-include_once 'face.php';
+include 'face.php';
 
 if (isset($_POST['btnLogin'])) { }
 //Logique pour voir si l'utilisateur existe dans la BD

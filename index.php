@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Voyage GoAbroad | Page d'accueil";
 $nav = "index";
 require 'includes/header.php' ?>
