@@ -1,9 +1,4 @@
 <?php
-
-
-
-
-
 ?>
 
 <form class="mt-3">
