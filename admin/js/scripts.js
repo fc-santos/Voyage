@@ -1,37 +1,17 @@
-tinymce.init({selector:'textarea'});
-
 $(document).ready(function(){
-
 	$('#selectAllBoxes').click(function(event){
-
 	if(this.checked) {
-
 	$('.checkBoxes').each(function(){
-
 	    this.checked = true;
-
 	});
 
 } else {
-
-
 	$('.checkBoxes').each(function(){
-
-	    this.checked = false;
-
+		this.checked = false;
 	});
-
-
 	}
 
 	});
-
-
-
-
-
-
-
 // var div_box = "<div id='load-screen'><div id='loading'></div></div>";
 
 // $("body").prepend(div_box);
@@ -39,32 +19,15 @@ $(document).ready(function(){
 // $('#load-screen').delay(700).fadeOut(600, function(){
 //    $(this).remove();
 // });
-
-
-
 });
 
-
 function loadUsersOnline() {
-
-
 	$.get("functions.php?onlineusers=result", function(data){
-
 		$(".usersonline").text(data);
-
-
 	});
-
-
-
 }
-
-
 setInterval(function(){
-
 	loadUsersOnline();
-
-
 },500);
 
 $('#nbjours').on('input', function() {
@@ -72,8 +35,8 @@ $('#nbjours').on('input', function() {
 	let searchText = $('#nbjours').val();
 	console.log(searchText);
 
-	//alert('ok');
-	//e.preventDefault();
+	alert('ok');
+	e.preventDefault();
 });
 
 

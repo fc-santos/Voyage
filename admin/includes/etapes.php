@@ -17,10 +17,21 @@
   </div>
     <div class="form-group">
         <label for="nbjours">Nombre de jours</label>
-        <input type="number" class="form-control" id="nbjours" name="nbjours" value="0">
+        <input type="number" class="form-control" id="nbjours" name="nbjours">
     </div>
-    <div class="form-group" id="detailsJours" visibility="hidden">
-</div>
+    <div id="detailsJours">
+    </div>
     <button type="submit" class="btn btn-default">Ajouter une autre étape</button>
     <button class="btn btn-primary">Terminer</button>
 </form>
+
+<script>    
+    $("#nbjours").on("input", function(){
+        let jours = $('#nbjours').val();
+        detailsJour = '';
+        for(let i = 1; i <= jours; i++){
+            detailsJour += '<p>' + i + '</p>';
+        }
+        $('#detailsJours').html(detailsJour);
+    });
+</script>
