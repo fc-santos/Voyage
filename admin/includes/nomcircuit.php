@@ -39,7 +39,7 @@ $correctNomCircuit = false;
   </div>
   <div class="form-group">
     <label for="descriptioncircuit">Description</label>
-    <textarea class="form-control" id="descriptioncircuit" name="descriptionCircuit" rows="10"><?php if (isset($_POST['descriptionCircuit'])) {
+    <textarea class="form-control" id="descriptioncircuit" name="descriptionCircuit" rows="5"><?php if (isset($_POST['descriptionCircuit'])) {
     echo htmlentities($_POST['descriptionCircuit']);
 }?></textarea>
   </div>
