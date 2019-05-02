@@ -1,16 +1,17 @@
-/*$(document).ready(function(){
+$(document).ready(function(){
 	$('#selectAllBoxes').click(function(event){
 	if(this.checked) {
 	$('.checkBoxes').each(function(){
 	    this.checked = true;
 	});
 
-	} else {
-		$('.checkBoxes').each(function(){
-			this.checked = false;
-		});
+} else {
+	$('.checkBoxes').each(function(){
+		this.checked = false;
+	});
 	}
-});
+
+	});
 // var div_box = "<div id='load-screen'><div id='loading'></div></div>";
 
 // $("body").prepend(div_box);
@@ -28,7 +29,16 @@ function loadUsersOnline() {
 setInterval(function(){
 	loadUsersOnline();
 },500);
-*/
+
+$('#nbjours').on('input', function() {
+
+	let searchText = $('#nbjours').val();
+	console.log(searchText);
+
+	alert('ok');
+	e.preventDefault();
+});
+
 
 
 
