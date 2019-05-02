@@ -11,7 +11,7 @@
   </div>
   <div class="form-group">
     <label for="descriptionetape">Description</label>
-    <textarea class="form-control" id="descriptionetape" name="descriptionetape" rows="10"><?php if (isset($_POST['descriptionetape'])) {
+    <textarea class="form-control" id="descriptionetape" name="descriptionetape" rows="5"><?php if (isset($_POST['descriptionetape'])) {
     echo htmlentities($_POST['descriptionetape']);
 }?></textarea>
   </div>
@@ -30,7 +30,10 @@
         let jours = $('#nbjours').val();
         detailsJour = '';
         for(let i = 1; i <= jours; i++){
-            detailsJour += '<p>' + i + '</p>';
+            detailsJour += `
+                            
+            
+            `;
         }
         $('#detailsJours').html(detailsJour);
     });
