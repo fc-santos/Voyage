@@ -30,15 +30,6 @@ setInterval(function(){
 	loadUsersOnline();
 },500);
 
-$('#nbjours').on('input', function() {
-
-	let searchText = $('#nbjours').val();
-	console.log(searchText);
-
-	alert('ok');
-	e.preventDefault();
-});
-
 
 
 

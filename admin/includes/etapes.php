@@ -2,6 +2,7 @@
 ?>
 
 <h2>Créer des étapes</h2>
+<?= $idCircuit ?>
 <form class="mt-3" action="addcircuit.php" method="POST">
   <div class="form-group">
     <label for="titreetape">Titre</label>
@@ -30,7 +31,7 @@
         let jours = $('#nbjours').val();
         detailsJour = '';
         for(let i = 1; i <= jours; i++){
-            detailsJour += '<p>' + i + '</p>';
+            detailsJour += '<div style="height:50px; border: 1px solid red;">fggfgfgfg</div>';
         }
         $('#detailsJours').html(detailsJour);
     });
