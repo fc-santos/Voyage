@@ -31,10 +31,10 @@ try {
 }
 
 if (!isset($accessToken)) {
-    $url_login = 'http://localhost:8080/face.php';
+    $url_login = 'http://localhost/Voyage/face.php';
     $loginUrl = $helper->getLoginUrl($url_login, $permissions);
 } else {
-    $url_login = 'http://localhost:8080/face.php';
+    $url_login = 'http://localhost/Voyage/face.php';
     $loginUrl = $helper->getLoginUrl($url_login, $permissions);
     //Usuário ja autenticado
     if (isset($_SESSION['face_access_token'])) {
