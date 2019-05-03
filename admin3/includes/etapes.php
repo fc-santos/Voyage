@@ -1,12 +1,12 @@
 <?php
 
-if (!isset($_SESSION['ordre'])) {
-    $_SESSION['ordre'] = 0;
-} else {
-    $_SESSION['ordre'] = $_SESSION['ordre'] + 1;
-}
-
-if (isset($_POST['autre'])) {
+if (isset($_POST['autre']) || isset($_POST['terminer'])) {
+    if (!isset($_SESSION['ordre'])) {
+        $_SESSION['ordre'] = 0;
+    } else {
+        $_SESSION['ordre'] = $_SESSION['ordre'] + 1;
+    }
+    
     if (isset($_POST['titreEtape'])) {
         $titreEtape = $_POST['titreEtape'];
     }
@@ -16,7 +16,6 @@ if (isset($_POST['autre'])) {
     if (isset($_POST['joursEtape'])) {
         $joursEtape = $_POST['joursEtape'];
     }
-
 
     try {
         $idCircuit = $_SESSION['idCircuit'];
@@ -32,7 +31,7 @@ if (isset($_POST['autre'])) {
               $ordre = 1;
           };*/
         
-        $sql3 = "INSERT INTO etape(idCircuit, ordre, nom, description, jours) VALUES($idCircuit, $ordre, :titre, :description, :joursEtape)";
+        $sql3 = "INSERT INTO etape(idCircuit, nom, description, ordre, nbJour) VALUES($idCircuit, :titre, :description,  $ordre, :joursEtape)";
         $stmt3 = $conn->prepare($sql3);
         $stmt3->execute(['titre' => $titreEtape, 'description' => $descriptionEtape, 'joursEtape' => $joursEtape]);
         $_SESSION['correctEtape'] = true;
@@ -48,7 +47,11 @@ if (isset($_POST['autre'])) {
 }
 
 if (isset($_POST['terminer'])) {
+    //$_SESSION['ordre'] = 0;
     unset($_SESSION['ordre']);
+    unset($_SESSION['correctEtape']);
+    unset($_SESSION['correctNomCircuit']);
+    unset($_POST['terminer']);
 }
 ?>
 
@@ -68,20 +71,30 @@ if (isset($_POST['terminer'])) {
   </div>
     <div class="form-group">
         <label for="joursEtape">Nombre de jours</label>
-        <input type="number" class="form-control" id="joursEtape" name="joursEtape" value="1">
+        <input type="number" class="form-control" id="joursEtape" min=1 name="joursEtape" value="1">
     </div>
     <div id="detailsJours" class="border mb-3">
+
         <div class="container pt-3 pb-3">
             <div class="row mb-2">
                 <div class="col-sm-12 col-md-4 mb-2">
-                One of three columnsOne of three columnsOne of three columnsOne of three columns
+                    <div class="form-group">
+                        <label for="hebergement">Hébergement</label>
+                        <input type="text" class="form-control" id="hebergement" aria-describedby="textHelp" placeholder="Entrez un hebergement">
+                    </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-2">
-                One of three columnsOne of three columnsOne of three columnsOne of three columns
+                    <div class="form-group">
+                        <label for="souper">text address</label>
+                        <input type="text" class="form-control" id="souper" aria-describedby="textHelp" placeholder="Entrez un lieu">
+                    </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-2">
-                One of three columnsOne of three columnsOne of three columnsOne of three columns
-                </div>
+                    <div class="form-group">
+                        <label for="diner">Dîner</label>
+                        <input type="text" class="form-control" id="diner" aria-describedby="textHelp" placeholder="Entrez un lieu">             
+                    </div>
+                </div>                
             </div>
         </div>
     </div>
