@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
   </div>
   <div class="form-group">
     <label for="descriptioncircuit">Description</label>
-    <textarea class="form-control" id="descriptioncircuit" name="descriptionCircuit" rows="10"><?php if (isset($_POST['descriptionCircuit'])) {
+    <textarea class="form-control" id="descriptioncircuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
     echo htmlentities($_POST['descriptionCircuit']);
 }?></textarea>
   </div>

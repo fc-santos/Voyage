@@ -56,6 +56,7 @@ if (isset($_POST['terminer'])) {
 ?>
 
 <h2>Créer des étapes</h2>
+
 <form class="mt-3" action="creerCircuit.php" method="POST">
   <div class="form-group">
     <label for="titreEtape">Titre</label>
@@ -65,40 +66,18 @@ if (isset($_POST['terminer'])) {
   </div>
   <div class="form-group">
     <label for="descriptionEtape">Description</label>
-    <textarea class="form-control" id="descriptionEtape" name="descriptionEtape" rows="10"><?php if (isset($_POST['descriptionEtape']) && !isset($_SESSION['correctEtape'])) {
+    <textarea class="form-control" id="descriptionEtape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape']) && !isset($_SESSION['correctEtape'])) {
     echo htmlentities($_POST['descriptionEtape']);
-}?></textarea>
+}?></textarea> 
   </div>
     <div class="form-group">
         <label for="joursEtape">Nombre de jours</label>
         <input type="number" class="form-control" id="joursEtape" min=1 name="joursEtape" value="1">
     </div>
-    <div id="detailsJours" class="border mb-3">
-
-        <div class="container pt-3 pb-3">
-            <div class="row mb-2">
-                <div class="col-sm-12 col-md-4 mb-2">
-                    <div class="form-group">
-                        <label for="hebergement">Hébergement</label>
-                        <input type="text" class="form-control" id="hebergement" aria-describedby="textHelp" placeholder="Entrez un hebergement">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4 mb-2">
-                    <div class="form-group">
-                        <label for="souper">text address</label>
-                        <input type="text" class="form-control" id="souper" aria-describedby="textHelp" placeholder="Entrez un lieu">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-4 mb-2">
-                    <div class="form-group">
-                        <label for="diner">Dîner</label>
-                        <input type="text" class="form-control" id="diner" aria-describedby="textHelp" placeholder="Entrez un lieu">             
-                    </div>
-                </div>                
-            </div>
-        </div>
+    <div id="detailsJours" class="border mb-3">       
+        //
     </div>
-    <button type="submit" name="autre" class="btn btn-primary">Ajouter une autre étape</button>
+    <button type="submit" onclick="ajouterJours()" name="autre" class="btn btn-primary">Ajouter une autre étape</button>
     <button type="submit" name="terminer" class="btn btn-primary">Terminer</button>
 </form>
 <script>
