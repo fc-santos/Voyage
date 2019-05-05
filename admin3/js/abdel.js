@@ -1,7 +1,7 @@
  
 $(document).ready(() => {
 
-  var groupeJours = function(quantite){
+  /*var groupeJours = function(quantite){
     var detailsJour = `<div class="container pt-3 pb-3">`;
 
       for(let i = 1; i <= quantite; i++){
@@ -56,9 +56,9 @@ $(document).ready(() => {
       }
       detailsJour += `</div>`;
       return detailsJour;
-  }
+  }*/
 
-  $('#detailsJours').html(groupeJours(1));
+  /*$('#detailsJours').html(groupeJours(1));
 
   $("#joursEtape").on("input", function(){
     if($('#joursEtape').val() < 1) {
@@ -66,7 +66,7 @@ $(document).ready(() => {
     }
     let jours = $('#joursEtape').val(); 
     $('#detailsJours').html(groupeJours(jours));
-  });
+  });*/
 
   lieu = null;
 
@@ -143,8 +143,8 @@ function prendreLaValeur(element,string,cible){
   $(cible).val(element.innerHTML);
 }
 
-function ajouterJours(){
-  var joursEtape = document.getElementsByClassName("lieu");
+function ajouterJours(){}
+/*  var joursEtape = document.getElementsByClassName("lieu");
 
   for(i = 0; i < joursEtape.length; i++){  
   
@@ -158,4 +158,4 @@ function ajouterJours(){
     xmlhttp.open("GET",pagePHP,true);
     xmlhttp.send();
   }
-}
+}*/
