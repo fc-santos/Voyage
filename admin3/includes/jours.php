@@ -27,7 +27,7 @@
            $stmt4 = $conn->prepare($sql4);
            $stmt4->execute();
            //$_SESSION['jourInserted'] = true;
-           $_SESSION['correctCircuit'] = true;
+           $_SESSION['correctNomCircuit'] = true;
        } catch (Exception $r) {
        }
        unset($_POST['autreJour']);
