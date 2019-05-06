@@ -1,43 +1,70 @@
 <?php
-   if (isset($_POST['autreEtape'])) {
-       if (isset($_SESSION['lieu'])) {
-           $lieu = $_SESSION['lieu'];
-       }
+    if (isset($_POST['autreEtape'])) {
+        if (isset($_SESSION['lieu'])) {
+            $lieu = $_SESSION['lieu'];
+        }
 
-       if (isset($_POST['hebergement'])) {
-           $hebergement = $_POST['hebergement'];
-       }
-       if (isset($_POST['souper'])) {
-           $souper = $_POST['souper'];
-       }
-       if (isset($_POST['diner'])) {
-           $diner = $_POST['diner'];
-       }
-       if (isset($_POST['typeHebergement'])) {
-           $typeHebergement = $_POST['typeHebergement'];
-       }
-       if (isset($_POST['activites'])) {
-           $activites = $_POST['activites'];
-       }
+        if (isset($_POST['hebergement'])) {
+            $hebergement = $_POST['hebergement'];
+        }
+        if (isset($_POST['souper'])) {
+            $souper = $_POST['souper'];
+        }
+        if (isset($_POST['diner'])) {
+            $diner = $_POST['diner'];
+        }
+        if (isset($_POST['typeHebergement'])) {
+            $typeHebergement = $_POST['typeHebergement'];
+        }
+        if (isset($_POST['activites'])) {
+            $activites = $_POST['activites'];
+        }
 
-       try {
-           $idEtape = $_SESSION['idEtape'];
+        try {
+            $idEtape = $_SESSION['idEtape'];
 
-           $sql4 = "INSERT INTO `jour`(`idEtape`, `idHebergement`, `idSouper`, `idDiner`, `idActivite`, `lieu`) VALUES ($idEtape, 1, 1, 1, 1, 'aaa')";
-           $stmt4 = $conn->prepare($sql4);
-           $stmt4->execute();
-           //$_SESSION['jourInserted'] = true;
-           $_SESSION['correctNomCircuit'] = true;
-       } catch (Exception $r) {
-       }
-       unset($_POST['autreJour']);
-   }
+            $sql4 = "INSERT INTO `jour`(`idEtape`, `idHebergement`, `idSouper`, `idDiner`, `idActivite`, `lieu`) VALUES ($idEtape, 1, 1, 1, 1, 'aaa')";
+            $stmt4 = $conn->prepare($sql4);
+            $stmt4->execute();
+            $_SESSION['correctNomCircuit'] = true;
+        } catch (Exception $r) {
+        }
+        unset($_POST['autreJour']);
+    }
 
+    if (isset($_POST['ajouterPlusJours'])) {
+        if (isset($_SESSION['lieu'])) {
+            $lieu = $_SESSION['lieu'];
+        }
 
+        if (isset($_POST['hebergement'])) {
+            $hebergement = $_POST['hebergement'];
+        }
+        if (isset($_POST['souper'])) {
+            $souper = $_POST['souper'];
+        }
+        if (isset($_POST['diner'])) {
+            $diner = $_POST['diner'];
+        }
+        if (isset($_POST['typeHebergement'])) {
+            $typeHebergement = $_POST['typeHebergement'];
+        }
+        if (isset($_POST['activites'])) {
+            $activites = $_POST['activites'];
+        }
+
+        try {
+            $idEtape = $_SESSION['idEtape'];
+
+            $sql4 = "INSERT INTO `jour`(`idEtape`, `idHebergement`, `idSouper`, `idDiner`, `idActivite`, `lieu`) VALUES ($idEtape, 1, 1, 1, 1, 'aaa')";
+            $stmt4 = $conn->prepare($sql4);
+            $stmt4->execute();
+            $_SESSION['correctEtape'] = true;
+        } catch (Exception $r) {
+        }
+        unset($_POST['ajouterPlusJours']);
+    }
 ?>
-
-
-
 
 <h2>Ajouter des jours</h2>
 

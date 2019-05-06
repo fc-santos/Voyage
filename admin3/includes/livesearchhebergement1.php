@@ -16,7 +16,6 @@ if (strlen($q)>0) {
         /*echo "Database connect successfuly";*/
     }
 
-    //C'est mieux avec joint mais je ne sais pas comment le faire
     if ($r != '') {
         $sql = "SELECT idLieu FROM lieu WHERE ville='". $r . "' OR pays='" . $r . "' OR nom='" . $r . "'";
         $result = mysqli_query($conn, $sql);
@@ -24,30 +23,20 @@ if (strlen($q)>0) {
     
         $idLieu = $row['idLieu'];
     
-        //if (isset($_GET["r"])) {
+
         $sql2 = "SELECT * FROM hebergement WHERE nom LIKE '%".$q."%' AND idLieu = " . $idLieu;
-        //} else {
-        //$sql2 = "SELECT * FROM hebergement WHERE nom LIKE '%".$q."%'";
-        // }
+
     
         $result = $conn->query($sql2);
         $liste = '';
-    //$total = $result->num_rows;
     } else {
-        //if (isset($_GET["r"])) {
         $sql2 = "SELECT * FROM hebergement WHERE nom LIKE '%".$q."%'";
-        //} else {
-        //$sql2 = "SELECT * FROM hebergement WHERE nom LIKE '%".$q."%'";
-        // }
-
         $result = $conn->query($sql2);
         $liste = '';
-        //$total = $result->num_rows;
     }
     
 
     if ($result->num_rows > 0) {
-        // output data of each row
         while ($row = $result->fetch_object()) {
             if ($row->nom != null) {
                 $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchhebergement1\',\'#hebergement1\')">' . $row->nom . '</p>';
@@ -59,5 +48,5 @@ if (strlen($q)>0) {
     $reponse = $liste;
     $conn->close();
 }
-//output the response
+
 echo $reponse;
