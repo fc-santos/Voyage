@@ -1,5 +1,9 @@
 <?php
 
+if (isset($_GET['id'])) {
+    //prendre le dernier ordre d'etape qui a ete mis dans la table pour continuer avec ordre = ordre + 1
+}
+
 if (isset($_POST['ajouterJours'])) {
     if (!isset($_SESSION['ordre'])) {
         $_SESSION['ordre'] = 0;

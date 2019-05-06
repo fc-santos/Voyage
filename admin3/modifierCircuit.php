@@ -13,7 +13,7 @@ if (isset($_GET['id'])) {
 
 $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $id);
 
-    $table = '<div class="container">
+    $table = '
                 <div class="table-wrapper">			
                     <div class="table-title">
                         <div class="row">
@@ -77,18 +77,18 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $id);
                 $table .= '</tbody>
                         </table>
                     </div>
-                </div>';
-
-    echo $table;
+                ';
 ?>
 
-
-
-
-
-
-
-
+<div class="container">
+    <form action="creerCircuit.php" method="GET">
+        <button class="btn btn-primary" style="color: white;" data-toggle="modal" data-target="#exampleModal'. $row->idEtape .'">Ajouter Étape</button>
+        <input type="hidden" name="idCircuit" value="<?= $id ?>">
+    </form>
+    <?php
+        echo $table;
+    ?>
+</div>
 
 
 <?php

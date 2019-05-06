@@ -52,18 +52,19 @@ if (!isset($accessToken)) {
         $response = $fb->get('/me?fields=name, email');
         $user = $response->getGraphUser();
         $_SESSION['nomMembre'] = $user['name'];
-        /*echo '<pre>';
+        echo '<pre>';
         var_dump($user);
-        echo '</pre>';*/
+        echo '</pre>';
+        exit();
         /*$result_usuario = "SELECT id, nome, email FROM usuarios WHERE email='".$user['email']."' LIMIT 1";
-		$resultado_usuario = mysqli_query($conn, $result_usuario);
-		if($resultado_usuario){
-			$row_usuario = mysqli_fetch_assoc($resultado_usuario);
-			$_SESSION['id'] = $row_usuario['id'];
-			$_SESSION['nomMembre'] = $row_usuario['nome'];
-			$_SESSION['email'] = $row_usuario['email'];
-			header("Location: index.php");			
-		} else {
+        $resultado_usuario = mysqli_query($conn, $result_usuario);
+        if($resultado_usuario){
+            $row_usuario = mysqli_fetch_assoc($resultado_usuario);
+            $_SESSION['id'] = $row_usuario['id'];
+            $_SESSION['nomMembre'] = $row_usuario['nome'];
+            $_SESSION['email'] = $row_usuario['email'];
+            header("Location: index.php");
+        } else {
             // inserer le nom et le courriel dans la base de données
         }*/
         header("Location: index.php");

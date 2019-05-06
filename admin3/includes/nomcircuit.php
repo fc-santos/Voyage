@@ -1,4 +1,30 @@
 <?php
+
+if (isset($_GET['idCircuit'])) {
+    $_SESSION['correctNomCircuit'] = true;
+
+    try {
+        $idCircuit = $_GET['idCircuit'];
+        //$ordre = $_SESSION['ordre'];
+
+        $query = 'SELECT * from circuit WHERE idCircuit=' . $idCircuit;
+
+        $stmt = $conn->query($query);
+        while ($row = $stmt->fetch()) {
+            $nomCircuit = $row->titre;
+            $descriptionCircuit = $row->description;
+        }
+
+        
+
+        unset($_POST['ajouterJours']);
+    } catch (Exception $r) {
+    }
+
+
+
+    unset($_POST['ajouterEtape']);
+}
   
 if (isset($_POST['ajouterEtape'])) {
     unset($_SESSION['ordre']);
@@ -42,12 +68,16 @@ if (isset($_POST['ajouterEtape'])) {
     <label for="titrecircuit">Titre</label>
     <input type="text" class="form-control" required id="titrecircuit" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
     echo htmlentities($_POST['nomCircuit']);
+} elseif (isset($_GET['idCircuit'])) {
+    echo $nomCircuit;
 }?>">
   </div>
   <div class="form-group">
     <label for="descriptioncircuit">Description</label>
     <textarea class="form-control" id="descriptioncircuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
     echo htmlentities($_POST['descriptionCircuit']);
+} elseif (isset($_GET['idCircuit'])) {
+    echo $descriptionCircuit;
 }?></textarea>
   </div>
   <div class="form-group">
