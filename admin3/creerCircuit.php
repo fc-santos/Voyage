@@ -7,9 +7,6 @@ if (!session_id()) {
 include "includes/header.php";
 include "includes/navbar.php";
 
-//unset($_SESSION['correctNomCircuit']);
-//unset($_SESSION['correctEtape']);
-
 ?>
 
 <!-- Begin Page Content -->
