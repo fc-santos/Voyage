@@ -27,9 +27,6 @@ include "includes/navbar.php";
           <li class="nav-item">
             <a href="#jours" id="li-jours" class="nav-link" role="tab" data-toggle="tab">Jours</a>
           </li>
-          <li class="nav-item">
-            <a href="#promotion" id="li-promotion" class="nav-link" role="tab" data-toggle="tab">Promotion</a>
-          </li>
       </ul>
 
       <div class="tab-content mt-3">
@@ -42,23 +39,17 @@ include "includes/navbar.php";
         <div role="tabpanel" class="tab-pane" id="jours">
           <?php include 'includes/jours.php';?>
         </div>
-        <div role="tabpanel" class="tab-pane" id="promotion">
-          <?php //include 'includes/promotion.php';?>
-        </div>
       </div>
     </div>
   </div>
 
-  <script>
-    
+  <script> 
       var elementEtapes = document.getElementById("etapes");
       var elementNomCircuit = document.getElementById("nomcircuit");
       var elementJours = document.getElementById("jours");
-      var elementPromotion = document.getElementById("promotion");
       var elementLiEtapes = document.getElementById("li-etapes");
       var elementLiNomCircuit = document.getElementById("li-nomcircuit");
       var elementLiJours = document.getElementById("li-jours");
-      var elementLiPromotion = document.getElementById("li-promotion");
   </script>
 
 <?php if (isset($_SESSION['correctNomCircuit'])) : ?>
@@ -69,10 +60,8 @@ include "includes/navbar.php";
 
       elementNomCircuit.classList.remove("active");
       elementJours.classList.remove("active");
-      elementPromotion.classList.remove("active");
       elementLiNomCircuit.classList.remove("active");
       elementLiJours.classList.remove("active");
-      elementLiPromotion.classList.remove("active");
     }
 
     activerEtapesTab();
@@ -82,28 +71,23 @@ include "includes/navbar.php";
 
 <?php if (isset($_SESSION['correctEtape'])) : ?>
   <script>
-      function myFunction2() {       
+      function activetJoursTab() {       
         
         elementJours.classList.add("active");
         elementLiJours.classList.add("active");
 
         elementEtapes.classList.remove("active");
         elementNomCircuit.classList.remove("active");
-        elementPromotion.classList.remove("active");
         elementLiEtapes.classList.remove("active");       
         elementLiNomCircuit.classList.remove("active");      
-        elementLiPromotion.classList.remove("active");
       }
 
-      myFunction2();
+      activetJoursTab();
   </script>
 
-<?php unset($_SESSION['correctEtape']); ?>
-
-
+  <?php unset($_SESSION['correctEtape']); ?>
 <?php endif ?>
-
 <?php
-include('includes/scripts.php');
-include('includes/footer.php');
+  include('includes/scripts.php');
+  include('includes/footer.php');
 ?>
