@@ -10,7 +10,7 @@
 
     $stmt = $conn->query('SELECT * FROM circuit');
 
-    $table = '<div class="container">
+    $table = '
                 <div class="table-wrapper">			
                     <div class="table-title">
                         <div class="row">
@@ -46,7 +46,7 @@
                                             <div class="col-md-12">
                         
                                                 <button class="btn btn-danger" style="color: white;" data-toggle="modal" data-target="#exampleModal'. $row->idCircuit .'"> Supprimer</button>
-                                                <a href="modifierCircuit.php?id=' . $row->idCircuit . '" class="btn btn-primary" style="color: white;"> Modifier</a>
+                                                <a href="modifierCircuit.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary" style="color: white;"> Modifier</a>
                                                 <!-- Modal -->
                                                 <div style="color: black;" class="modal fade" id="exampleModal'. $row->idCircuit .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
@@ -62,7 +62,7 @@
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a type="button" href="gererCircuits.php" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                            <a type="button" href="deleteCircuit.php?id=' . $row->idCircuit . '" class="btn btn-primary">Confirmer</a>
+                                                            <a type="button" href="deleteCircuit.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary">Confirmer</a>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -74,10 +74,17 @@
                 $table .= '</tbody>
                         </table>
                     </div>
-                </div>';
-
-    echo $table;
+                ';
 ?>
+
+<div class="container">
+    <form action="creerCircuit.php">
+        <button class="btn btn-primary" style="color: white;">Ajouter Circuit</button>
+    </form>
+    <?php
+        echo $table;
+    ?>
+</div>
 <?php
   include('includes/scripts.php');
   include('includes/footer.php');

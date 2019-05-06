@@ -32,7 +32,7 @@
         unset($_POST['autreJour']);
     }
 
-    if (isset($_POST['ajouterPlusJours'])) {
+    if (isset($_POST['ajouterPlusJours']) || isset($_POST['terminer'])) {
         if (isset($_SESSION['lieu'])) {
             $lieu = $_SESSION['lieu'];
         }
@@ -64,6 +64,10 @@
         }
         unset($_POST['ajouterPlusJours']);
     }
+
+    if (isset($_POST['terminer'])) {
+        unset($_SESSION['correctEtape']);
+    }
 ?>
 
 <h2>Ajouter des jours</h2>
@@ -71,12 +75,12 @@
 <form class="mt-3" action="creerCircuit.php" method="POST">
     <div id="detailsJours" class="border mb-3">
         <div class="container pt-3 pb-3">
-            <h5>Jour <?php //$jourNumber?></h5>
+            <h5>Jour</h5>
             <div class="row mb-2">
                 <div class="col-sm-12 col-md-4 mb-2">
                     <div class="form-group">
                         <label for="lieu">Lieu</label>
-                        <input type="text" class="form-control lieu" id="lieu1" autocomplete="off" aria-describedby="textHelp" name="lieu" placeholder="Entrez un lieu">
+                        <input type="text" required class="form-control lieu" id="lieu1" autocomplete="off" aria-describedby="textHelp" name="lieu" placeholder="Entrez un lieu">
                         <div class="pl-2" id="livesearchLieu1" style="min-width: 140px;position: absolute; z-index: 20; background-color: white;"></div>
                     </div>
                 </div>
@@ -119,6 +123,7 @@
 
             <button type="submit" name="autreEtape" class="btn btn-primary">Ajouter une autre étape</button>
             <button type="submit" name="ajouterPlusJours" class="btn btn-primary">Ajouter Jours</button>
+            <button type="submit" class="btn btn-primary">Terminer</button>
         </div>
     </div>
 </form>

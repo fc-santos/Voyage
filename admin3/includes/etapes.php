@@ -1,7 +1,49 @@
 <?php
 
+if (isset($_GET['idEtape'])) {
+    $_SESSION['correctEtape'] = true;
+
+    try {
+        $_SESSION['idEtape'] = $_GET['idEtape'];
+        $idEtape = $_SESSION['idEtape'];
+
+        $query = 'SELECT * from etape WHERE idEtape=' . $idEtape;
+
+        $stmt = $conn->query($query);
+
+        while ($row = $stmt->fetch()) {
+            $nomEtape = $row->titre;
+            $descriptionEtape = $row->description;
+        }
+    } catch (Exception $r) {
+    }
+    unset($_POST['ajouterEtape']);
+}
+
 if (isset($_GET['id'])) {
-    //prendre le dernier ordre d'etape qui a ete mis dans la table pour continuer avec ordre = ordre + 1
+    if (isset($_GET['idEtape'])) {
+        $_SESSION['correctEtape'] = true;
+    
+        try {
+            $_SESSION['idEtape'] = $_GET['idEtape'];
+    
+            $query = 'SELECT * from etape WHERE idEtape=' . $_SESSION['idEtape'];
+    
+            $stmt = $conn->query($query);
+            while ($row = $stmt->fetch()) {
+                $nomEtape = $row->titre;
+                $descriptionEtape = $row->description;
+            }
+    
+            
+    
+            unset($_POST['ajouterJours']);
+        } catch (Exception $r) {
+        }
+    
+    
+        unset($_POST['ajouterJours']);
+    }
 }
 
 if (isset($_POST['ajouterJours'])) {
@@ -131,7 +173,7 @@ if (isset($_POST['ajouterJours'])) {
   </div>
   <div class="form-group">
     <label for="descriptionEtape">Description</label>
-    <textarea class="form-control" id="descriptionEtape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape']) /*&& !isset($_SESSION['correctEtape'])*/) {
+    <textarea class="form-control" required  id="descriptionEtape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape']) /*&& !isset($_SESSION['correctEtape'])*/) {
     echo htmlentities($_POST['descriptionEtape']);
 }?></textarea> 
   </div>
