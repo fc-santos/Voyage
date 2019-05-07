@@ -7,18 +7,25 @@ if (!session_id()) {
 include "includes/header.php";
 include "includes/navbar.php";
 
-if (isset($_GET['idCircuit'])) {
-    $idCircuit = $_GET['idCircuit'];
+if (isset($_GET['idEtape'])) {
+    $idEtape = $_GET['idEtape'];
 }
 
-$stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
+$stmt = $conn->query('SELECT * FROM jour WHERE idEtape = ' . $idEtape);
+
+////////////////////////////////////////////////////
+//requetes avec les id (idEtape, idLieu, idHebergement, idSouper, idDiner, idActivite)
+
+/*Faire le code ici*/
+
+///////////////////////////////////////////////////////
 
     $table = '
                 <div class="table-wrapper">			
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-8">
-                                <h2>Étapes</b></h2>
+                                <h2>Jours</b></h2>
                             </div>
                             <div class="col-sm-4">
                                 <div class="search-box">
@@ -42,17 +49,16 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
                         while ($row = $stmt->fetch()) {
                             $table .= '              
                                     <tr>
+                                        <td>' . $row->idJour . '</td>
                                         <td>' . $row->idEtape . '</td>
-                                        <td>' . $row->nom . '</td>
-                                        <td>' . $row->description . '</td>
+                                        <td>' . $row->idHebergement . '</td>
                                         <td>
                                             <div class="col-md-12">
                         
-                                                <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idEtape .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
-                                                <a href="modifierEtape.php?idEtape=' . $row->idEtape . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
-                                                <a href="listerJours.php?idEtape=' . $row->idEtape . '" class="btn btn-primary" style="color: white;">Lister jours</a>
+                                                <button class="btn btn-danger" style="color: white;" data-toggle="modal" data-target="#exampleModal'. $row->idJour .'"> Supprimer</button>
+                                                <a href="modifierJour.php?idJour=' . $row->idJour . '" class="btn btn-primary" style="color: white;"> Modifier</a>
                                                 <!-- Modal -->
-                                                <div style="color: black;" class="modal fade" id="exampleModal'. $row->idEtape .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div style="color: black;" class="modal fade" id="exampleModal'. $row->idJour .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
@@ -62,11 +68,11 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                        Êtes-vous certain de vouloir supprimer "' . $row->nom . '"? 
+                                                        Êtes-vous certain de vouloir supprimer "' . $row->idJour . '"? 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a type="button" href="gererEtapes.php" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                            <a type="button" href="deleteEtape.php?idEtape=' . $row->idEtape . '" class="btn btn-primary">Confirmer</a>
+                                                            <a type="button" href="gererJours.php" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                                            <a type="button" href="deleteJour.php?idJour=' . $row->idJour . '" class="btn btn-primary">Confirmer</a>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -83,8 +89,8 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
 
 <div class="container">
     <form action="creerCircuit.php" method="GET">
-        <button class="btn btn-primary" style="color: white;">Ajouter Étape</button>
-        <input type="hidden" name="idCircuit" value="<?= $idCircuit ?>">
+        <button class="btn btn-primary" style="color: white;">Ajouter Jour</button>
+        <input type="hidden" name="idEtape" value="<?= $idEtape ?>">
     </form>
     <?php
         echo $table;

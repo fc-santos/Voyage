@@ -32,7 +32,7 @@
         unset($_POST['autreJour']);
     }
 
-    if (isset($_POST['ajouterPlusJours']) || isset($_POST['terminer'])) {
+    if (isset($_POST['ajouterPlusJours']) || isset($_POST['terminerJour'])) {
         if (isset($_SESSION['lieu'])) {
             $lieu = $_SESSION['lieu'];
         }
@@ -65,7 +65,7 @@
         unset($_POST['ajouterPlusJours']);
     }
 
-    if (isset($_POST['terminer'])) {
+    if (isset($_POST['terminerJour'])) {
         unset($_SESSION['correctEtape']);
     }
 ?>
@@ -123,7 +123,7 @@
 
             <button type="submit" name="autreEtape" class="btn btn-primary">Ajouter une autre étape</button>
             <button type="submit" name="ajouterPlusJours" class="btn btn-primary">Ajouter Jours</button>
-            <button type="submit" class="btn btn-primary">Terminer</button>
+            <button type="submit" name="terminerJour" class="btn btn-primary">Terminer</button>
         </div>
     </div>
 </form>

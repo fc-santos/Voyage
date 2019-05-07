@@ -53,7 +53,7 @@ if (isset($_POST['terminerEtape'])) {
     unset($_POST['descriptionCircuit']);
     unset($_SESSION['correctEtape']);
     unset($_GET['idCircuit']);
-    header("location: gererCircuit.php");
+    header("location: listerCircuit.php?idCircuit=" . $_SESSION['idCircuit']);
 }
 ?>
 
