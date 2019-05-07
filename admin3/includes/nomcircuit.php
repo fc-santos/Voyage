@@ -1,7 +1,5 @@
 <?php
 
-unset($_POST['terminer']);
-
 if (isset($_GET['idCircuit'])) {
     $_SESSION['correctNomCircuit'] = true;
 
@@ -29,15 +27,14 @@ if (isset($_GET['idCircuit'])) {
     unset($_POST['ajouterEtape']);
 }
   
-if (isset($_POST['ajouterEtape'])) {
+if (isset($_POST['ajouterEtape']) || isset($_POST['terminer'])) {
     unset($_SESSION['ordre']);
     unset($_SESSION['correctEtape']);
     unset($_SESSION['correctNomCircuit']);
     unset($_POST['ajouterJours']);
     unset($_POST['autreEtape']);
     unset($_SESSION['idCircuit']);
-    //unset($_POST['nomCircuit']);
-    //unset($_POST['descriptionCircuit']);
+
 
     if (isset($_POST['nomCircuit'])) {
         $nomCircuit = $_POST['nomCircuit'];
@@ -52,16 +49,16 @@ if (isset($_POST['ajouterEtape'])) {
         $_SESSION['correctNomCircuit'] = true;
         $_SESSION['idCircuit'] = $conn->lastInsertId();
         unset($_POST['ajouterEtape']);
-        
-        
-        //il faut prendre le dernier id ajoute a la table circuit et non le nom du circuit
-        /*$sql2 = "SELECT * FROM circuit WHERE titre = :titre";
-        $stmt2 = $conn->prepare($sql2);
-        $stmt2->execute(['titre' => $nomCircuit]);
-        $circuit = $stmt2->fetch();
-        $_SESSION['idCircuit'] = $circuit -> idCircuit;*/
     } catch (Exception $r) {
     }
+}
+
+if (isset($_POST['terminer'])) {
+    unset($_POST['nomCircuit']);
+    unset($_POST['descriptionCircuit']);
+    unset($_SESSION['correctNomCircuit']);
+    unset($_GET['idCircuit']);
+    header("location: gererCircuit.php");
 }
 ?>
 
@@ -88,6 +85,7 @@ if (isset($_POST['ajouterEtape'])) {
     <input type="file" id="imagecircuit">
   </div>
   <button type="submit" name="ajouterEtape" class="btn btn-primary">Ajouter des étapes</button>
+  <button type="submit" name="terminer" class="btn btn-primary">Terminer</button>
 </form>
 <script>
     if ( window.history.replaceState ) {

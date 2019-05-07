@@ -1,21 +1,24 @@
 <?php
-    include_once "controlleur/connexionDB.php";
-    if (!session_id()) {
-        @session_start();
-    }
+include "controlleur/connexionDB.php";
+if (!session_id()) {
+    @session_start();
+}
 
-    include_once "includes/header.php";
-    include_once "includes/navbar.php";
+include "includes/header.php";
+include "includes/navbar.php";
 
+if (isset($_GET['idCircuit'])) {
+    $idCircuit = $_GET['idCircuit'];
+}
 
-    $stmt = $conn->query('SELECT * FROM circuit');
+$stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
 
     $table = '
                 <div class="table-wrapper">			
                     <div class="table-title">
                         <div class="row">
                             <div class="col-sm-8">
-                                <h2>Details des circuits</b></h2>
+                                <h2>Étapes</b></h2>
                             </div>
                             <div class="col-sm-4">
                                 <div class="search-box">
@@ -30,8 +33,8 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID Circuit</th>
-                                <th>Titre</th>
+                                <th>ID Étape</th>
+                                <th>Nom</th>
                                 <th>Description</th>
                             </tr>
                         </thead>
@@ -39,17 +42,16 @@
                         while ($row = $stmt->fetch()) {
                             $table .= '              
                                     <tr>
-                                        <td>' . $row->idCircuit . '</td>
-                                        <td>' . $row->titre . '</td>
+                                        <td>' . $row->idEtape . '</td>
+                                        <td>' . $row->nom . '</td>
                                         <td>' . $row->description . '</td>
                                         <td>
                                             <div class="col-md-12">
                         
-                                                <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idCircuit .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
-                                                <a href="modifierCircuit.php?idCircuit=' . $row->idCircuit . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
-                                                <a href="listerCircuit.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary" style="color: white;">Lister étapes</a>
+                                                <button class="btn btn-danger" style="color: white;" data-toggle="modal" data-target="#exampleModal'. $row->idEtape .'"> Supprimer</button>
+                                                <a href="modifierEtape.php?idEtape=' . $row->idEtape . '" class="btn btn-primary" style="color: white;"> Modifier</a>
                                                 <!-- Modal -->
-                                                <div style="color: black;" class="modal fade" id="exampleModal'. $row->idCircuit .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div style="color: black;" class="modal fade" id="exampleModal'. $row->idEtape .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                         <div class="modal-header">
@@ -59,11 +61,11 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                        Êtes-vous certain de vouloir supprimer "' . $row->titre . '"? 
+                                                        Êtes-vous certain de vouloir supprimer "' . $row->nom . '"? 
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a type="button" href="gererCircuits.php" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                            <a type="button" href="deleteCircuit.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary">Confirmer</a>
+                                                            <a type="button" href="gererEtapes.php" class="btn btn-secondary" data-dismiss="modal">Close</a>
+                                                            <a type="button" href="deleteEtape.php?idEtape=' . $row->idEtape . '" class="btn btn-primary">Confirmer</a>
                                                         </div>
                                                         </div>
                                                     </div>
@@ -76,14 +78,20 @@
                         </table>
                     </div>
                 ';
-?><div class="container">
-    <form action="creerCircuit.php">
-        <button class="btn btn-primary" style="color: white;">Ajouter Circuit</button>
+?>
+
+<div class="container">
+    <form action="creerCircuit.php" method="GET">
+        <button class="btn btn-primary" style="color: white;">Ajouter Étape</button>
+        <input type="hidden" name="idCircuit" value="<?= $idCircuit ?>">
     </form>
     <?php
         echo $table;
     ?>
-</div><?php
-  include_once 'includes/scripts.php';
-  include_once 'includes/footer.php';
+</div>
+
+
+<?php
+  include('includes/scripts.php');
+  include('includes/footer.php');
 ?>

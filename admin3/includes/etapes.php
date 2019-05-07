@@ -20,33 +20,7 @@ if (isset($_GET['idEtape'])) {
     unset($_POST['ajouterEtape']);
 }
 
-if (isset($_GET['id'])) {
-    if (isset($_GET['idEtape'])) {
-        $_SESSION['correctEtape'] = true;
-    
-        try {
-            $_SESSION['idEtape'] = $_GET['idEtape'];
-    
-            $query = 'SELECT * from etape WHERE idEtape=' . $_SESSION['idEtape'];
-    
-            $stmt = $conn->query($query);
-            while ($row = $stmt->fetch()) {
-                $nomEtape = $row->titre;
-                $descriptionEtape = $row->description;
-            }
-    
-            
-    
-            unset($_POST['ajouterJours']);
-        } catch (Exception $r) {
-        }
-    
-    
-        unset($_POST['ajouterJours']);
-    }
-}
-
-if (isset($_POST['ajouterJours'])) {
+if (isset($_POST['ajouterJours']) || isset($_POST['terminerEtape'])) {
     if (!isset($_SESSION['ordre'])) {
         $_SESSION['ordre'] = 0;
     } else {
@@ -73,93 +47,14 @@ if (isset($_POST['ajouterJours'])) {
         //unset($_POST['ajouterEtape']);
     } catch (Exception $r) {
     }
-
-
-
-    //inserer jour
-
-    //save jour
-    /* if (isset($_SESSION['lieu'])) {
-         $lieu = $_SESSION['lieu'];
-     }
-
-     if (isset($_POST['hebergement'])) {
-         $hebergement = $_POST['hebergement'];
-     }
-     if (isset($_POST['souper'])) {
-         $souper = $_POST['souper'];
-     }
-     if (isset($_POST['diner'])) {
-         $diner = $_POST['diner'];
-     }
-     if (isset($_POST['typeHebergement'])) {
-         $typeHebergement = $_POST['typeHebergement'];
-     }
-     if (isset($_POST['activites'])) {
-         $activites = $_POST['activites'];
-     }
-
-     try {
-         $idEtape = $_SESSION['idEtape'];
-
-         $sql4 = "INSERT INTO `jour`(`idEtape`, `idHebergement`, `idSouper`, `idDiner`, `idActivite`, `lieu`) VALUES ($idEtape, 1, 1, 1, 1, 'aaa')";
-         $stmt4 = $conn->prepare($sql4);
-         $stmt4->execute();
-         $_SESSION['jourInserted'] = true;
-         $_SESSION['correctJour'] = true;
-     } catch (Exception $r) {
-     }*/
-
-    //unset($_POST['autreEtape']);
 }
-
-/*if (isset($_POST['autreJour'])) {
-    //$jourNumber++;
-    //get last etape
-    //done!!*//*
-    //save jour
-    if (isset($_SESSION['lieu'])) {
-        $lieu = $_SESSION['lieu'];
-    }
-
-    if (isset($_POST['hebergement'])) {
-        $hebergement = $_POST['hebergement'];
-    }
-    if (isset($_POST['souper'])) {
-        $souper = $_POST['souper'];
-    }
-    if (isset($_POST['diner'])) {
-        $diner = $_POST['diner'];
-    }
-    if (isset($_POST['typeHebergement'])) {
-        $typeHebergement = $_POST['typeHebergement'];
-    }
-    if (isset($_POST['activites'])) {
-        $activites = $_POST['activites'];
-    }
-
-    try {
-        $idEtape = $_SESSION['idEtape'];
-
-        $sql4 = "INSERT INTO `jour`(`idEtape`, `idHebergement`, `idSouper`, `idDiner`, `idActivite`, `lieu`) VALUES ($idEtape, 1, 1, 1, 1, 'aaa')";
-        $stmt4 = $conn->prepare($sql4);
-        $stmt4->execute();
-        $_SESSION['jourInserted'] = true;
-        $_SESSION['correctJour'] = true;
-    } catch (Exception $r) {
-    }
-    unset($_POST['autreJour']);
-}*/
-
-/*if (isset($_POST['ajouterJours'])) {
-    unset($_SESSION['ordre']);
+if (isset($_POST['terminerEtape'])) {
+    unset($_POST['nomCircuit']);
+    unset($_POST['descriptionCircuit']);
     unset($_SESSION['correctEtape']);
-    unset($_SESSION['correctNomCircuit']);
-    //unset($_POST['autreJour']);
-    unset($_POST['ajouterJours']);
-    //unset($_SESSION['jourInserted']);
-    unset($_POST['autreEtape']);
-}*/
+    unset($_GET['idCircuit']);
+    header("location: gererCircuit.php");
+}
 ?>
 
 <h2>Créer des étapes</h2>
@@ -179,6 +74,7 @@ if (isset($_POST['ajouterJours'])) {
   </div>
 
     <button type="submit" name="ajouterJours" class="btn btn-primary">Ajouter Jours</button>
+    <button type="submit" name="terminerEtape" class="btn btn-primary">Terminer</button>
 </form>
 <script>
     if ( window.history.replaceState ) {

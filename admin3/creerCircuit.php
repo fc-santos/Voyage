@@ -1,11 +1,12 @@
 <?php
-include "controlleur/connexionDB.php";
+ob_start();
+include_once "controlleur/connexionDB.php";
 if (!session_id()) {
     @session_start();
 }
 
-include "includes/header.php";
-include "includes/navbar.php";
+include_once "includes/header.php";
+include_once "includes/navbar.php";
 
 ?>
 
@@ -63,7 +64,7 @@ include "includes/navbar.php";
 
     activerEtapesTab();
   </script>
-  <?php unset($_SESSION['correctNomCircuit']); ?>
+<?php unset($_SESSION['correctNomCircuit']); ?>
 <?php endif ?>
 
 <?php if (isset($_SESSION['correctEtape'])) : ?>
@@ -85,6 +86,7 @@ include "includes/navbar.php";
   <?php unset($_SESSION['correctEtape']); ?>
 <?php endif ?>
 <?php
-  include('includes/scripts.php');
-  include('includes/footer.php');
+  include_once "includes/scripts.php";
+  include_once "includes/footer.php";
+  ob_end_flush();
 ?>

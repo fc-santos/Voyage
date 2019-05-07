@@ -1,6 +1,6 @@
 <?php
-include('includes/header.php');
-include('includes/navbar.php');
+include_once 'includes/header.php';
+include_once 'includes/navbar.php';
 ?>
 
 <!-- Begin Page Content -->
@@ -20,7 +20,7 @@ include('includes/navbar.php');
   <!-- Content Row -->
 
 
-  <?php
-include('includes/scripts.php');
-include('includes/footer.php');
+<?php
+include_once 'includes/scripts.php';
+include_once 'includes/footer.php';
 ?>

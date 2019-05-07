@@ -1,97 +1,54 @@
 <?php
-include "controlleur/connexionDB.php";
+include_once "controlleur/connexionDB.php";
 if (!session_id()) {
     @session_start();
 }
 
-include "includes/header.php";
-include "includes/navbar.php";
+include_once "includes/header.php";
+include_once "includes/navbar.php";
+
+
 
 if (isset($_GET['idCircuit'])) {
-    $idCircuit = $_GET['idCircuit'];
+    $stmt = $conn->query("SELECT * FROM circuit WHERE idCircuit=" . $_GET['idCircuit']);
+    $row = $stmt->fetch();
+
+    $titre = $row->titre;
+    $description = $row->description;
 }
 
-$stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
-
-    $table = '
-                <div class="table-wrapper">			
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-8">
-                                <h2>Étapes</b></h2>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="search-box">
-                                    <div class="input-group">								
-                                        <input type="text" id="search" class="form-control" placeholder="Recherche...">
-                                        <span class="input-group-addon"><i class="fa fa-search" aria-hidden="true"></i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID Étape</th>
-                                <th>Nom</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>';
-                        while ($row = $stmt->fetch()) {
-                            $table .= '              
-                                    <tr>
-                                        <td>' . $row->idEtape . '</td>
-                                        <td>' . $row->nom . '</td>
-                                        <td>' . $row->description . '</td>
-                                        <td>
-                                            <div class="col-md-12">
-                        
-                                                <button class="btn btn-danger" style="color: white;" data-toggle="modal" data-target="#exampleModal'. $row->idEtape .'"> Supprimer</button>
-                                                <a href="modifierEtape.php?idEtape=' . $row->idEtape . '" class="btn btn-primary" style="color: white;"> Modifier</a>
-                                                <!-- Modal -->
-                                                <div style="color: black;" class="modal fade" id="exampleModal'. $row->idEtape .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Suppression</h5>
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                        Êtes-vous certain de vouloir supprimer "' . $row->nom . '"? 
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a type="button" href="gererEtapes.php" class="btn btn-secondary" data-dismiss="modal">Close</a>
-                                                            <a type="button" href="deleteEtape.php?idEtape=' . $row->idEtape . '" class="btn btn-primary">Confirmer</a>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>';
-                        }
-                $table .= '</tbody>
-                        </table>
-                    </div>
-                ';
 ?>
 
-<div class="container">
-    <form action="creerCircuit.php" method="GET">
-        <button class="btn btn-primary" style="color: white;">Ajouter Étape</button>
-        <input type="hidden" name="idCircuit" value="<?= $idCircuit ?>">
-    </form>
-    <?php
-        echo $table;
-    ?>
-</div>
 
+<div class="container">
+  <h2>Modifier circuit</h2>
+  <form class="mt-3 mb-3" action="modifierCircuitConfirme.php" method="POST">
+    <div class="form-group">
+      <label for="titrecircuit">Titre</label>
+      <input type="text" class="form-control" required id="titrecircuit" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
+    echo htmlentities($_POST['nomCircuit']);
+} elseif (isset($_GET['idCircuit'])) {
+    echo $titre;
+}
+?>">
+    </div>
+    <div class="form-group">
+      <label for="descriptionCircuit">Description</label>
+      <textarea class="form-control" required id="descriptioncircuit" placeholder="Description du Circuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
+    echo htmlentities($_POST['descriptionCircuit']);
+} elseif (isset($_GET['idCircuit'])) {
+    echo $description;
+}?></textarea>
+    </div>
+    <input type="hidden" name="idCircuit" value="<?php if (isset($_GET['idCircuit'])) {
+    echo $_GET['idCircuit'];
+}?>">
+    <input type="submit" name="submit" class="btn btn-primary">
+    </form>
+</div>
+   
 
 <?php
-  include('includes/scripts.php');
-  include('includes/footer.php');
+  include_once 'includes/scripts.php';
+  include_once 'includes/footer.php';
 ?>
