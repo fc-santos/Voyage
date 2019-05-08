@@ -47,7 +47,7 @@
                         
                                                 <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idCircuit .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
                                                 <a href="modifierCircuit.php?idCircuit=' . $row->idCircuit . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
-                                                <a href="listerCircuit.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary" style="color: white;">Lister étapes</a>
+                                                <a href="listerEtapes.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary" style="color: white;">Lister étapes</a>
                                                 <!-- Modal -->
                                                 <div style="color: black;" class="modal fade" id="exampleModal'. $row->idCircuit .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">

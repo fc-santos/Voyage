@@ -23,12 +23,13 @@ if (strlen($q)>0) {
     
         $idLieu = $row['idLieu'];
     
-
-        $sql2 = "SELECT * FROM hebergement WHERE nom LIKE '%".$q."%' AND idLieu = " . $idLieu;
+        if ($idLieu != null) {
+            $sql2 = "SELECT * FROM hebergement WHERE nom LIKE '%".$q."%' AND idLieu = " . $idLieu;
 
     
-        $result = $conn->query($sql2);
-        $liste = '';
+            $result = $conn->query($sql2);
+            $liste = '';
+        }
     } else {
         $sql2 = "SELECT * FROM hebergement WHERE nom LIKE '%".$q."%'";
         $result = $conn->query($sql2);

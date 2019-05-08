@@ -20,7 +20,7 @@ $stmt = $conn->query('SELECT * FROM jour WHERE idEtape = ' . $idEtape);
 
 ///////////////////////////////////////////////////////
 
-    $table = '
+$table = '
                 <div class="table-wrapper">			
                     <div class="table-title">
                         <div class="row">
@@ -40,9 +40,9 @@ $stmt = $conn->query('SELECT * FROM jour WHERE idEtape = ' . $idEtape);
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID Étape</th>
-                                <th>Nom</th>
-                                <th>Description</th>
+                                <th>ID Jour</th>
+                                <th>idEtape</th>
+                                <th>idSouper</th>
                             </tr>
                         </thead>
                         <tbody>';
@@ -51,12 +51,12 @@ $stmt = $conn->query('SELECT * FROM jour WHERE idEtape = ' . $idEtape);
                                     <tr>
                                         <td>' . $row->idJour . '</td>
                                         <td>' . $row->idEtape . '</td>
-                                        <td>' . $row->idHebergement . '</td>
+                                        <td>' . $row->idSouper . '</td>
                                         <td>
                                             <div class="col-md-12">
                         
-                                                <button class="btn btn-danger" style="color: white;" data-toggle="modal" data-target="#exampleModal'. $row->idJour .'"> Supprimer</button>
-                                                <a href="modifierJour.php?idJour=' . $row->idJour . '" class="btn btn-primary" style="color: white;"> Modifier</a>
+                                                <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idJour .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
+                                                <a href="modifierJour.php?idJour=' . $row->idJour . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
                                                 <!-- Modal -->
                                                 <div style="color: black;" class="modal fade" id="exampleModal'. $row->idJour .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
@@ -68,7 +68,7 @@ $stmt = $conn->query('SELECT * FROM jour WHERE idEtape = ' . $idEtape);
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                        Êtes-vous certain de vouloir supprimer "' . $row->idJour . '"? 
+                                                        Êtes-vous certain de vouloir supprimer ce jour? 
                                                         </div>
                                                         <div class="modal-footer">
                                                             <a type="button" href="gererJours.php" class="btn btn-secondary" data-dismiss="modal">Close</a>
