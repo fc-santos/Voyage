@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  mer. 01 mai 2019 à 23:08
+-- Généré le :  jeu. 09 mai 2019 à 17:51
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données :  `dbvoyage`
+-- Base de données :  `bdvoyage`
 --
 
 -- --------------------------------------------------------
@@ -104,61 +104,6 @@ CREATE TABLE `depart` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `detailsactivite`
---
-
-CREATE TABLE `detailsactivite` (
-  `idDetailsActivite` int(11) NOT NULL,
-  `idActivite` int(11) NOT NULL,
-  `idEtape` int(11) NOT NULL,
-  `dateDebut` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `detailshebergement`
---
-
-CREATE TABLE `detailshebergement` (
-  `idDetailsHebergement` int(11) NOT NULL,
-  `idHebergement` int(11) NOT NULL,
-  `idEtape` int(11) NOT NULL,
-  `dateDebut` date NOT NULL,
-  `nbJours` int(11) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `detailslieu`
---
-
-CREATE TABLE `detailslieu` (
-  `idDetailsLieu` int(11) NOT NULL,
-  `idEtape` int(11) NOT NULL,
-  `idLieu` int(11) NOT NULL,
-  `dateDebut` date NOT NULL,
-  `nbJour` int(11) DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `detailsmanger`
---
-
-CREATE TABLE `detailsmanger` (
-  `idDetailsManger` int(11) NOT NULL,
-  `idManger` int(11) NOT NULL,
-  `idEtape` int(11) NOT NULL,
-  `typeRepas` varchar(50) DEFAULT NULL,
-  `dateDebut` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `etape`
 --
 
@@ -167,19 +112,18 @@ CREATE TABLE `etape` (
   `idCircuit` int(11) NOT NULL,
   `nom` varchar(50) COLLATE utf8_bin NOT NULL,
   `description` varchar(300) COLLATE utf8_bin DEFAULT NULL,
-  `ordre` int(11) NOT NULL,
-  `nbJour` int(11) DEFAULT '1'
+  `ordre` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `etape`
 --
 
-INSERT INTO `etape` (`idEtape`, `idCircuit`, `nom`, `description`, `ordre`, `nbJour`) VALUES
-(5, 5, 'Paris', NULL, 1, 2),
-(6, 5, 'Florence', NULL, 2, 2),
-(7, 5, 'Venise', NULL, 3, 2),
-(8, 5, 'Barcelone', NULL, 4, 1);
+INSERT INTO `etape` (`idEtape`, `idCircuit`, `nom`, `description`, `ordre`) VALUES
+(5, 5, 'Paris', NULL, 1),
+(6, 5, 'Florence', NULL, 2),
+(7, 5, 'Venise', NULL, 3),
+(8, 5, 'Barcelone', NULL, 4);
 
 -- --------------------------------------------------------
 
@@ -221,6 +165,22 @@ INSERT INTO `hebergement` (`idHebergement`, `idLieu`, `nom`, `typeHebergement`, 
 (18, 8, 'On charge à l\'heure', 'taux horaire', 0, NULL),
 (19, 4, 'Camping on foret', 'Camping', 0, NULL),
 (20, 1, 'Chambre sur croisière', 'Luxe', 1, 'croisieredereve.com');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `jour`
+--
+
+CREATE TABLE `jour` (
+  `idJour` int(11) NOT NULL,
+  `idEtape` int(11) NOT NULL,
+  `idActivite` int(11) DEFAULT NULL,
+  `idHebergement` int(11) DEFAULT NULL,
+  `idDinner` int(11) DEFAULT NULL,
+  `idSouper` int(11) DEFAULT NULL,
+  `idLieu` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf16;
 
 -- --------------------------------------------------------
 
@@ -412,38 +372,6 @@ ALTER TABLE `depart`
   ADD KEY `idCircuit` (`idCircuit`);
 
 --
--- Index pour la table `detailsactivite`
---
-ALTER TABLE `detailsactivite`
-  ADD PRIMARY KEY (`idDetailsActivite`),
-  ADD KEY `idActivite` (`idActivite`),
-  ADD KEY `idEtape` (`idEtape`);
-
---
--- Index pour la table `detailshebergement`
---
-ALTER TABLE `detailshebergement`
-  ADD PRIMARY KEY (`idDetailsHebergement`),
-  ADD KEY `idEtape` (`idEtape`),
-  ADD KEY `idHebergement` (`idHebergement`);
-
---
--- Index pour la table `detailslieu`
---
-ALTER TABLE `detailslieu`
-  ADD PRIMARY KEY (`idDetailsLieu`),
-  ADD KEY `idEtape` (`idEtape`),
-  ADD KEY `idLieu` (`idLieu`);
-
---
--- Index pour la table `detailsmanger`
---
-ALTER TABLE `detailsmanger`
-  ADD PRIMARY KEY (`idDetailsManger`),
-  ADD KEY `idEtape` (`idEtape`),
-  ADD KEY `idManger` (`idManger`);
-
---
 -- Index pour la table `etape`
 --
 ALTER TABLE `etape`
@@ -456,6 +384,18 @@ ALTER TABLE `etape`
 ALTER TABLE `hebergement`
   ADD PRIMARY KEY (`idHebergement`),
   ADD KEY `idLieu` (`idLieu`);
+
+--
+-- Index pour la table `jour`
+--
+ALTER TABLE `jour`
+  ADD PRIMARY KEY (`idJour`),
+  ADD KEY `idEtape` (`idEtape`),
+  ADD KEY `idActivite` (`idActivite`),
+  ADD KEY `idDinner` (`idDinner`),
+  ADD KEY `idHebergement` (`idHebergement`),
+  ADD KEY `idLieu` (`idLieu`),
+  ADD KEY `idSouper` (`idSouper`);
 
 --
 -- Index pour la table `lieu`
@@ -523,26 +463,6 @@ ALTER TABLE `commande`
 ALTER TABLE `depart`
   MODIFY `idDepart` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT pour la table `detailsactivite`
---
-ALTER TABLE `detailsactivite`
-  MODIFY `idDetailsActivite` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `detailshebergement`
---
-ALTER TABLE `detailshebergement`
-  MODIFY `idDetailsHebergement` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `detailslieu`
---
-ALTER TABLE `detailslieu`
-  MODIFY `idDetailsLieu` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `detailsmanger`
---
-ALTER TABLE `detailsmanger`
-  MODIFY `idDetailsManger` int(11) NOT NULL AUTO_INCREMENT;
---
 -- AUTO_INCREMENT pour la table `etape`
 --
 ALTER TABLE `etape`
@@ -552,6 +472,11 @@ ALTER TABLE `etape`
 --
 ALTER TABLE `hebergement`
   MODIFY `idHebergement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+--
+-- AUTO_INCREMENT pour la table `jour`
+--
+ALTER TABLE `jour`
+  MODIFY `idJour` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `lieu`
 --
@@ -607,34 +532,6 @@ ALTER TABLE `depart`
   ADD CONSTRAINT `depart_ibfk_2` FOREIGN KEY (`idCircuit`) REFERENCES `circuit` (`idCircuit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Contraintes pour la table `detailsactivite`
---
-ALTER TABLE `detailsactivite`
-  ADD CONSTRAINT `detailsactivite_ibfk_1` FOREIGN KEY (`idActivite`) REFERENCES `activite` (`idActivite`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detailsactivite_ibfk_2` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `detailshebergement`
---
-ALTER TABLE `detailshebergement`
-  ADD CONSTRAINT `detailshebergement_ibfk_1` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detailshebergement_ibfk_2` FOREIGN KEY (`idHebergement`) REFERENCES `hebergement` (`idHebergement`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `detailslieu`
---
-ALTER TABLE `detailslieu`
-  ADD CONSTRAINT `detailslieu_ibfk_1` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detailslieu_ibfk_2` FOREIGN KEY (`idLieu`) REFERENCES `lieu` (`idLieu`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Contraintes pour la table `detailsmanger`
---
-ALTER TABLE `detailsmanger`
-  ADD CONSTRAINT `detailsmanger_ibfk_1` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `detailsmanger_ibfk_2` FOREIGN KEY (`idManger`) REFERENCES `manger` (`idManger`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Contraintes pour la table `etape`
 --
 ALTER TABLE `etape`
@@ -645,6 +542,17 @@ ALTER TABLE `etape`
 --
 ALTER TABLE `hebergement`
   ADD CONSTRAINT `hebergement_ibfk_1` FOREIGN KEY (`idLieu`) REFERENCES `lieu` (`idLieu`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `jour`
+--
+ALTER TABLE `jour`
+  ADD CONSTRAINT `jour_ibfk_1` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jour_ibfk_2` FOREIGN KEY (`idActivite`) REFERENCES `activite` (`idActivite`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jour_ibfk_3` FOREIGN KEY (`idDinner`) REFERENCES `manger` (`idManger`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jour_ibfk_4` FOREIGN KEY (`idHebergement`) REFERENCES `hebergement` (`idHebergement`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jour_ibfk_5` FOREIGN KEY (`idLieu`) REFERENCES `lieu` (`idLieu`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jour_ibfk_6` FOREIGN KEY (`idSouper`) REFERENCES `manger` (`idManger`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `manger`
