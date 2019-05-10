@@ -5,3 +5,14 @@
 #navbar-orange{
     background-color: orange !important;
 }
+
+.choix{
+    text-align: right !important;
+}
+
+/*@media (min-width:768px) {
+ .sidebar{
+    width: 12rem !important;
+	}
+}*/
+

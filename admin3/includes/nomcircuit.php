@@ -1,5 +1,7 @@
 <?php
 
+
+
 if (isset($_GET['idCircuit'])) {
     $_SESSION['correctNomCircuit'] = true;
 
@@ -36,11 +38,16 @@ if (isset($_POST['ajouterEtape']) || isset($_POST['terminer'])) {
     unset($_SESSION['idCircuit']);
 
 
-    if (isset($_POST['nomCircuit'])) {
+    if (isset($_POST['nomCircuit']) && $_POST['nomCircuit'] != "") {
         $nomCircuit = $_POST['nomCircuit'];
+    } else {
+        $nomCircuit = "Sans titre";
     }
-    if (isset($_POST['descriptionCircuit'])) {
+    
+    if (isset($_POST['descriptionCircuit']) && $_POST['descriptionCircuit'] != "") {
         $descriptionCircuit = $_POST['descriptionCircuit'];
+    } else {
+        $descriptionCircuit = "Sans description";
     }
     try {
         $sql = "INSERT INTO circuit(titre, description, estActif) VALUES(:titre, :description, 0)";
@@ -58,6 +65,7 @@ if (isset($_POST['terminer'])) {
     unset($_POST['descriptionCircuit']);
     unset($_SESSION['correctNomCircuit']);
     unset($_GET['idCircuit']);
+    $_SESSION['success'] = 'Une circuit a été ajouté';
     header("location: gererCircuit.php");
 }
 ?>
@@ -66,7 +74,7 @@ if (isset($_POST['terminer'])) {
 <form class="mt-3 mb-3" action="creerCircuit.php" method="POST">
   <div class="form-group">
     <label for="titrecircuit">Titre</label>
-    <input type="text" class="form-control" required id="titrecircuit" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
+    <input type="text" class="form-control" id="titrecircuit" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
     echo htmlentities($_POST['nomCircuit']);
 } elseif (isset($_GET['idCircuit'])) {
     echo $nomCircuit;
@@ -74,7 +82,7 @@ if (isset($_POST['terminer'])) {
   </div>
   <div class="form-group">
     <label for="descriptioncircuit">Description</label>
-    <textarea class="form-control" required id="descriptioncircuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
+    <textarea class="form-control" id="descriptioncircuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
     echo htmlentities($_POST['descriptionCircuit']);
 } elseif (isset($_GET['idCircuit'])) {
     echo $descriptionCircuit;

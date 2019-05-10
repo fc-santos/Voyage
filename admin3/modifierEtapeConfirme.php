@@ -12,8 +12,6 @@ if (isset($_POST['submit'])) {
     while ($row = $stmt->fetch()) {
         $idCircuit = $row->idCircuit;
     }
-
-
     
-    @header("Location: listerCircuit.php?idCircuit=" . $idCircuit);
+    @header("Location: listerEtapes.php?idCircuit=" . $idCircuit);
 }

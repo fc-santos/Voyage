@@ -27,11 +27,15 @@ if (isset($_POST['ajouterJours']) || isset($_POST['terminerEtape'])) {
         $_SESSION['ordre'] = $_SESSION['ordre'] + 1;
     }
         
-    if (isset($_POST['titreEtape'])) {
+    if (isset($_POST['titreEtape']) && $_POST['titreEtape'] != "") {
         $titreEtape = $_POST['titreEtape'];
+    } else {
+        $titreEtape = "Sans titre";
     }
-    if (isset($_POST['descriptionEtape'])) {
+    if (isset($_POST['descriptionEtape']) && $_POST['descriptionEtape'] != "") {
         $descriptionEtape = $_POST['descriptionEtape'];
+    } else {
+        $descriptionEtape = "Sans description";
     }
     
     try {
@@ -53,6 +57,7 @@ if (isset($_POST['terminerEtape'])) {
     unset($_POST['descriptionCircuit']);
     unset($_SESSION['correctEtape']);
     unset($_GET['idCircuit']);
+    $_SESSION['success'] = 'Une étape a été ajouté au circuit "' . $idCircuit . '"';
     header("location: listerEtapes.php?idCircuit=" . $_SESSION['idCircuit']);
 }
 ?>
@@ -62,13 +67,13 @@ if (isset($_POST['terminerEtape'])) {
 <form class="mt-3 mb-3" action="creerCircuit.php" method="POST">
   <div class="form-group">
     <label for="titreEtape">Titre</label>
-    <input type="text" class="form-control" required id="titreEtape" placeholder="Nom de l'étape" name="titreEtape" value="<?php if (isset($_POST['titreEtape'])/* && !isset($_SESSION['correctEtape'])*/) {
+    <input type="text" class="form-control" id="titreEtape" placeholder="Nom de l'étape" name="titreEtape" value="<?php if (isset($_POST['titreEtape'])/* && !isset($_SESSION['correctEtape'])*/) {
     echo htmlentities($_POST['titreEtape']);
 }?>">
   </div>
   <div class="form-group">
     <label for="descriptionEtape">Description</label>
-    <textarea class="form-control" required  id="descriptionEtape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape']) /*&& !isset($_SESSION['correctEtape'])*/) {
+    <textarea class="form-control" id="descriptionEtape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape']) /*&& !isset($_SESSION['correctEtape'])*/) {
     echo htmlentities($_POST['descriptionEtape']);
 }?></textarea> 
   </div>

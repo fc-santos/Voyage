@@ -40,7 +40,7 @@ if (strlen($q)>0) {
     if ($result->num_rows > 0) {
         while ($row = $result->fetch_object()) {
             if ($row->nom != null) {
-                $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchhebergement1\',\'#hebergement1\')">' . $row->nom . '</p>';
+                $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchhebergement1\',\'#hebergement1\')">' . utf8_encode($row->nom) . '</p>';
             }
         }
     } else {

@@ -15,9 +15,11 @@ $stmt = $conn->query('SELECT * FROM jour WHERE idEtape = ' . $idEtape);
 
 ////////////////////////////////////////////////////
 //requetes avec les id (idEtape, idLieu, idHebergement, idSouper, idDiner, idActivite)
+$getEtape = $conn->query('SELECT * FROM etape WHERE idEtape = ' . $idEtape);
+$etape = $getEtape->fetch();
 
-/*Faire le code ici*/
-
+$getSouper = $conn->query('SELECT * FROM manger WHERE idManger = 46');// . $idSouper);
+$souper = $getSouper->fetch();
 ///////////////////////////////////////////////////////
 
 $table = '
@@ -40,21 +42,19 @@ $table = '
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID Jour</th>
-                                <th>idEtape</th>
-                                <th>idSouper</th>
+                                <th>Etape</th>
+                                <th>Souper</th>
+                                <th style="width: 150px; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>';
                         while ($row = $stmt->fetch()) {
                             $table .= '              
                                     <tr>
-                                        <td>' . $row->idJour . '</td>
-                                        <td>' . $row->idEtape . '</td>
-                                        <td>' . $row->idSouper . '</td>
-                                        <td>
-                                            <div class="col-md-12">
-                        
+                                        <td>' . $etape->nom . '</td>
+                                        <td>' . $souper->nom . '</td>
+                                        <td style="width: 150px;">
+                                            <div class="col-md-12 choix">                  
                                                 <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idJour .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
                                                 <a href="modifierJour.php?idJour=' . $row->idJour . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
                                                 <!-- Modal -->
@@ -88,6 +88,10 @@ $table = '
 ?>
 
 <div class="container">
+    <?php if (isset($_SESSION['success'])):?>
+        <div class="alert-success pt-2 pb-2 mb-2"><?= $_SESSION['success'] ?></div> 
+        <?php unset($_SESSION['success']);?>
+    <?php endif ?>
     <form action="creerCircuit.php" method="GET">
         <button class="btn btn-primary" style="color: white;">Ajouter Jour</button>
         <input type="hidden" name="idEtape" value="<?= $idEtape ?>">

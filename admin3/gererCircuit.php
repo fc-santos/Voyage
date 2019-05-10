@@ -30,24 +30,23 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>ID Circuit</th>
                                 <th>Titre</th>
                                 <th>Description</th>
+                                <th style="width: 200px; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>';
                         while ($row = $stmt->fetch()) {
                             $table .= '              
                                     <tr>
-                                        <td>' . $row->idCircuit . '</td>
                                         <td>' . $row->titre . '</td>
                                         <td>' . $row->description . '</td>
-                                        <td>
-                                            <div class="col-md-12">
+                                        <td style="width: 200px;">
+                                            <div class="col-md-12 choix">
                         
                                                 <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idCircuit .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
                                                 <a href="modifierCircuit.php?idCircuit=' . $row->idCircuit . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
-                                                <a href="listerEtapes.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary" style="color: white;">Lister étapes</a>
+                                                <a href="listerEtapes.php?idCircuit=' . $row->idCircuit . '" class="btn btn-primary" style="color: white;">Étapes</a>
                                                 <!-- Modal -->
                                                 <div style="color: black;" class="modal fade" id="exampleModal'. $row->idCircuit .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
@@ -77,6 +76,10 @@
                     </div>
                 ';
 ?><div class="container">
+    <?php if (isset($_SESSION['success'])):?>
+        <div class="alert-success pt-2 pb-2 mb-2"><?= $_SESSION['success'] ?></div> 
+        <?php unset($_SESSION['success']);?>   
+    <?php endif ?>
     <form action="creerCircuit.php">
         <button class="btn btn-primary" style="color: white;">Ajouter Circuit</button>
     </form>

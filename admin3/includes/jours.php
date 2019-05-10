@@ -2,7 +2,32 @@
     if (isset($_POST['autreEtape'])) {
         if (isset($_SESSION['lieu'])) {
             $lieu = $_SESSION['lieu'];
+        } else {
+            $lieu = "Sans lieu";
         }
+
+        if (isset($_POST['lieu']) && $_POST['lieu'] != "") {
+            $lieuAGarder = $_POST['lieu'];
+            $query = "SELECT * FROM lieu WHERE ville='". $lieuAGarder . "' OR pays='" . $lieuAGarder . "' OR nom='" . $lieuAGarder . "'";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+
+            $typeLieu = $_POST['selectTypeLieu'];
+
+            if ($stmt->rowCount() == 0) {
+                if ($typeLieu == "Ville") {
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, '". $lieuAGarder . "', NULL)";
+                } elseif ($typeLieu == "Pays") {
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL,'". $lieuAGarder . "')";
+                } else {
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES ('". $lieuAGarder . "', NULL, NULL)";
+                }
+                $stmt1 = $conn->prepare($query1);
+                $stmt1->execute();
+                $idLieu = $conn->lastInsertId();
+            }
+        }
+
 
         if (isset($_POST['hebergement'])) {
             $hebergement = $_POST['hebergement'];
@@ -10,11 +35,8 @@
         if (isset($_POST['souper'])) {
             $souper = $_POST['souper'];
         }
-        if (isset($_POST['diner'])) {
-            $diner = $_POST['diner'];
-        }
-        if (isset($_POST['typeHebergement'])) {
-            $typeHebergement = $_POST['typeHebergement'];
+        if (isset($_POST['dinner'])) {
+            $dinner = $_POST['dinner'];
         }
         if (isset($_POST['activites'])) {
             $activites = $_POST['activites'];
@@ -23,7 +45,7 @@
         try {
             $idEtape = $_SESSION['idEtape'];
 
-            $sql4 = "INSERT INTO `jour`(`idEtape`, `idHebergement`, `idSouper`, `idDiner`, `idActivite`, `lieu`) VALUES ($idEtape, 1, 1, 1, 1, 'aaa')";
+            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, 1, 5, 46, 47)";
             $stmt4 = $conn->prepare($sql4);
             $stmt4->execute();
             $_SESSION['correctNomCircuit'] = true;
@@ -37,14 +59,35 @@
             $lieu = $_SESSION['lieu'];
         }
 
+        if (isset($_POST['lieu'])) {
+            $lieuAGarder = $_POST['lieu'];
+            $query = "SELECT * FROM lieu WHERE ville='". $lieuAGarder . "' OR pays='" . $lieuAGarder . "' OR nom='" . $lieuAGarder . "'";
+            $stmt = $conn->prepare($query);
+            $stmt->execute();
+
+            $typeLieu = $_POST['selectTypeLieu'];
+
+            if ($stmt->rowCount() == 0) {
+                if ($typeLieu == "Ville") {
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, '". $lieuAGarder . "', NULL)";
+                } elseif ($typeLieu == "Pays") {
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL,'". $lieuAGarder . "')";
+                } else {
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES ('". $lieuAGarder . "', NULL, NULL)";
+                }
+                $stmt1 = $conn->prepare($query1);
+                $stmt1->execute();
+            }
+        }
+
         if (isset($_POST['hebergement'])) {
             $hebergement = $_POST['hebergement'];
         }
         if (isset($_POST['souper'])) {
             $souper = $_POST['souper'];
         }
-        if (isset($_POST['diner'])) {
-            $diner = $_POST['diner'];
+        if (isset($_POST['dinner'])) {
+            $dinner = $_POST['dinner'];
         }
         if (isset($_POST['typeHebergement'])) {
             $typeHebergement = $_POST['typeHebergement'];
@@ -56,7 +99,7 @@
         try {
             $idEtape = $_SESSION['idEtape'];
 
-            $sql4 = "INSERT INTO `jour`(`idEtape`, `idHebergement`, `idSouper`, `idDiner`, `idActivite`, `lieu`) VALUES ($idEtape, 1, 1, 1, 1, 'aaa')";
+            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, 1, 5, 46, 47)";
             $stmt4 = $conn->prepare($sql4);
             $stmt4->execute();
             $_SESSION['correctEtape'] = true;
@@ -67,6 +110,8 @@
 
     if (isset($_POST['terminerJour'])) {
         unset($_SESSION['correctEtape']);
+        $_SESSION['success'] = 'Un jour a été ajouté à l\'étape "' . $idEtape . '"';
+        header("location: listerJours.php?idEtape=" . $_SESSION['idEtape']);
     }
 ?>
 
@@ -80,9 +125,18 @@
                 <div class="col-sm-12 col-md-4 mb-2">
                     <div class="form-group">
                         <label for="lieu">Lieu</label>
-                        <input type="text" required class="form-control lieu" id="lieu1" autocomplete="off" aria-describedby="textHelp" name="lieu" placeholder="Entrez un lieu">
+                        <input type="text" class="form-control lieu" id="lieu1" autocomplete="off" aria-describedby="textHelp" name="lieu" placeholder="Entrez un lieu">
                         <div class="pl-2" id="livesearchLieu1" style="min-width: 140px;position: absolute; z-index: 20; background-color: white;"></div>
                     </div>
+                </div>
+                <div class="form-group">
+                <label for="selectTypeLieu">Select le type de lieu</label>
+                <select class="form-control" name="selectTypeLieu" id="selectTypeLieu">
+                <option selected>Lieu</option>
+                <option>Ville</option>
+                <option>Pays</option>
+                
+                </select>
                 </div>
             </div> 
             <div class="row mb-2">
@@ -101,8 +155,8 @@
                 </div>
                 <div class="col-sm-12 col-md-4 mb-2">
                     <div class="form-group">
-                        <label for="diner">Dîner</label>
-                        <input type="text" class="form-control lieuDiner" id="diner1" aria-describedby="textHelp" name="diner" placeholder="Entrez un lieu pour dîner">             
+                        <label for="dinner">Dîner</label>
+                        <input type="text" class="form-control lieudinner" id="dinner1" aria-describedby="textHelp" name="dinner" placeholder="Entrez un lieu pour dîner">             
                     </div>
                 </div>                
             </div>

@@ -7,8 +7,6 @@ if (!session_id()) {
 include_once "includes/header.php";
 include_once "includes/navbar.php";
 
-
-
 if (isset($_GET['idEtape'])) {
     $stmt = $conn->query("SELECT * FROM etape WHERE idEtape=" . $_GET['idEtape']);
     $row = $stmt->fetch();
