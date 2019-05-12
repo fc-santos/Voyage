@@ -44,6 +44,81 @@ body {
 
 /*#endregion recherche*/
 
+/*#region circuits page */
+.header_circuit {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('../assets/images/mayaruins.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 350px;
+    width: 100%;
+    position: relative;
+}
+
+.header_shadow {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.hero_two.header_title {
+    top: 35%;
+}
+
+.header_title {
+    margin: 16px 0 10px;
+    position: absolute;
+    transform: translate(0, 0);
+}
+
+.hero_two {
+    font-family: 'Montserrat';
+    text-transform: uppercase;
+    font-size: 2.5em;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    max-width: 100%;
+    width: 100%;
+    text-shadow: 4px 4px 8px #000000;
+}
+
+.box-search {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.form-title {
+    background: -webkit-linear-gradient(#00ABDC, #0083a9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-nav {
+    background-color: #00ABDC;
+    color: #fff;
+}
+
+.btn-nav:hover {
+    background-color: #0091ba;
+    color: #fff;
+}
+
+.btn-offre {
+    background-color: #F5941C;
+    color: #fff;
+}
+
+.btn-offre:hover {
+    background-color: #e5830a;
+    color: #fff;
+}
+
+
+/*#endregion circuits page */
+
 
 /*taille moyenne*/
 @media only screen and (min-width: 600px) {
@@ -215,4 +290,5 @@ body {
     }
 
     /*#endregion login form */
+
 }
