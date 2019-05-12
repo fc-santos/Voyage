@@ -22,58 +22,52 @@
 </head>
 
 <body style="min-height: 700px;">
-    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-blue pt-0 pb-0 pr-5 pl-5">
-        <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" style="width:100px;" alt=""></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-blue">
+        <div class="container">
+            <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" style="width:100px;" alt=""></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item mr-4">
-                    <a class="nav-link" href="#">Message aux clients</a>
-                </li>
-                <li class="nav-item dropdown mr-4">
-                    <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Circuits
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </li>
-                <li class="nav-item mr-4 <?php if ($nav === 'contact') : ?>active <?php endif; ?>">
-                    <a class="nav-link" href="contact.php">Contact</a>
-                </li>
-                <li class="nav-item <?php if ($nav === 'about') : ?>active <?php endif; ?>">
-                    <a class="nav-link" href="about.php">À propos</a>
-                </li>
-            </ul>
-            <?php if (!isset($_SESSION['nomMembre'])) : ?>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
-                        <a class="nav-link" href="login.php">Connexion</a>
+                    <li class="nav-item mr-4">
+                        <a class="nav-link" href="#">Message aux clients</a>
                     </li>
-                    <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
-                        <a class="nav-link" href="register.php">S'enregistrer</a>
+                    <li class="nav-item mr-4 <?php if ($nav === 'circuits') : ?>active <?php endif; ?>">
+                        <a class="nav-link" href="circuits.php">Circuits</a>
+                    </li>
+                    <li class="nav-item mr-4 <?php if ($nav === 'contact') : ?>active <?php endif; ?>">
+                        <a class="nav-link" href="contact.php">Contact</a>
+                    </li>
+                    <li class="nav-item <?php if ($nav === 'about') : ?>active <?php endif; ?>">
+                        <a class="nav-link" href="about.php">À propos</a>
                     </li>
                 </ul>
-            <?php else : ?>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown mr-4">
-                        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Bonjour <?php echo $_SESSION['nomMembre']; ?> <i class="fas fa-caret-down"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
-                            <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
-                        </div>
-                    </li>
-                </ul>
-            <?php endif; ?>
+                <?php if (!isset($_SESSION['nomMembre'])) : ?>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
+                            <a class="nav-link" href="login.php">Connexion</a>
+                        </li>
+                        <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
+                            <a class="nav-link" href="register.php">S'enregistrer</a>
+                        </li>
+                    </ul>
+                <?php else : ?>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown mr-4">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Bonjour <?php echo $_SESSION['nomMembre']; ?> <i class="fas fa-caret-down"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
+                            </div>
+                        </li>
+                    </ul>
+                <?php endif; ?>
+            </div>
         </div>
     </nav>
