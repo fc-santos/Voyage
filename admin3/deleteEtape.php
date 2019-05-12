@@ -10,5 +10,5 @@ if (isset($_GET['idEtape'])) {
 
     $stmt = $conn->query('DELETE FROM etape WHERE idEtape=' . $_GET['idEtape']);
     
-    header("Location: listerCircuit.php?idCircuit=" . $idCircuit);
+    header("Location: listerEtapes.php?idCircuit=" . $idCircuit);
 }

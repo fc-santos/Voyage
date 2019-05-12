@@ -59,11 +59,12 @@
             $lieu = $_SESSION['lieu'];
         }
 
-        if (isset($_POST['lieu'])) {
+        if (isset($_POST['lieu']) && $_POST['lieu'] != "") {
             $lieuAGarder = $_POST['lieu'];
             $query = "SELECT * FROM lieu WHERE ville='". $lieuAGarder . "' OR pays='" . $lieuAGarder . "' OR nom='" . $lieuAGarder . "'";
             $stmt = $conn->prepare($query);
             $stmt->execute();
+
 
             $typeLieu = $_POST['selectTypeLieu'];
 
@@ -77,11 +78,24 @@
                 }
                 $stmt1 = $conn->prepare($query1);
                 $stmt1->execute();
+                $idLieu = $conn->lastInsertId();
+            } else {
+                $row = $stmt->fetch();
+                $idLieu = $row->idLieu;
             }
         }
 
         if (isset($_POST['hebergement'])) {
             $hebergement = $_POST['hebergement'];
+            $query = "SELECT `idHebergement` FROM `hebergement` WHERE nom = '". $hebergement ."' AND idLieu = " . $idLieu;
+            $stmt1 = $conn->prepare($query);
+            $stmt1->execute();
+
+            $idHebergement = 5;
+
+            while ($row = $stmt1->fetch()) {
+                $idHebergement = $row->idHebergement;
+            }
         }
         if (isset($_POST['souper'])) {
             $souper = $_POST['souper'];
@@ -99,7 +113,7 @@
         try {
             $idEtape = $_SESSION['idEtape'];
 
-            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, 1, 5, 46, 47)";
+            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, 1, $idHebergement, 46, 47)";
             $stmt4 = $conn->prepare($sql4);
             $stmt4->execute();
             $_SESSION['correctEtape'] = true;
