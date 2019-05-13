@@ -1,8 +1,18 @@
 <?php
+session_start();
+
 $title = "S'enregistrer";
 $nav = "register";
 include 'includes/header.php';
-include 'face.php';
+include 'google.php';
+
+$loginUrl = $gClient->createAuthUrl();
+
+if (isset($_SESSION['givenName'])) {
+    header("Location: index.php");
+    exit();
+}
+
 ?>
 
 <div style="height:100vh; width:100%">
@@ -46,7 +56,7 @@ include 'face.php';
             <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
                 <h2>Connectez-vous avec les médias sociaux</h2>
                 <a href="<?php echo $loginUrl; ?>">
-                    <button class="btn btn-facebook btn-block"><i class="fab fa-facebook-f"></i> Continuez avec Facebook</button>
+                    <button class="btn btn-google btn-block"><i class="fab fa-google mr-2"></i> Continuez avec Google</button>
                 </a>
                 <p class="ml-3">Avez-vous déjà un compte? <a href="login.php">Connectez-vous</a></p>
             </div>

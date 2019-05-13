@@ -44,7 +44,7 @@
                         <a class="nav-link" href="about.php">À propos</a>
                     </li>
                 </ul>
-                <?php if (!isset($_SESSION['nomMembre'])) : ?>
+                <?php if (!isset($_SESSION['givenName'])) : ?>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
                             <a class="nav-link" href="login.php">Connexion</a>
@@ -57,7 +57,7 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown mr-4">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Bonjour <?php echo $_SESSION['nomMembre']; ?> <i class="fas fa-caret-down"></i>
+                                Bonjour <?= $_SESSION['givenName']; ?> <i class="fas fa-caret-down"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
