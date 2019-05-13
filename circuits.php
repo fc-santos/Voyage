@@ -113,7 +113,7 @@ include 'includes/header.php';
                         <hr>
                         <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
     </div>
