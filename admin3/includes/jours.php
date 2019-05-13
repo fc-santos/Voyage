@@ -87,6 +87,10 @@
 
         if (isset($_POST['hebergement'])) {
             $hebergement = $_POST['hebergement'];
+
+
+
+            
             $query = "SELECT `idHebergement` FROM `hebergement` WHERE nom = '". $hebergement ."' AND idLieu = " . $idLieu;
             $stmt1 = $conn->prepare($query);
             $stmt1->execute();
