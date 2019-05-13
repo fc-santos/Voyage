@@ -2,7 +2,9 @@
 $title = "Voyage GoAbroad | Connexion";
 $nav = "login";
 include 'includes/header.php';
-include 'face.php';
+require_once 'google.php';
+
+$loginUrl = $gClient->createAuthUrl();
 
 if (isset($_POST['btnLogin'])) { }
 //Logique pour voir si l'utilisateur existe dans la BD
@@ -39,7 +41,7 @@ if (isset($_POST['btnLogin'])) { }
         <hr class="style-one">
         <div style="color:#fff" class="or">OU</div>
         <a href="<?php echo $loginUrl; ?>">
-            <button class="btn btn-lg btn-facebook btn-block text-uppercase"><i class="fab fa-facebook-f mr-2"></i> Login avec Facebook</button>
+            <button class="btn btn-lg btn-google btn-block text-uppercase"><i class="fab fa-google mr-2"></i> Connecter avec Google</button>
         </a>
         <p>Vous n'avez pas de compte?<a href="register.php"> S'enregistrer</a></p>
     </div>
