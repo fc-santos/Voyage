@@ -2,10 +2,10 @@
 -- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 10, 2019 at 02:18 PM
--- Server version: 5.7.17
--- PHP Version: 5.6.30
+-- Hôte : 127.0.0.1
+-- Généré le :  lun. 13 mai 2019 à 18:04
+-- Version du serveur :  5.7.17
+-- Version de PHP :  5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dbvoyage`
+-- Base de données :  `bdvoyage`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `activite`
+-- Structure de la table `activite`
 --
 
 CREATE TABLE `activite` (
@@ -36,10 +36,18 @@ CREATE TABLE `activite` (
   `siteweb` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `activite`
+--
+
+INSERT INTO `activite` (`idActivite`, `idLieu`, `nom`, `description`, `siteweb`) VALUES
+(1, 1, '', NULL, NULL),
+(2, 8, 'test activite', 'descritption test activite', 'http://www.testactivite.com');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `circuit`
+-- Structure de la table `circuit`
 --
 
 CREATE TABLE `circuit` (
@@ -50,7 +58,7 @@ CREATE TABLE `circuit` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `circuit`
+-- Déchargement des données de la table `circuit`
 --
 
 INSERT INTO `circuit` (`idCircuit`, `titre`, `description`, `estActif`) VALUES
@@ -59,7 +67,7 @@ INSERT INTO `circuit` (`idCircuit`, `titre`, `description`, `estActif`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande`
+-- Structure de la table `commande`
 --
 
 CREATE TABLE `commande` (
@@ -72,7 +80,7 @@ CREATE TABLE `commande` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Triggers `commande`
+-- Déclencheurs `commande`
 --
 DELIMITER $$
 CREATE TRIGGER `updateNbPlacesDepart` AFTER INSERT ON `commande` FOR EACH ROW BEGIN
@@ -85,7 +93,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `depart`
+-- Structure de la table `depart`
 --
 
 CREATE TABLE `depart` (
@@ -103,7 +111,19 @@ CREATE TABLE `depart` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `etape`
+-- Structure de la table `detailsimage`
+--
+
+CREATE TABLE `detailsimage` (
+  `idDetailsImage` int(11) NOT NULL,
+  `idCircuit` int(11) NOT NULL,
+  `idImage` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `etape`
 --
 
 CREATE TABLE `etape` (
@@ -115,7 +135,7 @@ CREATE TABLE `etape` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Dumping data for table `etape`
+-- Déchargement des données de la table `etape`
 --
 
 INSERT INTO `etape` (`idEtape`, `idCircuit`, `nom`, `description`, `ordre`) VALUES
@@ -127,7 +147,7 @@ INSERT INTO `etape` (`idEtape`, `idCircuit`, `nom`, `description`, `ordre`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hebergement`
+-- Structure de la table `hebergement`
 --
 
 CREATE TABLE `hebergement` (
@@ -140,11 +160,11 @@ CREATE TABLE `hebergement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `hebergement`
+-- Déchargement des données de la table `hebergement`
 --
 
 INSERT INTO `hebergement` (`idHebergement`, `idLieu`, `nom`, `typeHebergement`, `dejeunerInclus`, `siteweb`) VALUES
-(1, 5, 'Hilton', 'Luxe', 1, 'hilton.com'),
+(1, 1, '', NULL, 0, NULL),
 (2, 5, 'L\'auberge d\'amour', 'Modeste', 1, NULL),
 (3, 6, 'Hilton', 'Luxe', 1, 'hilton.com'),
 (4, 6, 'L\'hotel à Bob', 'Rustique', 0, NULL),
@@ -152,23 +172,23 @@ INSERT INTO `hebergement` (`idHebergement`, `idLieu`, `nom`, `typeHebergement`, 
 (6, 7, 'airBnB', 'Luxe', 0, 'airbnb.com'),
 (7, 8, 'Hilton', 'Luxe', 1, 'hilton.com'),
 (8, 8, 'On charge à l\'heure', 'taux horaire', 0, NULL),
-(9, 4, 'Camping on foret', 'Camping', 0, NULL),
-(10, 1, 'Chambre sur croisière', 'Luxe', 1, 'croisieredereve.com'),
-(11, 5, 'Hilton', 'Luxe', 1, 'hilton.com'),
-(12, 5, 'L\'auberge d\'amour', 'Modeste', 1, NULL),
-(13, 6, 'Hilton', 'Luxe', 1, 'hilton.com'),
-(14, 6, 'L\'hotel à Bob', 'Rustique', 0, NULL),
-(15, 7, 'Hilton', 'Luxe', 1, 'hilton.com'),
-(16, 7, 'airBnB', 'Luxe', 0, 'airbnb.com'),
-(17, 8, 'Hilton', 'Luxe', 1, 'hilton.com'),
-(18, 8, 'On charge à l\'heure', 'taux horaire', 0, NULL),
-(19, 4, 'Camping on foret', 'Camping', 0, NULL),
-(20, 1, 'Chambre sur croisière', 'Luxe', 1, 'croisieredereve.com');
+(19, 4, 'Camping on foret', 'Camping', 0, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jour`
+-- Structure de la table `image`
+--
+
+CREATE TABLE `image` (
+  `idImage` int(11) NOT NULL,
+  `url` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `jour`
 --
 
 CREATE TABLE `jour` (
@@ -183,7 +203,7 @@ CREATE TABLE `jour` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lieu`
+-- Structure de la table `lieu`
 --
 
 CREATE TABLE `lieu` (
@@ -194,23 +214,29 @@ CREATE TABLE `lieu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `lieu`
+-- Déchargement des données de la table `lieu`
 --
 
 INSERT INTO `lieu` (`idLieu`, `nom`, `ville`, `pays`) VALUES
-(1, 'Ocean pacifique', NULL, NULL),
+(1, NULL, NULL, NULL),
+(7, NULL, 'Barcelone', 'Espagne'),
+(6, NULL, 'Florence', 'France'),
 (2, NULL, 'Montreal', 'Canada'),
 (3, NULL, 'New-York', 'Etats-Unis'),
-(4, 'Foret amazonie', NULL, 'Brezil'),
 (5, NULL, 'Paris', 'France'),
-(6, '', 'Florence', 'France'),
-(7, NULL, 'Barcelone', 'Espagne'),
-(8, NULL, 'Venise', 'Italie');
+(8, NULL, 'Venise', 'Italie'),
+(26, 'cdcd', NULL, NULL),
+(29, 'ddddd', NULL, NULL),
+(4, 'Foret amazonie', NULL, 'Brezil'),
+(25, 'h', NULL, NULL),
+(30, 'qqqqq', NULL, NULL),
+(28, 'sss', NULL, NULL),
+(27, 'xcdcccc', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `manger`
+-- Structure de la table `manger`
 --
 
 CREATE TABLE `manger` (
@@ -221,10 +247,11 @@ CREATE TABLE `manger` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `manger`
+-- Déchargement des données de la table `manger`
 --
 
 INSERT INTO `manger` (`idManger`, `idLieu`, `nom`, `siteweb`) VALUES
+(1, 1, '', NULL),
 (46, 5, 'Le petit pain chaud', 'lepetitpainchaud.fr'),
 (47, 5, 'Au café enchanté', 'enchanteCafe.fr'),
 (48, 6, '', NULL),
@@ -233,21 +260,12 @@ INSERT INTO `manger` (`idManger`, `idLieu`, `nom`, `siteweb`) VALUES
 (51, 7, 'Pizzaria mamamiya', 'mamamiya.com'),
 (52, 8, 'Pasta pasta pasta', 'welovepasta.com'),
 (53, 8, 'El restaurante bueno', 'lolwtf.com'),
-(54, 6, 'De la bonne bouffe', NULL),
-(55, 5, 'Le petit pain chaud', 'lepetitpainchaud.fr'),
-(56, 5, 'Au café enchanté', 'enchanteCafe.fr'),
-(57, 6, '', NULL),
-(58, 6, 'La marmite à maman', 'marmitemarmite.fr'),
-(59, 7, 'La soupe chaude', 'cestbondlasoupe.fr'),
-(60, 7, 'Pizzaria mamamiya', 'mamamiya.com'),
-(61, 8, 'Pasta pasta pasta', 'welovepasta.com'),
-(62, 8, 'El restaurante bueno', 'lolwtf.com'),
-(63, 6, 'De la bonne bouffe', NULL);
+(54, 6, 'De la bonne bouffe', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `message`
+-- Structure de la table `message`
 --
 
 CREATE TABLE `message` (
@@ -259,7 +277,7 @@ CREATE TABLE `message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `message`
+-- Déchargement des données de la table `message`
 --
 
 INSERT INTO `message` (`idMessage`, `idUtilisateur`, `titre`, `contenu`, `messageLu`) VALUES
@@ -271,7 +289,7 @@ INSERT INTO `message` (`idMessage`, `idUtilisateur`, `titre`, `contenu`, `messag
 -- --------------------------------------------------------
 
 --
--- Table structure for table `newletter`
+-- Structure de la table `newletter`
 --
 
 CREATE TABLE `newletter` (
@@ -284,7 +302,7 @@ CREATE TABLE `newletter` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `newletter`
+-- Déchargement des données de la table `newletter`
 --
 
 INSERT INTO `newletter` (`idNewletter`, `idUtilisateur`, `titre`, `contenu`, `dateDebut`, `dateFin`) VALUES
@@ -294,7 +312,7 @@ INSERT INTO `newletter` (`idNewletter`, `idUtilisateur`, `titre`, `contenu`, `da
 -- --------------------------------------------------------
 
 --
--- Table structure for table `panier`
+-- Structure de la table `panier`
 --
 
 CREATE TABLE `panier` (
@@ -308,7 +326,7 @@ CREATE TABLE `panier` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `utilisateur`
+-- Structure de la table `utilisateur`
 --
 
 CREATE TABLE `utilisateur` (
@@ -326,7 +344,7 @@ CREATE TABLE `utilisateur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `utilisateur`
+-- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`idUtilisateur`, `prenom`, `nom`, `courriel`, `password`, `sexe`, `adresse`, `ville`, `codePostal`, `pays`, `role`) VALUES
@@ -337,24 +355,25 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `prenom`, `nom`, `courriel`, `passwo
 (6, 'Admin', 'Istrateur', 'admin@gmail.com', 'admin', 'non-binaire', '456 rue de la programmation', 'Montreal', 'K9F3H6', 'Canada', 'Admin');
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `activite`
+-- Index pour la table `activite`
 --
 ALTER TABLE `activite`
   ADD PRIMARY KEY (`idActivite`),
+  ADD UNIQUE KEY `idLieu_2` (`idLieu`,`nom`),
   ADD KEY `idLieu` (`idLieu`);
 
 --
--- Indexes for table `circuit`
+-- Index pour la table `circuit`
 --
 ALTER TABLE `circuit`
   ADD PRIMARY KEY (`idCircuit`);
 
 --
--- Indexes for table `commande`
+-- Index pour la table `commande`
 --
 ALTER TABLE `commande`
   ADD PRIMARY KEY (`idCommande`),
@@ -362,7 +381,7 @@ ALTER TABLE `commande`
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
 --
--- Indexes for table `depart`
+-- Index pour la table `depart`
 --
 ALTER TABLE `depart`
   ADD PRIMARY KEY (`idDepart`),
@@ -370,21 +389,36 @@ ALTER TABLE `depart`
   ADD KEY `idCircuit` (`idCircuit`);
 
 --
--- Indexes for table `etape`
+-- Index pour la table `detailsimage`
+--
+ALTER TABLE `detailsimage`
+  ADD PRIMARY KEY (`idDetailsImage`),
+  ADD KEY `idCircuit` (`idCircuit`),
+  ADD KEY `idImage` (`idImage`);
+
+--
+-- Index pour la table `etape`
 --
 ALTER TABLE `etape`
   ADD PRIMARY KEY (`idEtape`),
   ADD KEY `idCircuit` (`idCircuit`);
 
 --
--- Indexes for table `hebergement`
+-- Index pour la table `hebergement`
 --
 ALTER TABLE `hebergement`
   ADD PRIMARY KEY (`idHebergement`),
+  ADD UNIQUE KEY `idLieu_2` (`idLieu`,`nom`),
   ADD KEY `idLieu` (`idLieu`);
 
 --
--- Indexes for table `jour`
+-- Index pour la table `image`
+--
+ALTER TABLE `image`
+  ADD PRIMARY KEY (`idImage`);
+
+--
+-- Index pour la table `jour`
 --
 ALTER TABLE `jour`
   ADD PRIMARY KEY (`idJour`),
@@ -395,34 +429,36 @@ ALTER TABLE `jour`
   ADD KEY `idSouper` (`idSouper`);
 
 --
--- Indexes for table `lieu`
+-- Index pour la table `lieu`
 --
 ALTER TABLE `lieu`
-  ADD PRIMARY KEY (`idLieu`);
+  ADD PRIMARY KEY (`idLieu`),
+  ADD UNIQUE KEY `nom` (`nom`,`ville`,`pays`);
 
 --
--- Indexes for table `manger`
+-- Index pour la table `manger`
 --
 ALTER TABLE `manger`
   ADD PRIMARY KEY (`idManger`),
+  ADD UNIQUE KEY `idLieu_2` (`idLieu`,`nom`),
   ADD KEY `idLieu` (`idLieu`);
 
 --
--- Indexes for table `message`
+-- Index pour la table `message`
 --
 ALTER TABLE `message`
   ADD PRIMARY KEY (`idMessage`),
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
 --
--- Indexes for table `newletter`
+-- Index pour la table `newletter`
 --
 ALTER TABLE `newletter`
   ADD PRIMARY KEY (`idNewletter`),
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
 --
--- Indexes for table `panier`
+-- Index pour la table `panier`
 --
 ALTER TABLE `panier`
   ADD PRIMARY KEY (`idPanier`),
@@ -430,118 +466,135 @@ ALTER TABLE `panier`
   ADD KEY `idUtilisateur` (`idUtilisateur`);
 
 --
--- Indexes for table `utilisateur`
+-- Index pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
   ADD PRIMARY KEY (`idUtilisateur`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `activite`
+-- AUTO_INCREMENT pour la table `activite`
 --
 ALTER TABLE `activite`
-  MODIFY `idActivite` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idActivite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `circuit`
+-- AUTO_INCREMENT pour la table `circuit`
 --
 ALTER TABLE `circuit`
-  MODIFY `idCircuit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idCircuit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
--- AUTO_INCREMENT for table `commande`
+-- AUTO_INCREMENT pour la table `commande`
 --
 ALTER TABLE `commande`
   MODIFY `idCommande` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `depart`
+-- AUTO_INCREMENT pour la table `depart`
 --
 ALTER TABLE `depart`
   MODIFY `idDepart` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `etape`
+-- AUTO_INCREMENT pour la table `detailsimage`
+--
+ALTER TABLE `detailsimage`
+  MODIFY `idDetailsImage` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `etape`
 --
 ALTER TABLE `etape`
-  MODIFY `idEtape` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idEtape` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
--- AUTO_INCREMENT for table `hebergement`
+-- AUTO_INCREMENT pour la table `hebergement`
 --
 ALTER TABLE `hebergement`
   MODIFY `idHebergement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
--- AUTO_INCREMENT for table `jour`
+-- AUTO_INCREMENT pour la table `image`
+--
+ALTER TABLE `image`
+  MODIFY `idImage` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT pour la table `jour`
 --
 ALTER TABLE `jour`
-  MODIFY `idJour` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idJour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
--- AUTO_INCREMENT for table `lieu`
+-- AUTO_INCREMENT pour la table `lieu`
 --
 ALTER TABLE `lieu`
-  MODIFY `idLieu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idLieu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
--- AUTO_INCREMENT for table `manger`
+-- AUTO_INCREMENT pour la table `manger`
 --
 ALTER TABLE `manger`
   MODIFY `idManger` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
--- AUTO_INCREMENT for table `message`
+-- AUTO_INCREMENT pour la table `message`
 --
 ALTER TABLE `message`
   MODIFY `idMessage` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
--- AUTO_INCREMENT for table `newletter`
+-- AUTO_INCREMENT pour la table `newletter`
 --
 ALTER TABLE `newletter`
   MODIFY `idNewletter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
--- AUTO_INCREMENT for table `panier`
+-- AUTO_INCREMENT pour la table `panier`
 --
 ALTER TABLE `panier`
   MODIFY `idPanier` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `utilisateur`
+-- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
   MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `activite`
+-- Contraintes pour la table `activite`
 --
 ALTER TABLE `activite`
   ADD CONSTRAINT `activite_ibfk_1` FOREIGN KEY (`idLieu`) REFERENCES `lieu` (`idLieu`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `commande`
+-- Contraintes pour la table `commande`
 --
 ALTER TABLE `commande`
   ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`idDepart`) REFERENCES `depart` (`idDepart`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `commande_ibfk_2` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `depart`
+-- Contraintes pour la table `depart`
 --
 ALTER TABLE `depart`
   ADD CONSTRAINT `depart_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `depart_ibfk_2` FOREIGN KEY (`idCircuit`) REFERENCES `circuit` (`idCircuit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `etape`
+-- Contraintes pour la table `detailsimage`
+--
+ALTER TABLE `detailsimage`
+  ADD CONSTRAINT `detailsimage_ibfk_1` FOREIGN KEY (`idCircuit`) REFERENCES `circuit` (`idCircuit`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `detailsimage_ibfk_2` FOREIGN KEY (`idImage`) REFERENCES `image` (`idImage`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `etape`
 --
 ALTER TABLE `etape`
   ADD CONSTRAINT `etape_ibfk_1` FOREIGN KEY (`idCircuit`) REFERENCES `circuit` (`idCircuit`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `hebergement`
+-- Contraintes pour la table `hebergement`
 --
 ALTER TABLE `hebergement`
   ADD CONSTRAINT `hebergement_ibfk_1` FOREIGN KEY (`idLieu`) REFERENCES `lieu` (`idLieu`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `jour`
+-- Contraintes pour la table `jour`
 --
 ALTER TABLE `jour`
   ADD CONSTRAINT `jour_ibfk_1` FOREIGN KEY (`idEtape`) REFERENCES `etape` (`idEtape`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -551,25 +604,25 @@ ALTER TABLE `jour`
   ADD CONSTRAINT `jour_ibfk_6` FOREIGN KEY (`idSouper`) REFERENCES `manger` (`idManger`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `manger`
+-- Contraintes pour la table `manger`
 --
 ALTER TABLE `manger`
   ADD CONSTRAINT `manger_ibfk_1` FOREIGN KEY (`idLieu`) REFERENCES `lieu` (`idLieu`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `message`
+-- Contraintes pour la table `message`
 --
 ALTER TABLE `message`
   ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `newletter`
+-- Contraintes pour la table `newletter`
 --
 ALTER TABLE `newletter`
   ADD CONSTRAINT `newletter_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `panier`
+-- Contraintes pour la table `panier`
 --
 ALTER TABLE `panier`
   ADD CONSTRAINT `panier_ibfk_1` FOREIGN KEY (`idDepart`) REFERENCES `depart` (`idDepart`) ON DELETE CASCADE ON UPDATE CASCADE,
