@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $title = "Voyage GoAbroad | Circuits";
 $nav = "circuits";
 include 'includes/header.php';
