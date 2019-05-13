@@ -52,10 +52,10 @@ if (!isset($accessToken)) {
         $response = $fb->get('/me?fields=name, email');
         $user = $response->getGraphUser();
         $_SESSION['nomMembre'] = $user['name'];
-        echo '<pre>';
+        /*echo '<pre>';
         var_dump($user);
         echo '</pre>';
-        exit();
+        exit();*/
         /*$result_usuario = "SELECT id, nome, email FROM usuarios WHERE email='".$user['email']."' LIMIT 1";
         $resultado_usuario = mysqli_query($conn, $result_usuario);
         if($resultado_usuario){

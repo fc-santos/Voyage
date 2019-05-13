@@ -106,6 +106,27 @@ body {
     color: #fff;
 }
 
+.img-cover {
+    object-fit: cover;
+    height: 180px;
+}
+
+.prix {
+    background: #ed5262;
+    padding: 10px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    color: #fff;
+    width: 100px;
+    font-weight: bold;
+    text-align: right;
+    position: absolute;
+    z-index: 10px;
+    top: 30%;
+    left: 70%;
+}
+
+
 .btn-offre {
     background-color: #F5941C;
     color: #fff;
@@ -114,11 +135,6 @@ body {
 .btn-offre:hover {
     background-color: #e5830a;
     color: #fff;
-}
-
-.img-cover {
-    object-fit: cover;
-    height: 180px;
 }
 
 /*#endregion circuits page */
@@ -134,11 +150,20 @@ body {
 
     /*#endregion menu*/
 
+    /*#region circuit cards */
+
+    .prix {
+        top: 32%;
+        left: 83%;
+    }
+
+    /*#endregion circuit cards */
+
 }
 
 
 /*taille grande*/
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 991px) {
 
     /*#region menu*/
     .bg-blue {
@@ -303,4 +328,25 @@ body {
 
     /*#endregion circuit page*/
 
+    /*#region prix cards */
+
+    .prix {
+        top: 29%;
+        left: 62%;
+    }
+
+    /*#endregion prix cards */
+
+}
+
+/*taille extra grande*/
+@media only screen and (min-width: 1200px) {
+
+    /*#region prix cards */
+    .prix {
+        top: 29%;
+        left: 67%;
+    }
+
+    /*#endregion prix cards*/
 }

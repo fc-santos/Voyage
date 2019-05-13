@@ -60,6 +60,7 @@ include 'includes/header.php';
             <div class="row mb-4">
                 <div class="col-lg-4">
                     <div class="card">
+                        <div class="prix">$4 999</div>
                         <img src="assets/images/castle.jpg" class="card-img-top img-cover" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
@@ -71,6 +72,7 @@ include 'includes/header.php';
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
+                        <div class="prix">$4 999</div>
                         <img src="assets/images/mountain.jpg" class="card-img-top img-cover" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
@@ -82,6 +84,7 @@ include 'includes/header.php';
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
+                        <div class="prix">$4 999</div>
                         <img src="assets/images/village.jpg" class="card-img-top img-cover" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
@@ -95,6 +98,7 @@ include 'includes/header.php';
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
+                        <div class="prix">$4 999</div>
                         <img src="assets/images/mayaruins.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
@@ -106,6 +110,7 @@ include 'includes/header.php';
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
+                        <div class="prix">$4 999</div>
                         <img src="assets/images/island.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
@@ -117,6 +122,7 @@ include 'includes/header.php';
                 </div>
                 <div class="col-lg-4">
                     <div class="card">
+                        <div class="prix">$4 999</div>
                         <img src="assets/images/colosseum.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
                         <div class="card-body">
                             <h5 class="card-title">Card title</h5>
