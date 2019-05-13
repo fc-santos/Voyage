@@ -83,22 +83,28 @@
                 $row = $stmt->fetch();
                 $idLieu = $row->idLieu;
             }
+        } elseif ($_POST['lieu'] == "") {
+            $idLieu = 1;
         }
 
         if (isset($_POST['hebergement'])) {
-            $hebergement = $_POST['hebergement'];
+            if ($_POST['hebergement'] == "") {
+                $idHebergement = 1;
+            } else {
+                $hebergement = $_POST['hebergement'];
+                $query = "SELECT `idHebergement` FROM `hebergement` WHERE nom = :hebergement AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
 
-
-
-            
-            $query = "SELECT `idHebergement` FROM `hebergement` WHERE nom = '". $hebergement ."' AND idLieu = " . $idLieu;
-            $stmt1 = $conn->prepare($query);
-            $stmt1->execute();
-
-            $idHebergement = 5;
-
-            while ($row = $stmt1->fetch()) {
-                $idHebergement = $row->idHebergement;
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idHebergement = $row->idHebergement;
+                } else {
+                    $query4 = "INSERT INTO `hebergement`(`idLieu`, `nom`) VALUES (:idLieu, :hebergement)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
+                    $idHebergement = $conn->lastInsertId();
+                }
             }
         }
         if (isset($_POST['souper'])) {
