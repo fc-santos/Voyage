@@ -116,6 +116,10 @@ body {
     color: #fff;
 }
 
+.img-cover {
+    object-fit: cover;
+    height: 180px;
+}
 
 /*#endregion circuits page */
 
@@ -290,5 +294,13 @@ body {
     }
 
     /*#endregion login form */
+
+    /*#region circuit page */
+
+    .header_circuit {
+        height: 500px;
+    }
+
+    /*#endregion circuit page*/
 
 }

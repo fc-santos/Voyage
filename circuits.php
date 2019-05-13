@@ -17,7 +17,7 @@ include 'includes/header.php';
 
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-lg-3">
             <div class="box-search">
                 <h2 class="form-title">Trouver des forfaits</h2>
                 <hr>
@@ -56,64 +56,76 @@ include 'includes/header.php';
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
-            <div class="card-deck mb-4">
-                <div class="card">
-                    <img src="assets/images/castle.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <hr>
-                        <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+        <div class="col-lg-9">
+            <div class="row mb-4">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="assets/images/castle.jpg" class="card-img-top img-cover" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <hr>
+                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="assets/images/mountain.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <hr>
-                        <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="assets/images/mountain.jpg" class="card-img-top img-cover" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <hr>
+                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="assets/images/village.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <hr>
-                        <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="assets/images/village.jpg" class="card-img-top img-cover" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <hr>
+                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-deck mb-4">
-                <div class="card">
-                    <img src="assets/images/mayaruins.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <hr>
-                        <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="assets/images/mayaruins.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <hr>
+                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="assets/images/island.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <hr>
-                        <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="assets/images/island.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <hr>
+                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                        </div>
                     </div>
                 </div>
-                <div class="card">
-                    <img src="assets/images/colosseum.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <hr>
-                        <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                <div class="col-lg-4">
+                    <div class="card">
+                        <img src="assets/images/colosseum.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                            <hr>
+                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
+                        </div>
                     </div>
-                </div> 
+                </div>
             </div>
         </div>
     </div>
