@@ -14,8 +14,6 @@ if (strlen($q)>0) {
         /*echo "Database connect successfuly";*/
     }
 
-    $q = mysqli_real_escape_string($conn, $q);
-
     $sql = "SELECT * FROM lieu WHERE nom LIKE '%".$q."%' OR ville LIKE '%".$q."%' OR pays LIKE '%".$q."%'";
 
     $result = $conn->query($sql);

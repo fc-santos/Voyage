@@ -83,11 +83,32 @@ $(document).ready(() => {
     e.preventDefault();
   });
 
-  $('#rechercheManger').on('input', (e) => {
+  $('#dinner1').on('input', (e) => {
+    lieu = $('#lieu1').val();
+    let searchText = $('#dinner1').val();
+    showResultParLieu(searchText,'livesearchdinner', lieu);        
+    e.preventDefault();
+  });
+
+  $('#souper1').on('input', (e) => {
+    lieu = $('#lieu1').val();
+    let searchText = $('#souper1').val();
+    showResultParLieu(searchText,'livesearchsouper', lieu);        
+    e.preventDefault();
+  });
+
+  $('#activites1').on('input', (e) => {
+    lieu = $('#lieu1').val();
+    let searchText = $('#activites1').val();
+    showResultParLieu(searchText,'livesearchactivites', lieu);        
+    e.preventDefault();
+  });
+
+  /*$('#rechercheManger').on('input', (e) => {
     let searchText = $('#rechercheManger').val();
     showResult(searchText,'livesearchManger');
     e.preventDefault();
-  });
+  });*/
 
   function showResult(str,str1) {
     id = "#" + str1 + "1";

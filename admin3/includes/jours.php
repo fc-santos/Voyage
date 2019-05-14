@@ -30,22 +30,90 @@
 
 
         if (isset($_POST['hebergement'])) {
-            $hebergement = $_POST['hebergement'];
+            if ($_POST['hebergement'] == "") {
+                $idHebergement = 1;
+            } else {
+                $hebergement = $_POST['hebergement'];
+                $query = "SELECT `idHebergement` FROM `hebergement` WHERE nom = :hebergement AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
+
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idHebergement = $row->idHebergement;
+                } else {
+                    $query4 = "INSERT INTO `hebergement`(`idLieu`, `nom`) VALUES (:idLieu, :hebergement)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
+                    $idHebergement = $conn->lastInsertId();
+                }
+            }
         }
         if (isset($_POST['souper'])) {
-            $souper = $_POST['souper'];
+            if ($_POST['souper'] == "") {
+                $idSouper = 1;
+            } else {
+                $souper = $_POST['souper'];
+                $query = "SELECT `idManger` FROM `manger` WHERE nom = :souper AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['souper' => $souper, 'idLieu' => $idLieu]);
+
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idSouper = $row->idManger;
+                } else {
+                    $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :souper)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['souper' => $souper, 'idLieu' => $idLieu]);
+                    $idSouper = $conn->lastInsertId();
+                }
+            }
         }
         if (isset($_POST['dinner'])) {
-            $dinner = $_POST['dinner'];
+            if ($_POST['dinner'] == "") {
+                $idDinner = 1;
+            } else {
+                $dinner = $_POST['dinner'];
+                $query = "SELECT `idManger` FROM `manger` WHERE nom = :dinner AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
+
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idDinner = $row->idManger;
+                } else {
+                    $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :dinner)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
+                    $idDinner = $conn->lastInsertId();
+                }
+            }
         }
         if (isset($_POST['activites'])) {
-            $activites = $_POST['activites'];
+            if ($_POST['activites'] == "") {
+                $idActivites = 1;
+            } else {
+                $activites = $_POST['activites'];
+                $query = "SELECT `idActivite` FROM `activite` WHERE nom = :activites AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['activites' => $activites, 'idLieu' => $idLieu]);
+
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idActivites = $row->idActivite;
+                } else {
+                    $query4 = "INSERT INTO `activite`(`idLieu`, `nom`) VALUES (:idLieu, :activites)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['activites' => $activites, 'idLieu' => $idLieu]);
+                    $idActivites = $conn->lastInsertId();
+                }
+            }
         }
 
         try {
             $idEtape = $_SESSION['idEtape'];
 
-            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, 1, 5, 46, 47)";
+            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, $idActivites, $idHebergement, $idDinner, $idSouper)";
             $stmt4 = $conn->prepare($sql4);
             $stmt4->execute();
             $_SESSION['correctNomCircuit'] = true;
@@ -108,22 +176,73 @@
             }
         }
         if (isset($_POST['souper'])) {
-            $souper = $_POST['souper'];
+            if ($_POST['souper'] == "") {
+                $idSouper = 1;
+            } else {
+                $souper = $_POST['souper'];
+                $query = "SELECT `idManger` FROM `manger` WHERE nom = :souper AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['souper' => $souper, 'idLieu' => $idLieu]);
+
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idSouper = $row->idManger;
+                } else {
+                    $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :souper)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['souper' => $souper, 'idLieu' => $idLieu]);
+                    $idSouper = $conn->lastInsertId();
+                }
+            }
         }
         if (isset($_POST['dinner'])) {
-            $dinner = $_POST['dinner'];
+            if ($_POST['dinner'] == "") {
+                $idDinner = 1;
+            } else {
+                $dinner = $_POST['dinner'];
+                $query = "SELECT `idManger` FROM `manger` WHERE nom = :dinner AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
+
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idDinner = $row->idManger;
+                } else {
+                    $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :dinner)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
+                    $idDinner = $conn->lastInsertId();
+                }
+            }
         }
-        if (isset($_POST['typeHebergement'])) {
+        /*if (isset($_POST['typeHebergement'])) {
             $typeHebergement = $_POST['typeHebergement'];
-        }
+        }*/
         if (isset($_POST['activites'])) {
-            $activites = $_POST['activites'];
+            if ($_POST['activites'] == "") {
+                $idActivites = 1;
+            } else {
+                $activites = $_POST['activites'];
+                $query = "SELECT `idActivite` FROM `activite` WHERE nom = :activites AND idLieu = :idLieu";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->execute(['activites' => $activites, 'idLieu' => $idLieu]);
+
+                if ($stmt1->rowCount() == 1) {
+                    $row = $stmt1->fetch();
+                    $idActivites = $row->idActivite;
+                } else {
+                    $query4 = "INSERT INTO `activite`(`idLieu`, `nom`) VALUES (:idLieu, :activites)";
+                    $stmt2 = $conn->prepare($query4);
+                    $stmt2->execute(['activites' => $activites, 'idLieu' => $idLieu]);
+                    $idActivites = $conn->lastInsertId();
+                }
+            }
         }
 
         try {
             $idEtape = $_SESSION['idEtape'];
 
-            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, 1, $idHebergement, 46, 47)";
+            $sql4 = "INSERT INTO `jour`(`idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idEtape, $idActivites, $idHebergement, $idDinner, $idSouper)";
             $stmt4 = $conn->prepare($sql4);
             $stmt4->execute();
             $_SESSION['correctEtape'] = true;
@@ -173,32 +292,36 @@
                 </div>
                 <div class="col-sm-12 col-md-4 mb-2">
                     <div class="form-group">
-                        <label for="souper">Souper</label>
-                        <input type="text" class="form-control lieuSouper" id="souper1" aria-describedby="textHelp" name="souper" placeholder="Entrez un lieu pour souper">
+                        <label for="dinner">Dîner</label>
+                        <input type="text" class="form-control lieudinner" id="dinner1" autocomplete="off" aria-describedby="textHelp" name="dinner" placeholder="Entrez un lieu pour dîner">
+                        <div class="pl-2" id="livesearchdinner1" style="min-width: 140px;position: absolute; z-index: 20; background-color: white;"></div>           
                     </div>
                 </div>
                 <div class="col-sm-12 col-md-4 mb-2">
                     <div class="form-group">
-                        <label for="dinner">Dîner</label>
-                        <input type="text" class="form-control lieudinner" id="dinner1" aria-describedby="textHelp" name="dinner" placeholder="Entrez un lieu pour dîner">             
+                        <label for="souper">Souper</label>
+                        <input type="text" class="form-control lieuSouper" id="souper1" autocomplete="off" aria-describedby="textHelp" name="souper" placeholder="Entrez un lieu pour souper">
+                        <div class="pl-2" id="livesearchsouper1" style="min-width: 140px;position: absolute; z-index: 20; background-color: white;"></div>    
+                        
                     </div>
-                </div>                
+                </div>                                
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-4 mb-2">
+                <!--<div class="col-sm-12 col-md-4 mb-2">
                     <div class="form-group">
                         <label for="typeHebergement">Type Hébergement</label>
                         <input type="text" class="form-control typeHebergement" id="typeHebergement1" aria-describedby="textHelp" name="typeHebergement" placeholder="Entrez le type d'hébergement">
+                        <div class="pl-2" id="livesearchdinner1" style="min-width: 140px;position: absolute; z-index: 20; background-color: white;"></div>
                     </div>
-                </div>
-                <div class="col-sm-12 col-md-8 mb-2">
+                </div>-->
+                <div class="col-sm-12 col-md-12 mb-2">
                     <div class="form-group">
                         <label for="activites">Activités</label>
-                        <input type="text" class="form-control jourActivites" id="activites1" aria-describedby="textHelp" name="activites" placeholder="Entrez des activités">
+                        <input type="text" class="form-control jourActivites" id="activites1" autocomplete="off" aria-describedby="textHelp" name="activites" placeholder="Entrez des activités">
+                        <div class="pl-2" id="livesearchactivites1" style="min-width: 140px;position: absolute; z-index: 20; background-color: white;"></div>
                     </div>
                 </div>
             </div>
-
             <button type="submit" name="autreEtape" class="btn btn-primary">Ajouter une autre étape</button>
             <button type="submit" name="ajouterPlusJours" class="btn btn-primary">Ajouter Jours</button>
             <button type="submit" name="terminerJour" class="btn btn-primary">Terminer</button>
