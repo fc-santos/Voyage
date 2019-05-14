@@ -9,10 +9,12 @@ if (strlen($q)>0) {
     $conn = new mysqli('localhost', 'root', '', 'dbvoyage');
 
     if ($conn->connect_error) {
-        die("Error: There is something error" . $conn->connect_error);
+        die("Erreur: Il y a une erreur" . $conn->connect_error);
     } else {
         /*echo "Database connect successfuly";*/
     }
+
+    $q = mysqli_real_escape_string($conn, $q);
 
     $sql = "SELECT * FROM lieu WHERE nom LIKE '%".$q."%' OR ville LIKE '%".$q."%' OR pays LIKE '%".$q."%'";
 

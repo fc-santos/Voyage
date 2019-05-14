@@ -8,22 +8,22 @@
 
         if (isset($_POST['lieu']) && $_POST['lieu'] != "") {
             $lieuAGarder = $_POST['lieu'];
-            $query = "SELECT * FROM lieu WHERE ville='". $lieuAGarder . "' OR pays='" . $lieuAGarder . "' OR nom='" . $lieuAGarder . "'";
+            $query = "SELECT * FROM lieu WHERE ville=:lieuAGarder OR pays=:lieuAGarder OR nom=:lieuAGarder";
             $stmt = $conn->prepare($query);
-            $stmt->execute();
+            $stmt->execute(['lieuAGarder'=>$lieuAGarder]);
 
             $typeLieu = $_POST['selectTypeLieu'];
 
             if ($stmt->rowCount() == 0) {
                 if ($typeLieu == "Ville") {
-                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, '". $lieuAGarder . "', NULL)";
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, :lieuAGarder, NULL)";
                 } elseif ($typeLieu == "Pays") {
-                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL,'". $lieuAGarder . "')";
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL,:lieuAGarder)";
                 } else {
-                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES ('". $lieuAGarder . "', NULL, NULL)";
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (:lieuAGarder, NULL, NULL)";
                 }
                 $stmt1 = $conn->prepare($query1);
-                $stmt1->execute();
+                $stmt1->execute(['lieuAGarder'=> $lieuAGarder]);
                 $idLieu = $conn->lastInsertId();
             }
         }
@@ -61,23 +61,23 @@
 
         if (isset($_POST['lieu']) && $_POST['lieu'] != "") {
             $lieuAGarder = $_POST['lieu'];
-            $query = "SELECT * FROM lieu WHERE ville='". $lieuAGarder . "' OR pays='" . $lieuAGarder . "' OR nom='" . $lieuAGarder . "'";
+            $query = "SELECT * FROM lieu WHERE ville=:lieuAGarder OR pays=:lieuAGarder OR nom=:lieuAGarder";
             $stmt = $conn->prepare($query);
-            $stmt->execute();
+            $stmt->execute(['lieuAGarder'=>$lieuAGarder]);
 
 
             $typeLieu = $_POST['selectTypeLieu'];
 
             if ($stmt->rowCount() == 0) {
                 if ($typeLieu == "Ville") {
-                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, '". $lieuAGarder . "', NULL)";
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL,:lieuAGarder, NULL)";
                 } elseif ($typeLieu == "Pays") {
-                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL,'". $lieuAGarder . "')";
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL,:lieuAGarder)";
                 } else {
-                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES ('". $lieuAGarder . "', NULL, NULL)";
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (:lieuAGarder, NULL, NULL)";
                 }
                 $stmt1 = $conn->prepare($query1);
-                $stmt1->execute();
+                $stmt1->execute(['lieuAGarder'=>$lieuAGarder]);
                 $idLieu = $conn->lastInsertId();
             } else {
                 $row = $stmt->fetch();

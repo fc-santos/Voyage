@@ -16,6 +16,9 @@ if (strlen($q)>0) {
         /*echo "Database connect successfuly";*/
     }
 
+    $r = mysqli_real_escape_string($conn, $r);
+    $q = mysqli_real_escape_string($conn, $q);
+
     if ($r != '') {
         $sql = "SELECT idLieu FROM lieu WHERE ville='". $r . "' OR pays='" . $r . "' OR nom='" . $r . "'";
         $result = mysqli_query($conn, $sql);
