@@ -76,10 +76,7 @@
                     </div>
                 ';
 ?><div class="container">
-    <?php if (isset($_SESSION['success'])):?>
-        <div class="alert-success pt-2 pb-2 mb-2"><?= $_SESSION['success'] ?></div> 
-        <?php unset($_SESSION['success']);?>   
-    <?php endif ?>
+    
     <form action="creerCircuit.php">
         <button class="btn btn-primary" style="color: white;">Ajouter Circuit</button>
     </form>

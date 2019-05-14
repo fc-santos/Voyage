@@ -1,5 +1,7 @@
 <?php
-
+if (!session_id()) {
+    @session_start();
+}
 //get the q parameter from URL
 $q = $_GET["q"];
 $reponse = '';
@@ -37,5 +39,6 @@ if (strlen($q)>0) {
     $reponse = $liste;
     $conn->close();
 }
+$_SESSION['typeLieuFromDatabase'] = true;
 //output the response
 echo $reponse;

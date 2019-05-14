@@ -8,9 +8,9 @@
 
         if (isset($_POST['lieu']) && $_POST['lieu'] != "") {
             $lieuAGarder = $_POST['lieu'];
-            $query = "SELECT * FROM lieu WHERE ville=:lieuAGarder OR pays=:lieuAGarder OR nom=:lieuAGarder";
+            $query = "SELECT * FROM lieu WHERE ville= :lieuAGarder OR pays= :lieuAGarder1 OR nom= :lieuAGarder2";
             $stmt = $conn->prepare($query);
-            $stmt->execute(['lieuAGarder'=>$lieuAGarder]);
+            $stmt->execute(['lieuAGarder'=>$lieuAGarder, 'lieuAGarder1'=> $lieuAGarder, 'lieuAGarder2'=>$lieuAGarder]);
 
             $typeLieu = $_POST['selectTypeLieu'];
 
@@ -18,7 +18,7 @@
                 if ($typeLieu == "Ville") {
                     $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, :lieuAGarder, NULL)";
                 } elseif ($typeLieu == "Pays") {
-                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL,:lieuAGarder)";
+                    $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (NULL, NULL, :lieuAGarder)";
                 } else {
                     $query1 = "INSERT INTO `lieu`(`nom`, `ville`, `pays`) VALUES (:lieuAGarder, NULL, NULL)";
                 }
@@ -38,14 +38,14 @@
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idHebergement = $row->idHebergement;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `hebergement`(`idLieu`, `nom`) VALUES (:idLieu, :hebergement)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
                     $idHebergement = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idHebergement = $row->idHebergement;
                 }
             }
         }
@@ -58,34 +58,34 @@
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['souper' => $souper, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idSouper = $row->idManger;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :souper)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['souper' => $souper, 'idLieu' => $idLieu]);
                     $idSouper = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idSouper = $row->idManger;
                 }
             }
         }
         if (isset($_POST['dinner'])) {
             if ($_POST['dinner'] == "") {
-                $idDinner = 1;
+                $idDinner = 0;
             } else {
                 $dinner = $_POST['dinner'];
                 $query = "SELECT `idManger` FROM `manger` WHERE nom = :dinner AND idLieu = :idLieu";
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idDinner = $row->idManger;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :dinner)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
                     $idDinner = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idDinner = $row->idManger;
                 }
             }
         }
@@ -98,14 +98,14 @@
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['activites' => $activites, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idActivites = $row->idActivite;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `activite`(`idLieu`, `nom`) VALUES (:idLieu, :activites)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['activites' => $activites, 'idLieu' => $idLieu]);
                     $idActivites = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idActivites = $row->idActivite;
                 }
             }
         }
@@ -129,9 +129,9 @@
 
         if (isset($_POST['lieu']) && $_POST['lieu'] != "") {
             $lieuAGarder = $_POST['lieu'];
-            $query = "SELECT * FROM lieu WHERE ville=:lieuAGarder OR pays=:lieuAGarder OR nom=:lieuAGarder";
+            $query = "SELECT * FROM lieu WHERE ville= :lieuAGarder OR pays= :lieuAGarder1 OR nom= :lieuAGarder2";
             $stmt = $conn->prepare($query);
-            $stmt->execute(['lieuAGarder'=>$lieuAGarder]);
+            $stmt->execute(['lieuAGarder'=>$lieuAGarder, 'lieuAGarder1'=> $lieuAGarder, 'lieuAGarder2'=>$lieuAGarder]);
 
 
             $typeLieu = $_POST['selectTypeLieu'];
@@ -164,14 +164,14 @@
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idHebergement = $row->idHebergement;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `hebergement`(`idLieu`, `nom`) VALUES (:idLieu, :hebergement)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['hebergement' => $hebergement, 'idLieu' => $idLieu]);
                     $idHebergement = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idHebergement = $row->idHebergement;
                 }
             }
         }
@@ -184,14 +184,14 @@
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['souper' => $souper, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idSouper = $row->idManger;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :souper)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['souper' => $souper, 'idLieu' => $idLieu]);
                     $idSouper = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idSouper = $row->idManger;
                 }
             }
         }
@@ -204,14 +204,14 @@
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idDinner = $row->idManger;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `manger`(`idLieu`, `nom`) VALUES (:idLieu, :dinner)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['dinner' => $dinner, 'idLieu' => $idLieu]);
                     $idDinner = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idDinner = $row->idManger;
                 }
             }
         }
@@ -227,14 +227,14 @@
                 $stmt1 = $conn->prepare($query);
                 $stmt1->execute(['activites' => $activites, 'idLieu' => $idLieu]);
 
-                if ($stmt1->rowCount() == 1) {
-                    $row = $stmt1->fetch();
-                    $idActivites = $row->idActivite;
-                } else {
+                if ($stmt1->rowCount() == 0) {
                     $query4 = "INSERT INTO `activite`(`idLieu`, `nom`) VALUES (:idLieu, :activites)";
                     $stmt2 = $conn->prepare($query4);
                     $stmt2->execute(['activites' => $activites, 'idLieu' => $idLieu]);
                     $idActivites = $conn->lastInsertId();
+                } else {
+                    $row = $stmt1->fetch();
+                    $idActivites = $row->idActivite;
                 }
             }
         }
