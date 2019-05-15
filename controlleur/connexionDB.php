@@ -2,7 +2,7 @@
   $host =  'localhost';
   $user = 'root';
   $password = 'root';
-  $dbname = 'bdvoyage';
+  $dbname = 'dbvoyage';
   // Set DSN
   $dsn = 'mysql:host='. $host .';dbname='. $dbname;
   // Create a PDO instance

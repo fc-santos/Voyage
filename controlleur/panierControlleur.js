@@ -1,6 +1,10 @@
 $(document).ready(function() {
-
+    getPanier();
 });
+
+$(document).on('click', 'div .dropdown-menu', function (e) {
+    e.stopPropagation();
+  });
 
 // $('#navbarDropdownMenuLink0').click(function () {
 //     getPanier();
@@ -40,7 +44,7 @@ function getPanier(){
 	formPanier.append('action','listerPanier');//alert(formFilm.get("action"));
 	$.ajax({
 		type : "post",
-		url : "controlleur/panier.php",
+		url : "controlleur/panierControlleur.php",
 		data : formPanier,
 		contentType : false,
 		processData : false,
@@ -87,10 +91,10 @@ function viewPanier(infoPanier) {
 		for(var i=0; i<taille; i++){
 			rep += `<div class="row">
                         <div class="col-md-3">
-                            ` + infoPanier.circuit.titre + `
+                            ` + infoPanier.circuit[i].titre + `
                         </div>
                         <div class="col-md-2 my-1 centerText">
-                        ` + infoPanier.depart.dateDebut + `
+                        ` + infoPanier.depart[i].dateDebut + `
                         </div>
                         <div class="col-md-2 my-1 centerText">
                         ` + infoPanier.panier[i].nbAdultes + `
@@ -99,70 +103,74 @@ function viewPanier(infoPanier) {
                         ` + infoPanier.panier[i].nbEnfants + `
                         </div>
                         <div class="col-md-2 my-1 centerText">
-                        $ ` + infoPanier.depart.prix + `
+                        $ ` + infoPanier.depart[i].prix.toFixed(2) + `
                         </div>
                         <div class="col-md-1">
-                            <button type="button" class="btn btn-default" onclick='supprimer()'><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-default" onclick='supprimer(` + infoPanier.panier[i].idPanier + `); getPanier();'><i class="fas fa-trash-alt"></i></button>
                         </div>                                  
                     </div>
                     <div class="dropdown-divider"></div>`;
         }
-
         rep += 		`<div class="col-md-11 my-1" id='prixTotal'>
-                        <span> Prix Total : </span>$ ` + infoPanier.soustotal + `
+                        <span> Prix Total : </span>$ ` + infoPanier.total.toFixed(2) + `
                     </div>
                     <div class="col-md-3">
                         <button type="button" class="btn btn-success" onclick='acheter()'>Payer</button>
                     </div>
                 </div>`;
+
+        $('#panier').html(" (" + taille + ") $ " + infoPanier.total.toFixed(2));
 	} else {
 		rep = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>";
 	}
 	
-	$('#divPanier').html(rep);
+    $('#divPanier').html(rep);
+    
+
 }
 
-function listerParCategorie(idCategorie){
-	var formFilm = new FormData();
-	formFilm.append('action','listerParCategorie');//alert(formFilm.get("action"));
-	formFilm.append('id', idCategorie);
-	$.ajax({
-		type : "post",
-		url : "controller/filmsControleur.php",
-		data : formFilm,
-		contentType : false,
-		processData : false,
-		cache : false,
-		dataType : "json", //text pour le voir en format de string
-		success : function (reponse){//alert(reponse);
-					filmsVue(reponse);
-					console.log(reponse);
-		},
-		fail : function (err){
-			console.log('Deu Ruim!!');
-		}
-	});
-}
-
-// function enlever(){
-// 	var leForm=document.getElementById('formEnlever');
-// 	var formFilm = new FormData(leForm);
-// 	formFilm.append('action','enlever');//alert(formFilm.get("action"));
+// function listerParCategorie(idCategorie){
+// 	var formFilm = new FormData();
+// 	formFilm.append('action','listerParCategorie');//alert(formFilm.get("action"));
+// 	formFilm.append('id', idCategorie);
 // 	$.ajax({
-// 		type : 'POST',
-// 		url : 'controller/filmsControleur.php',
-// 		data : formFilm,//leForm.serialize(),
-// 		contentType : false, //Enlever ces deux directives si vous utilisez serialize()
+// 		type : "post",
+// 		url : "controller/filmsControleur.php",
+// 		data : formFilm,
+// 		contentType : false,
 // 		processData : false,
-// 		dataType : 'json', //text pour le voir en format de string
+// 		cache : false,
+// 		dataType : "json", //text pour le voir en format de string
 // 		success : function (reponse){//alert(reponse);
 // 					filmsVue(reponse);
+// 					console.log(reponse);
 // 		},
 // 		fail : function (err){
-			
+// 			console.log('Deu Ruim!!');
 // 		}
 // 	});
 // }
+
+function supprimer(idPanier){
+    var formPanier = new FormData();
+	formPanier.append('action','supprimer');
+	formPanier.append('idPanier', idPanier);
+	$.ajax({
+		type : 'POST',
+		url : 'controlleur/panierControlleur.php',
+		data : formPanier,//leForm.serialize(),
+		contentType : false, //Enlever ces deux directives si vous utilisez serialize()
+		processData : false,
+		dataType : 'json', //text pour le voir en format de string
+		success : function (reponse){//alert(reponse);
+            console.log(reponse);
+			viewPanier(reponse);
+		},
+		fail : function (err){
+			
+		}
+	});
+}
 
 // function obtenirFiche(){
 // 	$('#divFiche').hide();
