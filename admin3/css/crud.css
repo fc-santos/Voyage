@@ -76,7 +76,11 @@ table.table th i {
     cursor: pointer;
 }
 table.table th:first-child {
-    width: 10rem;
+    width: 3rem;
+}
+
+table.table td:first-child, table.table th{
+    text-align: center;
 }
 
 table.table td a {

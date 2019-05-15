@@ -48,6 +48,7 @@ $table = '
                         <thead>
                             <tr>
                                 <th>Jour</th>
+                                <th>Lieu</th>
                                 <th>Hebergement</th>
                                 <th>Activites</th>
                                 <th>Dinner</th>
@@ -65,6 +66,15 @@ $table = '
 
                             $getActivite = $conn->query('SELECT * FROM activite WHERE idActivite = ' . $row->idActivite);
                             $activite = $getActivite->fetch();
+                            
+                            $idLieu = $activite->idLieu;
+                            $getLieu = $conn->query("SELECT * FROM lieu WHERE idLieu = $idLieu");
+                            $lieu = $getLieu->fetch();
+                            if ($lieu->nom == null && $lieu->ville == null && $lieu->pays == null) {
+                                $lieuAMontrer = 'Sans Lieu';
+                            } else {
+                                $lieuAMontrer = $lieu->nom . " " . $lieu->ville . " " . $lieu->pays;
+                            }
 
                             $getHebergement = $conn->query('SELECT * FROM hebergement WHERE idHebergement = ' . $row->idHebergement);
                             $hebergement = $getHebergement->fetch();
@@ -75,14 +85,22 @@ $table = '
                             $getSouper = $conn->query('SELECT * FROM manger WHERE idManger = ' . $row->idSouper);
                             $souper = $getSouper->fetch();
                             ///////////////////////////////////////////////////////
-                            $table .= '              
+                            $table .= ' 
+                                    <col width="50">
+                                    <col width="130">
+                                    <col width="130">
+                                    <col width="130">
+                                    <col width="130">
+                                    <col width="130">
+                                    <col width="150">            
                                     <tr>
                                         <td>' . $jour . '</td>
+                                        <td>' . $lieuAMontrer . '</td>
                                         <td>' . $hebergement->nom . '</td>
                                         <td>' . $activite->nom . '</td>
                                         <td>' . $dinner->nom . '</td>
                                         <td>' . $souper->nom . '</td>
-                                        <td style="width: 150px;">
+                                        <td>
                                             <div class="col-md-12 choix">                  
                                                 <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idJour .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
                                                 <a href="modifierJour.php?idJour=' . $row->idJour . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
