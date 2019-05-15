@@ -76,6 +76,18 @@ $(document).ready(() => {
     e.preventDefault();
   });
 
+  $('#lieuModifier').on('change', (e) => {
+    $('#activiteModifier').val("");
+    $('#hebergementModifier').val("");
+    $('#dinnerModifier').val("");
+    $('#souperModifier').val("");
+
+    
+    let searchText = $('#lieuModifier').val();
+    showResult(searchText,'livesearchLieu');
+    e.preventDefault();
+  });
+
   $('#hebergement1').on('input', (e) => {
     lieu = $('#lieu1').val();
     let searchText = $('#hebergement1').val();
@@ -157,11 +169,15 @@ $(document).ready(() => {
   }
 });
 
-function prendreLaValeur(element,string,cible){
+function prendreLaValeur(element,string,cible,id=0){
   id = '#' + string;
 
   $(id).html(null);
   $(cible).val(element.innerHTML);
+  console.log(element.innerHTML + ", " + string + ", " + cible + "," + id);
+  $('#idLieuChoisi').val(id);
+  
+  
 }
 
 function ajouterJours(){}

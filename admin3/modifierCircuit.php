@@ -25,7 +25,7 @@ if (isset($_GET['idCircuit'])) {
   <form class="mt-3 mb-3" action="modifierCircuitConfirme.php" method="POST">
     <div class="form-group">
       <label for="titrecircuit">Titre</label>
-      <input type="text" class="form-control" required id="titrecircuit" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
+      <input type="text" class="form-control" autocomplete="off" id="titrecircuit" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
     echo htmlentities($_POST['nomCircuit']);
 } elseif (isset($_GET['idCircuit'])) {
     echo $titre;
@@ -34,7 +34,7 @@ if (isset($_GET['idCircuit'])) {
     </div>
     <div class="form-group">
       <label for="descriptionCircuit">Description</label>
-      <textarea class="form-control" required id="descriptioncircuit" placeholder="Description du Circuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
+      <textarea class="form-control" autocomplete="off" id="descriptioncircuit" placeholder="Description du Circuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
     echo htmlentities($_POST['descriptionCircuit']);
 } elseif (isset($_GET['idCircuit'])) {
     echo $description;

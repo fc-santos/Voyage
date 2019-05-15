@@ -32,7 +32,7 @@ if (strlen($q)>0) {
             } elseif ($row->pays != null) {
                 $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchLieu1\',\'#lieu1\')">' . $row->pays . '</p>';
             }*/
-            $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchLieu1\',\'#lieu1\')">' . $row->nom . " " . $row->ville . " " . $row->pays . '</p>';
+            $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchLieu1\',\'#lieu1\', 7)">' . $row->nom . " " . $row->ville . " " . $row->pays . '</p>';
         }
     } else {
         $liste = '';

@@ -23,7 +23,7 @@ if (isset($_GET['idEtape'])) {
   <form class="mt-3 mb-3" action="modifierEtapeConfirme.php" method="POST">
     <div class="form-group">
       <label for="titreetape">Titre</label>
-      <input type="text" class="form-control" required id="titreetape" placeholder="Nom de l'étape" name="nomEtape" value="<?php if (isset($_POST['nomEtape'])) {
+      <input type="text" class="form-control" autocomplete="off" id="titreetape" placeholder="Nom de l'étape" name="nomEtape" value="<?php if (isset($_POST['nomEtape'])) {
     echo htmlentities($_POST['nomEtape']);
 } elseif (isset($_GET['idEtape'])) {
     echo $titre;
@@ -32,7 +32,7 @@ if (isset($_GET['idEtape'])) {
     </div>
     <div class="form-group">
       <label for="descriptionEtape">Description</label>
-      <textarea class="form-control" required id="descriptionetape" placeholder="Description de l'étape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape'])) {
+      <textarea class="form-control" autocomplete="off" id="descriptionetape" placeholder="Description de l'étape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape'])) {
     echo htmlentities($_POST['descriptionEtape']);
 } elseif (isset($_GET['idEtape'])) {
     echo $description;

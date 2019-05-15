@@ -44,9 +44,10 @@ if (isset($_GET['idJour'])) {
         $idLieu = $souper->idLieu;
     }
 
+
     $getLieu = $conn->query('SELECT * FROM lieu WHERE idLieu = ' . $idLieu);
     $lieu = $getLieu->fetch();
-    $nomLieu = $lieu->nom;
+    $nomLieu = $lieu->nom . " "  . $lieu->ville . " " . $lieu->pays;
 }
 ?>
 
@@ -54,15 +55,15 @@ if (isset($_GET['idJour'])) {
   <h2>Modifier jour</h2>
   <form class="mt-3 mb-3" action="modifierJourConfirme.php" method="POST">
   <div class="form-group">
-      <label for="lieu">Lieu</label>
-      <input type="text" class="form-control" id="lieu" placeholder="lieu" name="lieu" value="<?php if (isset($nomLieu)) {
-    echo $nomLieu;
+      <label for="lieu">Lieu</label> (<span style="color: red;">Attention: Modifier le lieu implique la perte de tous les données pour le lieu</span>)
+      <input type="text" class="form-control" id="lieuModifier" autocomplete="off" placeholder="lieu" name="lieu" value="<?php if (isset($nomLieu)) {
+    echo ltrim($nomLieu);
 }
 ?>">
     </div>
     <div class="form-group">
       <label for="hebergement">Hebergement</label>
-      <input type="text" class="form-control" id="hebergement" placeholder="hebergement" name="hebergement" value="<?php if (isset($_POST['hebergement'])) {
+      <input type="text" class="form-control" id="hebergementModifier" autocomplete="off" placeholder="hebergement" name="hebergement" value="<?php if (isset($_POST['hebergement'])) {
     echo htmlentities($_POST['hebergement']);
 } elseif (isset($nomHebergement)) {
     echo $nomHebergement;
@@ -71,7 +72,7 @@ if (isset($_GET['idJour'])) {
     </div>
     <div class="form-group">
       <label for="activite">Activite</label>
-      <input type="text" class="form-control" id="activite" placeholder="activite" name="activite" value="<?php if (isset($_POST['activite'])) {
+      <input type="text" class="form-control" id="activiteModifier" autocomplete="off" placeholder="activite" name="activite" value="<?php if (isset($_POST['activite'])) {
     echo htmlentities($_POST['activite']);
 } elseif (isset($nomActivite)) {
     echo $nomActivite;
@@ -80,7 +81,7 @@ if (isset($_GET['idJour'])) {
     </div>
     <div class="form-group">
       <label for="dinner">Dinner</label>
-      <input type="text" class="form-control" id="dinner" placeholder="dinner" name="dinner" value="<?php if (isset($_POST['dinner'])) {
+      <input type="text" class="form-control" id="dinnerModifier" autocomplete="off" placeholder="dinner" name="dinner" value="<?php if (isset($_POST['dinner'])) {
     echo htmlentities($_POST['dinner']);
 } elseif (isset($nomDinner)) {
     echo $nomDinner;
@@ -89,7 +90,7 @@ if (isset($_GET['idJour'])) {
     </div>
     <div class="form-group">
       <label for="souper">Souper</label>
-      <input type="text" class="form-control" id="souper" placeholder="souper" name="souper" value="<?php if (isset($_POST['souper'])) {
+      <input type="text" class="form-control" id="souperModifier" autocomplete="off" placeholder="souper" name="souper" value="<?php if (isset($_POST['souper'])) {
     echo htmlentities($_POST['souper']);
 } elseif (isset($nomSouper)) {
     echo $nomSouper;

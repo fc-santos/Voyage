@@ -11,6 +11,8 @@ if (isset($_GET['idEtape'])) {
     $idEtape = $_GET['idEtape'];
 }
 
+echo $_SESSION['debug'];
+
 
 
 /*$getEtape = $conn->query('SELECT * FROM etape WHERE idEtape = ' . $idEtape);
@@ -45,6 +47,13 @@ $table = '
                         </div>
                     </div>
                     <table class="table table-striped">
+                        <col width="50">
+                        <col width="130">
+                        <col width="130">
+                        <col width="130">
+                        <col width="130">
+                        <col width="130">
+                        <col width="150">            
                         <thead>
                             <tr>
                                 <th>Jour</th>
@@ -86,13 +95,6 @@ $table = '
                             $souper = $getSouper->fetch();
                             ///////////////////////////////////////////////////////
                             $table .= ' 
-                                    <col width="50">
-                                    <col width="130">
-                                    <col width="130">
-                                    <col width="130">
-                                    <col width="130">
-                                    <col width="130">
-                                    <col width="150">            
                                     <tr>
                                         <td>' . $jour . '</td>
                                         <td>' . $lieuAMontrer . '</td>
