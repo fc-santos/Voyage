@@ -1,3 +1,12 @@
+<?php
+require "./controlleur/connexionDB.php";
+
+$idUtilisateur = isset($_SESSION['idUtilisateur']) ? $_SESSION['idUtilisateur'] : 2;
+
+$sql = ''
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -42,6 +51,18 @@
                     </li>
                     <li class="nav-item <?php if ($nav === 'about') : ?>active <?php endif; ?>">
                         <a class="nav-link" href="about.php">À propos</a>
+                    </li>
+                    <li class="nav-item dropdown test" id="panierClick">
+                        <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
+                            onclick="getPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><i class="fas fa-shopping-cart"></i>
+                            <span id="panier"> (0) $ 0.00 </span>
+                        </div>
+                        <div id="cart" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
+                            <div id="divPanier" class="test">
+                                <!--Insert Panier ici-->  
+                            </div>
+                        </div>
                     </li>
                 </ul>
                 <?php if (!isset($_SESSION['givenName'])) : ?>
