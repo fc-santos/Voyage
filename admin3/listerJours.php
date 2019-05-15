@@ -11,17 +11,22 @@ if (isset($_GET['idEtape'])) {
     $idEtape = $_GET['idEtape'];
 }
 
+
+
+/*$getEtape = $conn->query('SELECT * FROM etape WHERE idEtape = ' . $idEtape);
+$etape = $getEtape->fetch();*/
+
 $stmt = $conn->query('SELECT * FROM jour WHERE idEtape = ' . $idEtape);
 
 ////////////////////////////////////////////////////
 //requetes avec les id (idEtape, idLieu, idHebergement, idSouper, idDiner, idActivite)
-$getEtape = $conn->query('SELECT * FROM etape WHERE idEtape = ' . $idEtape);
+/*$getEtape = $conn->query('SELECT * FROM etape WHERE idEtape = ' . $idEtape);
 $etape = $getEtape->fetch();
 
 $getSouper = $conn->query('SELECT * FROM manger WHERE idManger = 46');// . $idSouper);
-$souper = $getSouper->fetch();
+$souper = $getSouper->fetch();*/
 ///////////////////////////////////////////////////////
-
+$jour = 0;
 $table = '
                 <div class="table-wrapper">			
                     <div class="table-title">
@@ -42,16 +47,40 @@ $table = '
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Etape</th>
+                                <th>Jour</th>
+                                <th>Hebergement</th>
+                                <th>Activites</th>
+                                <th>Dinner</th>
                                 <th>Souper</th>
                                 <th style="width: 150px; text-align: center;">Action</th>
                             </tr>
                         </thead>
                         <tbody>';
                         while ($row = $stmt->fetch()) {
+                            $jour++;
+                            $idJour = $row->idJour;
+                            ////////////////////////////////////////////////////
+                            //requetes avec les id (idEtape, idLieu, idHebergement, idSouper, idDiner, idActivite)
+                            
+
+                            $getActivite = $conn->query('SELECT * FROM activite WHERE idActivite = ' . $row->idActivite);
+                            $activite = $getActivite->fetch();
+
+                            $getHebergement = $conn->query('SELECT * FROM hebergement WHERE idHebergement = ' . $row->idHebergement);
+                            $hebergement = $getHebergement->fetch();
+
+                            $getDinner = $conn->query('SELECT * FROM manger WHERE idManger = ' . $row->idDinner);
+                            $dinner = $getDinner->fetch();
+
+                            $getSouper = $conn->query('SELECT * FROM manger WHERE idManger = ' . $row->idSouper);
+                            $souper = $getSouper->fetch();
+                            ///////////////////////////////////////////////////////
                             $table .= '              
                                     <tr>
-                                        <td>' . $etape->nom . '</td>
+                                        <td>' . $jour . '</td>
+                                        <td>' . $hebergement->nom . '</td>
+                                        <td>' . $activite->nom . '</td>
+                                        <td>' . $dinner->nom . '</td>
                                         <td>' . $souper->nom . '</td>
                                         <td style="width: 150px;">
                                             <div class="col-md-12 choix">                  
