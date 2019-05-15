@@ -10,11 +10,6 @@ include "includes/navbar.php";
 if (isset($_GET['idEtape'])) {
     $idEtape = $_GET['idEtape'];
 }
-
-echo $_SESSION['debug'];
-
-
-
 /*$getEtape = $conn->query('SELECT * FROM etape WHERE idEtape = ' . $idEtape);
 $etape = $getEtape->fetch();*/
 

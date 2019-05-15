@@ -169,13 +169,13 @@ $(document).ready(() => {
   }
 });
 
-function prendreLaValeur(element,string,cible,id=0){
+function prendreLaValeur(element,string,cible,idLieu=0){
   id = '#' + string;
 
   $(id).html(null);
   $(cible).val(element.innerHTML);
-  console.log(element.innerHTML + ", " + string + ", " + cible + "," + id);
-  $('#idLieuChoisi').val(id);
+  console.log(element.innerHTML + ", " + string + ", " + cible + "," + idLieu);
+  $('#idLieuChoisi').val(idLieu);
   
   
 }
