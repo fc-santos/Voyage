@@ -90,7 +90,9 @@ body {
     margin-bottom: 24px;
 }
 
-.form-title {
+.form-title,
+.circuit-description,
+.circuit-details {
     background: -webkit-linear-gradient(#00ABDC, #0083a9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -106,11 +108,6 @@ body {
     color: #fff;
 }
 
-.img-cover {
-    object-fit: cover;
-    height: 180px;
-}
-
 .prix {
     background: #ed5262;
     padding: 10px;
@@ -122,8 +119,12 @@ body {
     text-align: right;
     position: absolute;
     z-index: 10px;
-    top: 30%;
-    left: 70%;
+    top: 42%;
+    left: 74%;
+}
+
+.mb-4-sm {
+    margin-bottom: 1.4em;
 }
 
 
@@ -137,7 +138,39 @@ body {
     color: #fff;
 }
 
+.img-cover {
+    object-fit: cover;
+    height: 250px;
+}
+
 /*#endregion circuits page */
+
+/*#region details circuit*/
+
+.circuit-caption {
+    position: absolute;
+    top: 27%;
+    left: 20%;
+    color: #fff;
+    text-shadow: 4px 4px 8px #000000;
+}
+
+.jour {
+    border: 1px solid #efefef;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 1.3em;
+}
+
+/*#endregion details circuit*/
+@media only screen and (max-width: 599px) and (min-width: 400px) {
+    .prix {
+        top: 42%;
+        left: 77%;
+        font-size: 1.3em;
+    }
+}
+
 
 
 /*taille moyenne*/
@@ -153,8 +186,8 @@ body {
     /*#region circuit cards */
 
     .prix {
-        top: 32%;
-        left: 83%;
+        top: 40%;
+        left: 84%;
     }
 
     /*#endregion circuit cards */
@@ -330,8 +363,13 @@ body {
 
     /*#region prix cards */
 
+    .img-cover {
+        object-fit: cover;
+        height: 150px;
+    }
+
     .prix {
-        top: 29%;
+        top: 23%;
         left: 62%;
     }
 
@@ -343,10 +381,21 @@ body {
 @media only screen and (min-width: 1200px) {
 
     /*#region prix cards */
+
+    .img-cover {
+        object-fit: cover;
+        height: 150px;
+    }
+
     .prix {
-        top: 29%;
+        top: 23%;
         left: 67%;
     }
 
     /*#endregion prix cards*/
+
+    .circuit-caption {
+        top: 50%;
+        left: 40%;
+    }
 }
