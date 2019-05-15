@@ -337,6 +337,47 @@ body {
 
     /*#endregion prix cards */
 
+    /* Panier */
+    .card {
+        margin-bottom: 15px;
+    }
+    
+    .modal-body .col-md-3 {
+        padding-bottom: 5px;
+    }
+    
+    .modal-body img, .image-panier img {
+        width: 18%;
+    }
+    
+    #cart {
+        margin-left: -50rem;
+        width: 57rem;
+    }
+    
+    .fa-trash-alt {
+        font-size: 18pt;
+        color: rgba(255, 0, 0, 0.7);
+    }
+    
+    #divPanier{
+        max-height: 400px;
+        overflow-y: auto;
+        overflow-x: hidden;   
+    }
+    
+    #prixTotal{
+        text-align: right;
+    }
+    
+    #prixTotal span{
+        font-weight: bold;
+    }
+    
+    .centerText{
+        text-align: center;
+    }
+
 }
 
 /*taille extra grande*/

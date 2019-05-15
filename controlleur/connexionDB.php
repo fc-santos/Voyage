@@ -1,8 +1,8 @@
 <?php
   $host =  'localhost';
   $user = 'root';
-  $password = '';
-  $dbname = 'dbvoyage';
+  $password = 'root';
+  $dbname = 'bdvoyage';
   // Set DSN
   $dsn = 'mysql:host='. $host .';dbname='. $dbname;
   // Create a PDO instance

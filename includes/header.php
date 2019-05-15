@@ -43,6 +43,70 @@
                     <li class="nav-item <?php if ($nav === 'about') : ?>active <?php endif; ?>">
                         <a class="nav-link" href="about.php">À propos</a>
                     </li>
+                    <li class="nav-item dropdown test" id="panierClick">
+                        <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
+                            onclick="getPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false"><i class="fas fa-shopping-cart"></i>
+                            <span id="panier"> (0) $ 0.00 </span>
+                        </div>
+                        <div id="cart" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
+                            <div id="divPanier" class="test">
+                                <!--Insert Panier ici-->
+                                <!-- <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <span><b>Circuit</b></span>
+                                        </div>
+                                        <div class="col-md-2 centerText">
+                                            <span><b>Depart</b></span>
+                                        </div>
+                                        <div class="col-md-2 centerText">
+                                            <span><b>Adults</b></span>
+                                        </div>
+                                        <div class="col-md-2 centerText">
+                                            <span><b>Enfants</b></span>
+                                        </div>
+                                        <div class="col-md-2 centerText">
+                                            <span><b>Prix Unitaire</b></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr style="border: 0.5px solid grey">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            Paris à 2
+                                        </div>
+                                        <div class="col-md-2 my-1 centerText">
+                                            12/05/2020
+                                        </div>
+                                        <div class="col-md-2 my-1 centerText">
+                                            2
+                                        </div>
+                                        <div class="col-md-2 my-1 centerText">
+                                            0
+                                        </div>
+                                        <div class="col-md-2 my-1 centerText">
+                                            $1899,99
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button type="button" class="btn btn-default" onclick='supprimer()'><i class="fas fa-trash-alt"></i></button>
+                                        </div>                                  
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="col-md-11 my-1" id='prixTotal'>
+                                        <span>Prix Total : </span>$ $3799,98
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="button" class="btn btn-success" onclick='acheter()'>Payer</button>
+                                    </div>
+                                </div> -->
+                                
+                            </div>
+                        </div>
+                    </li>
                 </ul>
                 <?php if (!isset($_SESSION['givenName'])) : ?>
                     <ul class="navbar-nav ml-auto">
