@@ -53,19 +53,17 @@ $sql = ''
                         <a class="nav-link" href="about.php">À propos</a>
                     </li>
                     <li class="nav-item dropdown test" id="panierClick">
-                        <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
-                            onclick="getPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false"><i class="fas fa-shopping-cart"></i>
+                        <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0" onclick="getPanier()" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-shopping-cart"></i>
                             <span id="panier"> (0) $ 0.00 </span>
                         </div>
                         <div id="cart" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
                             <div id="divPanier" class="test">
-                                <!--Insert Panier ici-->  
+                                <!--Insert Panier ici-->
                             </div>
                         </div>
                     </li>
                 </ul>
-                <?php if (!isset($_SESSION['givenName'])) : ?>
+                <?php if (!isset($_SESSION['prenom'])) : ?>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
                             <a class="nav-link" href="login.php">Connexion</a>
@@ -78,7 +76,7 @@ $sql = ''
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown mr-4">
                             <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Bonjour <?= $_SESSION['givenName']; ?> <i class="fas fa-caret-down"></i>
+                                Bonjour <?= $_SESSION['prenom']; ?> <i class="fas fa-caret-down"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
