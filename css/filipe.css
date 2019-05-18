@@ -159,7 +159,21 @@ body {
     border: 1px solid #efefef;
     border-radius: 10px;
     padding: 20px;
-    margin-bottom: 1.3em;
+}
+
+.jour:hover {
+    box-shadow: 2px 2px 6px 4px #efefef;
+}
+
+.jour h5 a {
+    color: #272727;
+    text-decoration: none;
+    display: block;
+}
+
+.booking {
+    border: 1px solid #efefef;
+    border-radius: 10px;
 }
 
 /*#endregion details circuit*/
@@ -379,40 +393,41 @@ body {
     .card {
         margin-bottom: 15px;
     }
-    
+
     .modal-body .col-md-3 {
         padding-bottom: 5px;
     }
-    
-    .modal-body img, .image-panier img {
+
+    .modal-body img,
+    .image-panier img {
         width: 18%;
     }
-    
+
     #cart {
         margin-left: -50rem;
         width: 57rem;
     }
-    
+
     .fa-trash-alt {
         font-size: 18pt;
         color: rgba(255, 0, 0, 0.7);
     }
-    
-    #divPanier{
+
+    #divPanier {
         max-height: 400px;
         overflow-y: auto;
-        overflow-x: hidden;   
+        overflow-x: hidden;
     }
-    
-    #prixTotal{
+
+    #prixTotal {
         text-align: right;
     }
-    
-    #prixTotal span{
+
+    #prixTotal span {
         font-weight: bold;
     }
-    
-    .centerText{
+
+    .centerText {
         text-align: center;
     }
 
