@@ -20,19 +20,12 @@ if (strlen($q)>0) {
 
     $result = $conn->query($sql);
     $liste = '';
-    //$total = $result->num_rows;
-
+    
     if ($result->num_rows > 0) {
         // output data of each row
         while ($row = $result->fetch_object()) {
-            /*if ($row->nom != null) {
-                $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchLieu1\',\'#lieu1\')">' . $row->nom . '</p>';
-            } elseif ($row->ville != null) {
-                $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchLieu1\',\'#lieu1\')">' . $row->ville . '</p>';
-            } elseif ($row->pays != null) {
-                $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchLieu1\',\'#lieu1\')">' . $row->pays . '</p>';
-            }*/
-            $liste = $liste . '<p onclick="prendreLaValeur(this,\'livesearchLieu1\',\'#lieu1\', 7)">' . $row->nom . " " . $row->ville . " " . $row->pays . '</p>';
+            $cleanStr = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $row->nom . ' ' . $row->ville . ' ' . $row->pays)));
+            $liste = $liste . "<p onclick=\"prendreLaValeur(this,'livesearchLieu1','#lieu1'," . $row->idLieu . ")\">" . $cleanStr . "</p>";
         }
     } else {
         $liste = '';

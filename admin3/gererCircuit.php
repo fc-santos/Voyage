@@ -57,7 +57,7 @@
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body" style="text-align: left !important;"> 
                                                         Êtes-vous certain de vouloir supprimer "' . $row->titre . '"? 
                                                         </div>
                                                         <div class="modal-footer">
@@ -76,7 +76,10 @@
                     </div>
                 ';
 ?><div class="container">
-    
+    <?php if (isset($_SESSION['success'])):?>
+        <div class="alert-success pt-2 pb-2 mb-2"><?= $_SESSION['success'] ?></div> 
+        <?php unset($_SESSION['success']); ?>   
+    <?php endif ?>
     <form action="creerCircuit.php">
         <button class="btn btn-primary" style="color: white;">Ajouter Circuit</button>
     </form>

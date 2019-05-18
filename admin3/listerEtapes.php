@@ -59,7 +59,7 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body" style="text-align: left !important;">
                                                         Êtes-vous certain de vouloir supprimer "' . $row->nom . '"? 
                                                         </div>
                                                         <div class="modal-footer">
@@ -91,6 +91,7 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
     <?php
         echo $table;
     ?>
+    <a href="gererCircuit.php" class="mb-10"><i class="fas fa-arrow-alt-circle-left"></i> Retourner</a>
 </div>
 
 

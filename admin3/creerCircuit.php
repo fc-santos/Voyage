@@ -7,7 +7,10 @@ if (!session_id()) {
 
 include_once "includes/header.php";
 include_once "includes/navbar.php";
-
+/*if (isset($_SESSION['debug'])) {
+    echo $_SESSION['debug'];
+}
+unset($_SESSION['debug']);*/
 ?>
 
 <!-- Begin Page Content -->

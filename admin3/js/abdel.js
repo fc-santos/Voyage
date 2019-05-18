@@ -71,21 +71,26 @@ $(document).ready(() => {
   lieu = null;
 
   $('#lieu1').on('input', (e) => {
+    $('#idLieuChoisi').removeAttr("value");
+    $('#activites1').val("");
+    $('#hebergement1').val("");
+    $('#dinner1').val("");
+    $('#souper1').val("");
     let searchText = $('#lieu1').val();
     showResult(searchText,'livesearchLieu');
     e.preventDefault();
   });
 
-  $('#lieuModifier').on('change', (e) => {
-    $('#activiteModifier').val("");
-    $('#hebergementModifier').val("");
-    $('#dinnerModifier').val("");
-    $('#souperModifier').val("");
+  $('#lieu1').on('change', (e) => {
+    $('#activite1').val("");
+    $('#hebergement1').val("");
+    $('#dinner1').val("");
+    $('#souper1').val("");
 
     
-    let searchText = $('#lieuModifier').val();
+    /*let searchText = $('#lieu2').val();
     showResult(searchText,'livesearchLieu');
-    e.preventDefault();
+    e.preventDefault();*/
   });
 
   $('#hebergement1').on('input', (e) => {
@@ -175,9 +180,10 @@ function prendreLaValeur(element,string,cible,idLieu=0){
   $(id).html(null);
   $(cible).val(element.innerHTML);
   console.log(element.innerHTML + ", " + string + ", " + cible + "," + idLieu);
-  $('#idLieuChoisi').val(idLieu);
-  
-  
+  //$("#idLieuChoisi").removeAttr("value");
+  if(cible === "#lieu1"){
+    $('#idLieuChoisi').val(idLieu);
+  }  
 }
 
 function ajouterJours(){}

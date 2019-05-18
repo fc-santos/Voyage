@@ -67,13 +67,13 @@ if (isset($_POST['terminerEtape'])) {
 <form class="mt-3 mb-3" action="creerCircuit.php" method="POST">
   <div class="form-group">
     <label for="titreEtape">Titre</label>
-    <input type="text" class="form-control" id="titreEtape" placeholder="Nom de l'étape" name="titreEtape" value="<?php if (isset($_POST['titreEtape'])/* && !isset($_SESSION['correctEtape'])*/) {
+    <input type="text" class="form-control" autocomplete="off" id="titreEtape" placeholder="Nom de l'étape" name="titreEtape" value="<?php if (isset($_POST['titreEtape'])/* && !isset($_SESSION['correctEtape'])*/) {
     echo htmlentities($_POST['titreEtape']);
 }?>">
   </div>
   <div class="form-group">
     <label for="descriptionEtape">Description</label>
-    <textarea class="form-control" id="descriptionEtape" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape']) /*&& !isset($_SESSION['correctEtape'])*/) {
+    <textarea class="form-control" id="descriptionEtape" autocomplete="off" name="descriptionEtape" rows="4"><?php if (isset($_POST['descriptionEtape']) /*&& !isset($_SESSION['correctEtape'])*/) {
     echo htmlentities($_POST['descriptionEtape']);
 }?></textarea> 
   </div>
