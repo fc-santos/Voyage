@@ -1,7 +1,4 @@
 <?php
-
-
-
 if (isset($_GET['idCircuit'])) {
     $_SESSION['correctNomCircuit'] = true;
 

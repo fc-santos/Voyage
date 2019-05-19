@@ -1,10 +1,13 @@
 <?php
+
     if (isset($_POST['autreEtape'])) {
         if (isset($_SESSION['lieu'])) {
             $lieu = $_SESSION['lieu'];
         } else {
             $lieu = "Sans lieu";
         }
+        
+        //$_SESSION['debug'] = $_POST['lieu'];
 
         if (isset($_POST['lieu']) && $_POST['lieu'] != "") {
             if ($_POST['idLieuChoisi'] == "0" || $_POST['idLieuChoisi'] == "" || $_POST['idLieuChoisi'] == null) {
@@ -48,6 +51,7 @@
                 }
             }
         }
+
         if (isset($_POST['souper'])) {
             if ($_POST['souper'] == "") {
                 $idSouper = 1;
@@ -68,6 +72,7 @@
                 }
             }
         }
+
         if (isset($_POST['dinner'])) {
             if ($_POST['dinner'] == "") {
                 $idDinner = 0;
@@ -88,6 +93,7 @@
                 }
             }
         }
+        
         if (isset($_POST['activites'])) {
             if ($_POST['activites'] == "") {
                 $idActivites = 1;
@@ -111,7 +117,6 @@
 
         try {
             $idEtape = $_SESSION['idEtape'];
-
             $sql4 = "INSERT INTO `jour`(`idLieu`, `idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idLieu, $idEtape, $idActivites, $idHebergement, $idDinner, $idSouper)";
             $stmt4 = $conn->prepare($sql4);
             $stmt4->execute();

@@ -12,6 +12,11 @@ include "includes/navbar.php";
 if (isset($_GET['idEtape'])) {
     $idEtape = $_GET['idEtape'];
 }
+
+if (isset($_GET['idCircuit'])) {
+    $idCircuit = $_GET['idCircuit'];
+}
+
 /*$getEtape = $conn->query('SELECT * FROM etape WHERE idEtape = ' . $idEtape);
 $etape = $getEtape->fetch();*/
 
@@ -156,7 +161,7 @@ $table = '
                 ';
 ?>
 
-<div class="container">
+<div class="container minimumHeight">
 <?php //echo $_SESSION['debug'];?>
 <?php //unset($_SESSION['debug']);?>
     <?php if (isset($_SESSION['success'])):?>
@@ -170,6 +175,11 @@ $table = '
     <?php
         echo $table;
     ?>
+    <a href="<?php if (isset($idCircuit)) {
+        echo "listerEtapes.php?idCircuit=$idCircuit";
+    } else {
+        echo 'gererCircuit.php';
+    } ?>" class="mb-10"><i class="fas fa-arrow-alt-circle-left"></i> Retourner</a>
 </div>
 
 <?php
