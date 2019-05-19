@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  sam. 18 mai 2019 à 22:41
+-- Généré le :  Dim 19 mai 2019 à 04:08
 -- Version du serveur :  5.7.17
 -- Version de PHP :  5.6.30
 
@@ -340,7 +340,7 @@ CREATE TABLE `utilisateur` (
   `ville` varchar(50) DEFAULT NULL,
   `codePostal` varchar(50) DEFAULT NULL,
   `pays` varchar(50) DEFAULT NULL,
-  `role` varchar(50) NOT NULL
+  `role` varchar(50) NOT NULL DEFAULT 'Membre'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -352,7 +352,8 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `prenom`, `nom`, `courriel`, `passwo
 (3, 'Suzie', 'Karate', 'Suzi@outlook.com', 'ilovemaman', 'Femme', '345 rue Sherbrooke', 'Montreal', 'G8K9D7', 'Canada', 'Admin'),
 (4, 'Jose', 'Gonzalez', 'jose@gmail.com', 'poutine', 'Homme', '9876 Saint-Andre', 'Montrel', 'H4K9D3', 'Canada', 'Membre'),
 (5, 'Catherine', 'Cossette', 'catherine_45@hotmail.com', 'ryanna', 'Femmme', '5667 du Diable', 'Quebec', 'H4K9D3', 'Canada', 'Membre'),
-(6, 'Admin', 'Istrateur', 'admin@gmail.com', 'admin', 'non-binaire', '456 rue de la programmation', 'Montreal', 'K9F3H6', 'Canada', 'Admin');
+(6, 'Admin', 'Istrateur', 'admin@gmail.com', 'admin', 'non-binaire', '456 rue de la programmation', 'Montreal', 'K9F3H6', 'Canada', 'Admin'),
+(7, 'Logiciel', 'Genie', 'genielogicielmaisonneuve@gmail.com', 'p@ssw0rd', NULL, NULL, NULL, NULL, NULL, 'Membre');
 
 --
 -- Index pour les tables déchargées
@@ -549,7 +550,7 @@ ALTER TABLE `panier`
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Contraintes pour les tables déchargées
 --
