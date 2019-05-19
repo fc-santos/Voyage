@@ -251,12 +251,11 @@ body {
 
     /*#region login form */
     .box {
-        position: relative;
-        top: -85%;
+        position: absolute;
+        top: 15%;
         left: 25%;
-        height: 80vh;
         z-index: 20px;
-        min-height: 450px;
+        height: auto;
         width: 600px;
         padding: 30px;
         background: rgba(0, 0, 0, .8);
