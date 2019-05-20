@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  Dim 19 mai 2019 à 04:08
+-- Généré le :  lun. 20 mai 2019 à 02:41
 -- Version du serveur :  5.7.17
--- Version de PHP :  5.6.30
+-- Version de PHP :  7.1.3
 
 SET SQL_MODE
 = "NO_AUTO_VALUE_ON_ZERO";
@@ -438,30 +438,18 @@ CREATE TABLE `panier`
 -- Structure de la table `utilisateur`
 --
 
-CREATE TABLE `utilisateur`
-(
-  `idUtilisateur` int
-(11) NOT NULL,
-  `prenom` varchar
-(50) NOT NULL,
-  `nom` varchar
-(50) NOT NULL,
-  `courriel` varchar
-(50) NOT NULL,
-  `password` varchar
-(50) NOT NULL DEFAULT 'p@ssw0rd',
-  `sexe` varchar
-(50) DEFAULT NULL,
-  `adresse` varchar
-(50) DEFAULT NULL,
-  `ville` varchar
-(50) DEFAULT NULL,
-  `codePostal` varchar
-(50) DEFAULT NULL,
-  `pays` varchar
-(50) DEFAULT NULL,
-  `role` varchar
-(50) NOT NULL DEFAULT 'Membre'
+CREATE TABLE `utilisateur` (
+  `idUtilisateur` int(11) NOT NULL,
+  `prenom` varchar(50) NOT NULL,
+  `nom` varchar(50) NOT NULL,
+  `courriel` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL DEFAULT 'p@ssw0rd',
+  `sexe` varchar(50) DEFAULT NULL,
+  `adresse` varchar(50) DEFAULT NULL,
+  `ville` varchar(50) DEFAULT NULL,
+  `codePostal` varchar(50) DEFAULT NULL,
+  `pays` varchar(50) DEFAULT NULL,
+  `role` varchar(50) NOT NULL DEFAULT 'Membre'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

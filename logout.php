@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require_once "google.php";
 unset($_SESSION['access_token']);
 $gClient->revokeToken();

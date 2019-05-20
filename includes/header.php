@@ -1,9 +1,9 @@
 <?php
 require "./controlleur/connexionDB.php";
 
-$idUtilisateur = isset($_SESSION['idUtilisateur']) ? $_SESSION['idUtilisateur'] : 2;
+//$idUtilisateur = isset($_SESSION['idUtilisateur']) ? $_SESSION['idUtilisateur'] : 2;
 
-$sql = ''
+//$sql = ''
 
 ?>
 
