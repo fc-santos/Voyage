@@ -1,4 +1,5 @@
 <?php
+session_start();
 $title = "Voyage GoAbroad | Connexion";
 $nav = "login";
 include 'includes/header.php';
@@ -16,13 +17,16 @@ if (isset($_POST['btnLogin'])) {
     //Logique pour voir si l'utilisateur existe dans la BD
     $courriel = $_POST['courrielConnexion'];
     $password = $_POST['mdpConnexion'];
-    $q = "SELECT idUtilisateur, prenom, role FROM utilisateur WHERE courriel = ?";
+    $q = "SELECT * FROM utilisateur WHERE courriel = :courriel";
+    //$q = "SELECT idUtilisateur, prenom, role FROM utilisateur WHERE courriel = ?";
     $stmt = $conn->prepare($q);
-    $stmt->execute([$courriel]);
+    $stmt->execute(['courriel'=>$courriel]);
     $user = $stmt->fetch();
-    $hash = $conn->quote($user->password);
+    //$hash = $conn->quote($user->password);
+    $hash = password_hash($user->password, PASSWORD_DEFAULT);
     if ($user) {
-        if (password_verify($password, '$2y$10$8xo9dT/1L0slTwfwTSXJMeUBb7dJaBkpVd3hJ/a28sWUyyDy85UBC')) {
+        if (password_verify($password, $hash)) {
+            $_SESSION = [];
             $_SESSION['idUtilisateur'] = $user->idUtilisateur;
             $_SESSION['prenom'] = $user->prenom;
             $_SESSION['role'] = $user->role;
