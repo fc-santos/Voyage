@@ -1,6 +1,5 @@
  
 $(document).ready(() => {
-
   /*var groupeJours = function(quantite){
     var detailsJour = `<div class="container pt-3 pb-3">`;
 

@@ -14,6 +14,7 @@ include 'includes/header.php'; ?>
         <div class="row">
             <div class="col-md-9">
                 <h3 class="circuit-description">Description du Circuit</h3>
+                <button class="btn btn-primary">Add au panier</button>
                 <hr>
                 <p class="text-justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam repudiandae, inventore illo ratione officiis itaque cum debitis recusandae doloribus aut, sunt, pariatur accusamus nobis mollitia sed. Quod architecto dignissimos illum? Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque dolore nisi dicta corporis dolorum, vel nostrum suscipit. Laborum tempora beatae quibusdam incidunt consectetur. Excepturi est adipisci quia. Sequi, aliquam asperiores?</p>
                 <hr>
