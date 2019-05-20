@@ -52,7 +52,17 @@ $sql = ''
                     <li class="nav-item <?php if ($nav === 'about') : ?>active <?php endif; ?>">
                         <a class="nav-link" href="about.php">À propos</a>
                     </li>
-                    <li class="nav-item dropdown test" id="panierClick">
+                 
+                </ul>
+                <?php if (!isset($_SESSION['givenName'])) : ?>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
+                            <a class="nav-link" href="login.php">Connexion</a>
+                        </li>
+                        <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
+                            <a class="nav-link" href="register.php">S'enregistrer</a>
+                        </li>
+                        <li class="nav-item dropdown test" id="panierClick">
                         <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
                             onclick="getPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false"><i class="fas fa-shopping-cart"></i>
@@ -64,15 +74,6 @@ $sql = ''
                             </div>
                         </div>
                     </li>
-                </ul>
-                <?php if (!isset($_SESSION['givenName'])) : ?>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
-                            <a class="nav-link" href="login.php">Connexion</a>
-                        </li>
-                        <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
-                            <a class="nav-link" href="register.php">S'enregistrer</a>
-                        </li>
                     </ul>
                 <?php else : ?>
                     <ul class="navbar-nav ml-auto">
