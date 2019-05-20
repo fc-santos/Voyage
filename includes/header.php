@@ -61,19 +61,7 @@ require "./controlleur/connexionDB.php";
                         <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
                             <a class="nav-link" href="register.php">S'enregistrer</a>
                         </li>
-                        <li class="nav-item dropdown test">
-                            <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
-                                onclick="ContentPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false"><i class="fas fa-shopping-cart"></i>
-                                <span id="panier"> (0) $ 0.00
-                                </span>
-                            </div>
-                            <div id="cart" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
-                                <div id="divPanier" class="test">
-                                    <!--Insert Panier ici-->
-                                </div>
-                            </div>
-                        </li>
+                        
                     </ul>
                 <?php else : ?>
                     <ul class="navbar-nav ml-auto">
@@ -86,6 +74,19 @@ require "./controlleur/connexionDB.php";
                                 <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown test">
+                            <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
+                                onclick="ContentPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false"><i class="fas fa-shopping-cart"></i>
+                                <span id="panier"> (0) $ 0.00
+                                </span>
+                            </div>
+                            <div id="cart" class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink0">
+                                <div id="divPanier" class="test">
+                                    <!--Insert Panier ici-->
+                                </div>
                             </div>
                         </li>
                     </ul>
