@@ -254,7 +254,6 @@ body {
         position: absolute;
         top: 15%;
         left: 25%;
-        z-index: 20px;
         height: auto;
         width: 600px;
         padding: 30px;
@@ -272,18 +271,6 @@ body {
         text-align: center;
     }
 
-    .box p {
-        font-size: 15px;
-        color: #fff;
-        margin-top: 20px;
-    }
-
-    .box a:hover,
-    .box a:visited,
-    .box a:focus {
-        text-decoration: none;
-    }
-
     .box .inputBox {
         position: relative;
     }
@@ -294,7 +281,7 @@ body {
         font-size: 14px;
         letter-spacing: 1px;
         color: #fff;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         border: none;
         border-bottom: 1px solid #fff;
         outline: none;
@@ -332,9 +319,26 @@ body {
         border-radius: 5px;
     }
 
+    .box p {
+        font-size: 15px;
+        color: #fff;
+        margin-top: 20px;
+    }
+
+    .box a:hover,
+    .box a:visited,
+    .box a:focus {
+        text-decoration: none;
+    }
+
     .box input[type="submit"]:focus,
     .box input[type="submit"]:hover {
         background: #007698;
+    }
+
+    .error {
+        color: #fa0000;
+        font-size: 0.8rem;
     }
 
     .btn-google {

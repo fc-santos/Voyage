@@ -6,26 +6,35 @@ require_once 'google.php';
 
 $loginUrl = $gClient->createAuthUrl();
 $erreur = null;
-$courriel = '';
+
+if (isset($_SESSION['givenName'])) {
+    header("Location: index.php");
+    exit();
+}
 
 if (isset($_POST['btnLogin'])) {
     //Logique pour voir si l'utilisateur existe dans la BD
-    $courriel = $_POST['courriel'];
-    $password = $_POST['password'];
-    $q = "SELECT idUtilisateur, prenom, role FROM utilisateur WHERE courriel = ? AND password = ?";
+    $courriel = $_POST['courrielConnexion'];
+    $password = $_POST['mdpConnexion'];
+    $q = "SELECT idUtilisateur, prenom, role FROM utilisateur WHERE courriel = ?";
     $stmt = $conn->prepare($q);
-    $stmt->execute([$courriel, $password]);
+    $stmt->execute([$courriel]);
     $user = $stmt->fetch();
+    $hash = $conn->quote($user->password);
     if ($user) {
-        $_SESSION['idUtilisateur'] = $user->idUtilisateur;
-        $_SESSION['prenom'] = $user->prenom;
-        $_SESSION['role'] = $user->role;
-        if ($_SESSION['role'] == 'Membre') {
-            header('Location: index.php');
-            exit();
+        if (password_verify($password, '$2y$10$8xo9dT/1L0slTwfwTSXJMeUBb7dJaBkpVd3hJ/a28sWUyyDy85UBC')) {
+            $_SESSION['idUtilisateur'] = $user->idUtilisateur;
+            $_SESSION['prenom'] = $user->prenom;
+            $_SESSION['role'] = $user->role;
+            if ($_SESSION['role'] == 'Membre') {
+                header('Location: index.php');
+                exit();
+            } else {
+                //Location page admin
+                //exit();
+            }
         } else {
-            //Location page admin
-            //exit();
+            $erreur = 'Mot de passe invalide!';
         }
     } else {
         $erreur = "Courriel et/ou mot de passe invalide!";
@@ -52,17 +61,17 @@ if (isset($_POST['btnLogin'])) {
     <h2>Connectez-vous à votre compte</h2>
     <?php
     if ($erreur) {
-        echo "<div class='alert alert-danger mb-4' role='alert'>$erreur</div>";
+        echo "<div id='msg3' class='alert alert-danger mb-4' role='alert'>$erreur</div>";
     }
     ?>
-    <form action="" method="post">
+    <form id="formConnecter" action="" method="post">
         <div class="inputBox">
-            <input type="email" name="courriel" id="courriel" value="<?= $courriel ?>" required>
-            <label for="courriel">Courriel</label>
+            <input type="email" name="courrielConnexion" id="courrielConnexion" required>
+            <label for="courrielConnexion">Courriel</label>
         </div>
         <div class="inputBox">
-            <input type="password" name="password" id="password" required>
-            <label for="password">Mot de passe</label>
+            <input type="password" name="mdpConnexion" id="mdpConnexion" required>
+            <label for="mdpConnexion">Mot de passe</label>
         </div>
         <input type="submit" name="btnLogin" value="Se connecter">
     </form>
@@ -73,6 +82,15 @@ if (isset($_POST['btnLogin'])) {
     </a>
     <p>Vous n'avez pas de compte?<a href="register.php"> S'enregistrer</a></p>
 </div>
+
+<script>
+    var msg3 = document.getElementById('msg3');
+    if (msg3 != null) {
+        setTimeout(function() {
+            msg3.style.display = 'none'
+        }, 5000);
+    }
+</script>
 
 
 <?php include 'includes/footer.php' ?>
