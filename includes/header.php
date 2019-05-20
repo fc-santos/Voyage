@@ -64,18 +64,7 @@ require "./controlleur/connexionDB.php";
                         
                     </ul>
                 <?php else : ?>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item dropdown mr-4">
-                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Bonjour <?= $_SESSION['prenom']; ?> <i class="fas fa-caret-down"></i>
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
-                            </div>
-                        </li>
+                    <ul class="navbar-nav ml-auto">                        
                         <li class="nav-item dropdown test">
                             <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
                                 onclick="ContentPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -87,6 +76,17 @@ require "./controlleur/connexionDB.php";
                                 <div id="divPanier" class="test">
                                     <!--Insert Panier ici-->
                                 </div>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown mr-4">
+                            <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Bonjour <?= $_SESSION['prenom']; ?> <i class="fas fa-caret-down"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
                             </div>
                         </li>
                     </ul>

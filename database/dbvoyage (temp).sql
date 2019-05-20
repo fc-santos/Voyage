@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2019 at 01:22 PM
+-- Generation Time: May 20, 2019 at 01:37 PM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
 
@@ -345,7 +345,7 @@ CREATE TABLE `utilisateur` (
   `prenom` varchar(50) NOT NULL,
   `nom` varchar(50) NOT NULL,
   `courriel` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL DEFAULT 'p@ssw0rd',
+  `password` varchar(100) NOT NULL DEFAULT 'p@ssw0rd',
   `sexe` varchar(50) DEFAULT NULL,
   `adresse` varchar(50) DEFAULT NULL,
   `ville` varchar(50) DEFAULT NULL,
@@ -364,7 +364,8 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `prenom`, `nom`, `courriel`, `passwo
 (4, 'Jose', 'Gonzalez', 'jose@gmail.com', 'poutine', 'Homme', '9876 Saint-Andre', 'Montrel', 'H4K9D3', 'Canada', 'Membre'),
 (5, 'Catherine', 'Cossette', 'catherine_45@hotmail.com', 'ryanna', 'Femmme', '5667 du Diable', 'Quebec', 'H4K9D3', 'Canada', 'Membre'),
 (6, 'Admin', 'Istrateur', 'admin@gmail.com', 'admin', 'non-binaire', '456 rue de la programmation', 'Montreal', 'K9F3H6', 'Canada', 'Admin'),
-(7, 'Logiciel', 'Genie', 'genielogicielmaisonneuve@gmail.com', 'p@ssw0rd', NULL, NULL, NULL, NULL, NULL, 'Membre');
+(7, 'Logiciel', 'Genie', 'genielogicielmaisonneuve@gmail.com', 'p@ssw0rd', NULL, NULL, NULL, NULL, NULL, 'Membre'),
+(9, 'Abdel', 'Hidalgo', 'abdel.hidalgo@gmail.com', 'p@ssw0rd', NULL, NULL, NULL, NULL, NULL, 'Membre');
 
 --
 -- Indexes for dumped tables
@@ -560,7 +561,7 @@ ALTER TABLE `panier`
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --
