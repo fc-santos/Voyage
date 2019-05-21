@@ -1,6 +1,6 @@
 var allCircuits = null;
 
-function getCircuits(){
+function getCircuits(isAuthentifie){
     if (window.XMLHttpRequest) {
         // code for IE7+, Firefox, Chrome, Opera, Safari
         xmlhttp=new XMLHttpRequest();
@@ -12,7 +12,7 @@ function getCircuits(){
             var r = this.responseText;
             circuits = JSON.parse(r);
             console.log(circuits);
-            createCircuits(circuits);
+            createCircuits(circuits,isAuthentifie);
         }
       }
     
@@ -21,7 +21,7 @@ function getCircuits(){
       xmlhttp.send();      
 }
 
-function createCircuits(circuits){
+function createCircuits(circuits, isAuthentifie){
     var content = "";
     var compteur = 0;
     var row = 1;
@@ -36,11 +36,16 @@ function createCircuits(circuits){
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
                                 <hr>
-                                <a href="details.php" class="btn btn-offre btn-block">Voir l'offre</a>
-                                <div class="text-center">
-                                    <a href="#" class="btn btn-primary mt-3" id="` + element.idDepart + `" onclick='ajouterAuPanier(` + element.idDepart + `, ` + element.prix + `, "` + element.dateDebut + `"); event.preventDefault();'>Ajouter au panier</a>
-                                </div>
-                            </div>
+                                <a href="details.php" class="btn btn-offre btn-block">Voir l'offre</a>`
+        if(isAuthentifie === 'authentifie'){
+                            content += `<div class="text-center">
+                                        <a href="#" class="btn btn-primary mt-2" id="` + element.idDepart + `" onclick='ajouterAuPanier(` + element.idDepart + `, ` + element.prix + `, "` + element.dateDebut + `"); event.preventDefault();'>Ajouter au panier</a>
+                                    </div>`
+        }
+                                
+                                    
+                               
+         content += `</div>
                         </div>
                     </div>`
         
