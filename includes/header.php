@@ -27,9 +27,13 @@ require "./controlleur/connexionDB.php";
     </title>
 </head>
 
-<body style="min-height: 700px;" onload="getCircuits()" >    
+<body style="min-height: 700px;" onload="getCircuits(<?php if (isset($_SESSION['prenom'])) {
+        echo "'authentifie'";
+    } else {
+        echo "'nonAuthentifie'";
+    }  ?>)" >    
 <?php while ($row = $stmt->fetch()):?>
-    <div   class="row fermerNewsletters" style="min-height: 40px; border-botton: 1px solid black; background-color: red; color: white;" id="newsletter">
+    <div class="row fermerNewsletters" style="min-height: 40px; border-botton: 1px solid black; background-color: red; color: white; display: none;" id="newsletter">
         <div class="col-sm-1" style="cursor: pointer;" onclick="fermer()">X</div>
         <div class="col-sm-11"><?= $row->contenu ?></div>
     </div>
@@ -44,7 +48,7 @@ require "./controlleur/connexionDB.php";
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-4">
-                        <a class="nav-link" href="#">Message aux clients</a>
+                        <a class="nav-link" onclick="ouvrirMessage()" href="#">Message aux clients</a>
                     </li>
                     <li class="nav-item mr-4 <?php if ($nav === 'circuits') : ?>active <?php endif; ?>">
                         <a class="nav-link" href="circuits.php">Circuits</a>
