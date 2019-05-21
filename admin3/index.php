@@ -15,8 +15,6 @@ include_once 'includes/navbar.php';
     <div class="col-sm-12">
       <a href="gererCircuit.php" class="btn btn-primary">Liste de Circuits</a>
       <a href="creerCircuit.php" class="btn btn-primary">Créer un Circuit</a>
-      <a href="#" class="btn btn-primary">Ajouter un Admin</a>
-      <a href="#" class="btn btn-primary">Gerer des Utilisateurs</a>
       <a href="creerNewsletter.php" class="btn btn-primary">Créer un Message</a>
       <a href="creerDepart.php" class="btn btn-primary">Créer un Départ</a>
 
