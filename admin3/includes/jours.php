@@ -75,7 +75,7 @@
 
         if (isset($_POST['dinner'])) {
             if ($_POST['dinner'] == "") {
-                $idDinner = 0;
+                $idDinner = 1;
             } else {
                 $dinner = $_POST['dinner'];
                 $query = "SELECT `idManger` FROM `manger` WHERE nom = :dinner AND idLieu = :idLieu";
@@ -115,15 +115,17 @@
             }
         }
 
-        try {
-            $idEtape = $_SESSION['idEtape'];
-            $sql4 = "INSERT INTO `jour`(`idLieu`, `idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idLieu, $idEtape, $idActivites, $idHebergement, $idDinner, $idSouper)";
-            $stmt4 = $conn->prepare($sql4);
-            $stmt4->execute();
-            $_SESSION['correctNomCircuit'] = true;
-        } catch (Exception $r) {
-        }
+        //try {
+        $idEtape = $_SESSION['idEtape'];
+        $sql4 = "INSERT INTO `jour`(`idLieu`, `idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES ($idLieu, $idEtape, $idActivites, $idHebergement, $idDinner, $idSouper)";
+        $stmt4 = $conn->query($sql4);
+        //$stmt4->execute();
+        $_SESSION['correctNomCircuit'] = true;
+        // } catch (Exception $r) {
+        // }
+        $_SESSION['debug'] = $sql4;
         unset($_POST['autreJour']);
+        unset($_POST['autreEtape']);
     }
 
     if (isset($_POST['ajouterPlusJours']) || isset($_POST['terminerJour'])) {
