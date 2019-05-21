@@ -1,11 +1,8 @@
 <?php
 require "./controlleur/connexionDB.php";
-
-//$idUtilisateur = isset($_SESSION['idUtilisateur']) ? $_SESSION['idUtilisateur'] : 2;
-
-//$sql = ''
-
-?>
+    
+    $query = "SELECT * FROM `newletter` WHERE dateDebut <= NOW() AND dateFin >= NOW()";
+    $stmt = $conn->query($query);?>
 
 <!doctype html>
 <html lang="fr">
@@ -30,8 +27,14 @@ require "./controlleur/connexionDB.php";
     </title>
 </head>
 
-<body style="min-height: 700px;" onload="getCircuits()" >
-    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-blue">
+<body style="min-height: 700px;" onload="getCircuits()" >    
+<?php while ($row = $stmt->fetch()):?>
+    <div   class="row fermerNewsletters" style="min-height: 40px; border-botton: 1px solid black; background-color: red; color: white;" id="newsletter">
+        <div class="col-sm-1" style="cursor: pointer;" onclick="fermer()">X</div>
+        <div class="col-sm-11"><?= $row->contenu ?></div>
+    </div>
+<?php endwhile ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-blue">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" style="width:100px;" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,4 +97,5 @@ require "./controlleur/connexionDB.php";
             </div>
         </div>
     </nav>
+    
     <div id="exemple"></div>
