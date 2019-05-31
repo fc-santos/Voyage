@@ -72,5 +72,4 @@ require 'includes/header.php' ?>
       </div>
     </div>
   </div>
-
   <?php include 'includes/footer.php' ?>

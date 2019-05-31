@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 //unset($_SESSION['face_access_token']);
 require_once 'lib/GoogleAPI/vendor/autoload.php';
 //include_once 'conexao.php';

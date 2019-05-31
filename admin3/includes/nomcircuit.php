@@ -1,7 +1,4 @@
 <?php
-
-
-
 if (isset($_GET['idCircuit'])) {
     $_SESSION['correctNomCircuit'] = true;
 
@@ -74,7 +71,7 @@ if (isset($_POST['terminer'])) {
 <form class="mt-3 mb-3" action="creerCircuit.php" method="POST">
   <div class="form-group">
     <label for="titrecircuit">Titre</label>
-    <input type="text" class="form-control" id="titrecircuit" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
+    <input type="text" class="form-control" id="titrecircuit" autocomplete="off" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
     echo htmlentities($_POST['nomCircuit']);
 } elseif (isset($_GET['idCircuit'])) {
     echo $nomCircuit;
@@ -82,7 +79,7 @@ if (isset($_POST['terminer'])) {
   </div>
   <div class="form-group">
     <label for="descriptioncircuit">Description</label>
-    <textarea class="form-control" id="descriptioncircuit" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
+    <textarea class="form-control" id="descriptioncircuit" autocomplete="off" name="descriptionCircuit" rows="4"><?php if (isset($_POST['descriptionCircuit'])) {
     echo htmlentities($_POST['descriptionCircuit']);
 } elseif (isset($_GET['idCircuit'])) {
     echo $descriptionCircuit;

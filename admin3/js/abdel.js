@@ -1,6 +1,5 @@
  
 $(document).ready(() => {
-
   /*var groupeJours = function(quantite){
     var detailsJour = `<div class="container pt-3 pb-3">`;
 
@@ -71,9 +70,26 @@ $(document).ready(() => {
   lieu = null;
 
   $('#lieu1').on('input', (e) => {
+    $('#idLieuChoisi').removeAttr("value");
+    $('#activites1').val("");
+    $('#hebergement1').val("");
+    $('#dinner1').val("");
+    $('#souper1').val("");
     let searchText = $('#lieu1').val();
     showResult(searchText,'livesearchLieu');
     e.preventDefault();
+  });
+
+  $('#lieu1').on('change', (e) => {
+    $('#activite1').val("");
+    $('#hebergement1').val("");
+    $('#dinner1').val("");
+    $('#souper1').val("");
+
+    
+    /*let searchText = $('#lieu2').val();
+    showResult(searchText,'livesearchLieu');
+    e.preventDefault();*/
   });
 
   $('#hebergement1').on('input', (e) => {
@@ -157,11 +173,16 @@ $(document).ready(() => {
   }
 });
 
-function prendreLaValeur(element,string,cible){
+function prendreLaValeur(element,string,cible,idLieu=0){
   id = '#' + string;
 
   $(id).html(null);
   $(cible).val(element.innerHTML);
+  console.log(element.innerHTML + ", " + string + ", " + cible + "," + idLieu);
+  //$("#idLieuChoisi").removeAttr("value");
+  if(cible === "#lieu1"){
+    $('#idLieuChoisi').val(idLieu);
+  }  
 }
 
 function ajouterJours(){}

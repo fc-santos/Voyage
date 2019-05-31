@@ -76,7 +76,7 @@ table.table th i {
     cursor: pointer;
 }
 table.table th:first-child {
-    width: 10rem;
+    width: 13rem;
 }
 
 table.table td a {

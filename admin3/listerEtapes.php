@@ -48,7 +48,7 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
                                             <div class="col-md-12 choix">
                                                 <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idEtape .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
                                                 <a href="modifierEtape.php?idEtape=' . $row->idEtape . '"><i class="fa fa-pencil" aria-hidden="true" style="color: #00b33c;"></i></a>
-                                                <a href="listerJours.php?idEtape=' . $row->idEtape . '" class="btn btn-primary" style="color: white;">Jours</a>
+                                                <a href="listerJours.php?idEtape=' . $row->idEtape . '&idCircuit=' . $idCircuit . '" class="btn btn-primary" style="color: white;">Jours</a>
                                                 <!-- Modal -->
                                                 <div style="color: black;" class="modal fade" id="exampleModal'. $row->idEtape .'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
@@ -59,7 +59,7 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
                                                             <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
+                                                        <div class="modal-body" style="text-align: left !important;">
                                                         Êtes-vous certain de vouloir supprimer "' . $row->nom . '"? 
                                                         </div>
                                                         <div class="modal-footer">
@@ -79,7 +79,7 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
                 ';
 ?>
 
-<div class="container">
+<div class="container minimumHeight">
     <?php if (isset($_SESSION['success'])):?>
         <div class="alert-success pt-2 pb-2 mb-2"><?= $_SESSION['success'] ?></div> 
         <?php unset($_SESSION['success']); ?>   
@@ -91,6 +91,7 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
     <?php
         echo $table;
     ?>
+    <a href="gererCircuit.php" class="mb-10"><i class="fas fa-arrow-alt-circle-left"></i> Retourner</a>
 </div>
 
 

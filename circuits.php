@@ -59,81 +59,12 @@ include 'includes/header.php';
             </div>
         </div>
         <div class="col-lg-9">
-            <div class="row mb-4">
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="prix">$4 999</div>
-                        <img src="assets/images/castle.jpg" class="card-img-top img-cover" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="prix">$4 999</div>
-                        <img src="assets/images/mountain.jpg" class="card-img-top img-cover" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="prix">$4 999</div>
-                        <img src="assets/images/village.jpg" class="card-img-top img-cover" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" id="cards-circuits1">
+                <!--3 Circuits here-->
+
             </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="prix">$4 999</div>
-                        <img src="assets/images/mayaruins.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="prix">$4 999</div>
-                        <img src="assets/images/island.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="card">
-                        <div class="prix">$4 999</div>
-                        <img src="assets/images/colosseum.jpg" class="card-img-top img-cover fixed-img-size" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                            <hr>
-                            <a href="#" class="btn btn-offre btn-block">Voir l'offre</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="row" id="cards-circuits2">
+                <!--3 Circuits here-->
             </div>
         </div>
     </div>

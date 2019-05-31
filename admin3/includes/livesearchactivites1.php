@@ -20,7 +20,8 @@ if (strlen($q)>0) {
     $q = mysqli_real_escape_string($conn, $q);
 
     if ($r != '') {
-        $sql = "SELECT idLieu FROM lieu WHERE ville='". $r . "' OR pays='" . $r . "' OR nom='" . $r . "'";
+        $r = ltrim($r);
+        $sql = "SELECT idLieu FROM lieu WHERE CONCAT_WS(' ',nom, ville, pays) ='" . $r . "'";
         $result = mysqli_query($conn, $sql);
         $row = mysqli_fetch_assoc($result);
     
