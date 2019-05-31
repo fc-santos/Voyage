@@ -7,6 +7,8 @@ if (!session_id()) {
 
 include_once "includes/header.php";
 include_once "includes/navbar.php";
+//echo $_SESSION['debug'];
+//unset($_SESSION['debug']);
 
 ?>
 

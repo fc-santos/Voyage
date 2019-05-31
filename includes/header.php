@@ -1,11 +1,8 @@
 <?php
 require "./controlleur/connexionDB.php";
-
-//$idUtilisateur = isset($_SESSION['idUtilisateur']) ? $_SESSION['idUtilisateur'] : 2;
-
-//$sql = ''
-
-?>
+    
+    $query = "SELECT * FROM `newletter` WHERE dateDebut <= NOW() AND dateFin >= NOW()";
+    $stmt = $conn->query($query);?>
 
 <!doctype html>
 <html lang="fr">
@@ -30,8 +27,18 @@ require "./controlleur/connexionDB.php";
     </title>
 </head>
 
-<body style="min-height: 700px;" onload="getCircuits()" >
-    <nav class="fixed-top navbar navbar-expand-lg navbar-light bg-blue">
+<body style="min-height: 700px;" onload="getCircuits(<?php if (isset($_SESSION['prenom'])) {
+        echo "'authentifie'";
+    } else {
+        echo "'nonAuthentifie'";
+    }  ?>)" >    
+<?php while ($row = $stmt->fetch()):?>
+    <div class="row fermerNewsletters" style="min-height: 40px; border-botton: 1px solid black; background-color: red; color: white; display: none;" id="newsletter">
+        <div class="col-sm-1" style="cursor: pointer;" onclick="fermer()">X</div>
+        <div class="col-sm-11"><?= $row->contenu ?></div>
+    </div>
+<?php endwhile ?>
+    <nav class="navbar navbar-expand-lg navbar-light bg-blue">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" style="width:100px;" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +48,7 @@ require "./controlleur/connexionDB.php";
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-4">
-                        <a class="nav-link" href="#">Message aux clients</a>
+                        <a class="nav-link" onclick="ouvrirMessage()" href="#">Message aux clients</a>
                     </li>
                     <li class="nav-item mr-4 <?php if ($nav === 'circuits') : ?>active <?php endif; ?>">
                         <a class="nav-link" href="circuits.php">Circuits</a>
@@ -94,4 +101,5 @@ require "./controlleur/connexionDB.php";
             </div>
         </div>
     </nav>
+    
     <div id="exemple"></div>

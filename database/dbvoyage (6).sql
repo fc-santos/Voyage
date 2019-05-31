@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2019 at 01:37 PM
+-- Generation Time: May 21, 2019 at 07:09 PM
 -- Server version: 5.7.17
 -- PHP Version: 5.6.30
 
@@ -42,7 +42,16 @@ CREATE TABLE `activite` (
 
 INSERT INTO `activite` (`idActivite`, `idLieu`, `nom`, `description`, `siteweb`) VALUES
 (1, 1, '', NULL, NULL),
-(2, 8, 'test activite', 'descritption test activite', 'http://www.testactivite.com');
+(2, 8, 'test activite', 'descritption test activite', 'http://www.testactivite.com'),
+(3, 3, 's', NULL, NULL),
+(4, 40, 'r', NULL, NULL),
+(5, 7, 'g', NULL, NULL),
+(6, 41, '1', NULL, NULL),
+(7, 43, '3', NULL, NULL),
+(8, 44, '4', NULL, NULL),
+(9, 6, 'r', NULL, NULL),
+(10, 6, 'e', NULL, NULL),
+(11, 6, 'a', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -62,7 +71,8 @@ CREATE TABLE `circuit` (
 --
 
 INSERT INTO `circuit` (`idCircuit`, `titre`, `description`, `estActif`) VALUES
-(5, 'Romance pour deux', 'Un voyage d\'une semaine dans les villes les plus romantiques de l\'Europe', 1);
+(5, 'Romance pour deux', 'Un voyage d\'une semaine dans les villes les plus romantiques de l\'Europe', 1),
+(13, 'Promenade sur la mer avec un beau couche de soleil', 'Yo!', 0);
 
 -- --------------------------------------------------------
 
@@ -99,25 +109,25 @@ DELIMITER ;
 CREATE TABLE `depart` (
   `idDepart` int(11) NOT NULL,
   `idCircuit` int(11) NOT NULL,
-  `dateDebut` date NOT NULL,
+  `dateDebut` date DEFAULT NULL,
   `nbPlaces` int(11) DEFAULT '10',
-  `prix` double NOT NULL,
+  `prix` double DEFAULT NULL,
   `titrePromotion` varchar(50) DEFAULT NULL,
-  `rabais` double DEFAULT NULL
+  `rabais` double DEFAULT NULL,
+  `estActif` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `depart`
 --
 
-INSERT INTO `depart` (`idDepart`, `idCircuit`, `dateDebut`, `nbPlaces`, `prix`, `titrePromotion`, `rabais`) VALUES
-(1, 5, '2019-06-02', 30, 4000, 'vfv', 10),
-(2, 5, '2019-06-10', 30, 6000, 'ded', 4),
-(3, 5, '2019-07-02', 30, 7000, 'ded', 6),
-(4, 5, '2019-06-02', 30, 5000, 'vfv', 10),
-(5, 5, '2019-06-10', 30, 6000, '8000', 4),
-(6, 5, '2019-07-02', 30, 9000, 'ded', 6),
-(7, 5, '2019-08-02', 30, 5000, 'vfv55', 10);
+INSERT INTO `depart` (`idDepart`, `idCircuit`, `dateDebut`, `nbPlaces`, `prix`, `titrePromotion`, `rabais`, `estActif`) VALUES
+(4, 5, '2019-06-02', 30, 5000, 'vfv', 10, 0),
+(5, 5, '2019-06-10', 30, 6000, '8000', 4, 0),
+(6, 5, '2019-07-02', 30, 9000, 'ded', 6, 0),
+(7, 5, '2019-08-02', 30, 5000, 'vfv55', 10, 0),
+(11, 13, '2019-05-22', 1, 7888, 'Gratuit pour les belles personnes', 100, 0),
+(12, 13, '2019-05-21', 1, 2345, 'cdcd', 23, 0);
 
 -- --------------------------------------------------------
 
@@ -153,7 +163,9 @@ INSERT INTO `etape` (`idEtape`, `idCircuit`, `nom`, `description`, `ordre`) VALU
 (5, 5, 'Paris', NULL, 1),
 (6, 5, 'Florence', NULL, 2),
 (7, 5, 'Venise', NULL, 3),
-(8, 5, 'Barcelone', NULL, 4);
+(8, 5, 'Barcelone', NULL, 4),
+(37, 13, 'Dejeuner au caviare', 'Miam miam des oeuf de poissons', 0),
+(38, 13, 'Saut de bonji', 'Youuuuuuh', 1);
 
 -- --------------------------------------------------------
 
@@ -183,7 +195,19 @@ INSERT INTO `hebergement` (`idHebergement`, `idLieu`, `nom`, `typeHebergement`, 
 (6, 7, 'airBnB', 'Luxe', 0, 'airbnb.com'),
 (7, 8, 'Hilton', 'Luxe', 1, 'hilton.com'),
 (8, 8, 'On charge à l\'heure', 'taux horaire', 0, NULL),
-(19, 4, 'Camping on foret', 'Camping', 0, NULL);
+(19, 4, 'Camping on foret', 'Camping', 0, NULL),
+(32, 3, 's', NULL, 0, NULL),
+(33, 39, 't', NULL, 0, NULL),
+(34, 40, 'r', NULL, 0, NULL),
+(35, 7, 'g', NULL, 0, NULL),
+(36, 41, '1', NULL, 0, NULL),
+(37, 42, '2', NULL, 0, NULL),
+(38, 43, '3', NULL, 0, NULL),
+(39, 44, '4', NULL, 0, NULL),
+(40, 6, 'r', NULL, 0, NULL),
+(41, 2, 'e', NULL, 0, NULL),
+(42, 6, 'a', NULL, 0, NULL),
+(43, 45, 'airBnB', NULL, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -204,12 +228,21 @@ CREATE TABLE `image` (
 
 CREATE TABLE `jour` (
   `idJour` int(11) NOT NULL,
+  `idLieu` int(10) DEFAULT NULL,
   `idEtape` int(11) NOT NULL,
   `idActivite` int(11) DEFAULT NULL,
   `idHebergement` int(11) DEFAULT NULL,
   `idDinner` int(11) DEFAULT NULL,
   `idSouper` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16;
+
+--
+-- Dumping data for table `jour`
+--
+
+INSERT INTO `jour` (`idJour`, `idLieu`, `idEtape`, `idActivite`, `idHebergement`, `idDinner`, `idSouper`) VALUES
+(26, 6, 37, 11, 42, 54, 54),
+(27, 45, 38, 1, 43, 63, 1);
 
 -- --------------------------------------------------------
 
@@ -236,13 +269,13 @@ INSERT INTO `lieu` (`idLieu`, `nom`, `ville`, `pays`) VALUES
 (3, NULL, 'New-York', 'Etats-Unis'),
 (5, NULL, 'Paris', 'France'),
 (8, NULL, 'Venise', 'Italie'),
-(26, 'cdcd', NULL, NULL),
-(29, 'ddddd', NULL, NULL),
-(4, 'Foret amazonie', NULL, 'Brezil'),
-(25, 'h', NULL, NULL),
-(30, 'qqqqq', NULL, NULL),
-(28, 'sss', NULL, NULL),
-(27, 'xcdcccc', NULL, NULL);
+(41, '1', NULL, NULL),
+(42, '2', NULL, NULL),
+(43, '3', NULL, NULL),
+(44, '4', NULL, NULL),
+(45, 'Barcelone Espagne', NULL, NULL),
+(40, 'rr', NULL, NULL),
+(39, 'yt', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -271,7 +304,16 @@ INSERT INTO `manger` (`idManger`, `idLieu`, `nom`, `siteweb`) VALUES
 (51, 7, 'Pizzaria mamamiya', 'mamamiya.com'),
 (52, 8, 'Pasta pasta pasta', 'welovepasta.com'),
 (53, 8, 'El restaurante bueno', 'lolwtf.com'),
-(54, 6, 'De la bonne bouffe', NULL);
+(54, 6, 'De la bonne bouffe', NULL),
+(55, 3, 's', NULL),
+(56, 40, 'r', NULL),
+(57, 7, 'g', NULL),
+(58, 41, '1', NULL),
+(59, 42, '2', NULL),
+(60, 43, '3', NULL),
+(61, 44, '4', NULL),
+(62, 2, 'e', NULL),
+(63, 45, 'd', NULL);
 
 -- --------------------------------------------------------
 
@@ -317,8 +359,9 @@ CREATE TABLE `newletter` (
 --
 
 INSERT INTO `newletter` (`idNewletter`, `idUtilisateur`, `titre`, `contenu`, `dateDebut`, `dateFin`) VALUES
-(1, 6, 'Une tempête frappe Milan', 'Les destinations voyage en direction de Milan sont interrompu jusqu\'à nouvelle ordre. Merci de votre compréhension..', '2019-05-16', '2019-05-30'),
-(2, 6, 'Une tempête frappe Milan', 'Les destinations voyage en direction de Milan sont interrompu jusqu\'à nouvelle ordre. Merci de votre compréhension..', '2019-05-16', '2019-05-30');
+(1, 6, 'Une tempête frappe Milan', 'Les destinations voyage en direction de Milan sont interrompu jusqu\'à nouvelle ordre. Merci de votre compréhension..', '2019-05-16', '2019-05-20'),
+(2, 6, 'message1', 'problems!!!', '2019-05-21', '2019-05-22'),
+(3, 6, 'Chaleur extreme au bresil', 'Creme soleil obligatoire.', '2019-05-21', '2019-05-22');
 
 -- --------------------------------------------------------
 
@@ -364,8 +407,8 @@ INSERT INTO `utilisateur` (`idUtilisateur`, `prenom`, `nom`, `courriel`, `passwo
 (4, 'Jose', 'Gonzalez', 'jose@gmail.com', 'poutine', 'Homme', '9876 Saint-Andre', 'Montrel', 'H4K9D3', 'Canada', 'Membre'),
 (5, 'Catherine', 'Cossette', 'catherine_45@hotmail.com', 'ryanna', 'Femmme', '5667 du Diable', 'Quebec', 'H4K9D3', 'Canada', 'Membre'),
 (6, 'Admin', 'Istrateur', 'admin@gmail.com', 'admin', 'non-binaire', '456 rue de la programmation', 'Montreal', 'K9F3H6', 'Canada', 'Admin'),
-(7, 'Logiciel', 'Genie', 'genielogicielmaisonneuve@gmail.com', 'p@ssw0rd', NULL, NULL, NULL, NULL, NULL, 'Membre'),
-(9, 'Abdel', 'Hidalgo', 'abdel.hidalgo@gmail.com', 'p@ssw0rd', NULL, NULL, NULL, NULL, NULL, 'Membre');
+(13, 'Julien', 'Ouellet', 'exemple@hotmail.fr', '$2y$10$huvRPBPr8CzAHA1g0p7gHe3EHTtQAy6/EVX7RyOt1RdWjlxm4X/0K', NULL, NULL, NULL, NULL, NULL, 'Membre'),
+(14, 'Abdel', 'Hidalgo', 'abdel.hidalgo@gmail.com', 'p@ssw0rd', NULL, NULL, NULL, NULL, NULL, 'Membre');
 
 --
 -- Indexes for dumped tables
@@ -438,7 +481,8 @@ ALTER TABLE `jour`
   ADD KEY `idActivite` (`idActivite`),
   ADD KEY `idDinner` (`idDinner`),
   ADD KEY `idHebergement` (`idHebergement`),
-  ADD KEY `idSouper` (`idSouper`);
+  ADD KEY `idSouper` (`idSouper`),
+  ADD KEY `idLieu` (`idLieu`);
 
 --
 -- Indexes for table `lieu`
@@ -491,12 +535,12 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT for table `activite`
 --
 ALTER TABLE `activite`
-  MODIFY `idActivite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idActivite` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT for table `circuit`
 --
 ALTER TABLE `circuit`
-  MODIFY `idCircuit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idCircuit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `commande`
 --
@@ -506,7 +550,7 @@ ALTER TABLE `commande`
 -- AUTO_INCREMENT for table `depart`
 --
 ALTER TABLE `depart`
-  MODIFY `idDepart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idDepart` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `detailsimage`
 --
@@ -516,12 +560,12 @@ ALTER TABLE `detailsimage`
 -- AUTO_INCREMENT for table `etape`
 --
 ALTER TABLE `etape`
-  MODIFY `idEtape` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idEtape` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT for table `hebergement`
 --
 ALTER TABLE `hebergement`
-  MODIFY `idHebergement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `idHebergement` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 --
 -- AUTO_INCREMENT for table `image`
 --
@@ -531,17 +575,17 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `jour`
 --
 ALTER TABLE `jour`
-  MODIFY `idJour` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idJour` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `lieu`
 --
 ALTER TABLE `lieu`
-  MODIFY `idLieu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `idLieu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 --
 -- AUTO_INCREMENT for table `manger`
 --
 ALTER TABLE `manger`
-  MODIFY `idManger` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `idManger` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 --
 -- AUTO_INCREMENT for table `message`
 --
@@ -551,7 +595,7 @@ ALTER TABLE `message`
 -- AUTO_INCREMENT for table `newletter`
 --
 ALTER TABLE `newletter`
-  MODIFY `idNewletter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idNewletter` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `panier`
 --
@@ -561,7 +605,7 @@ ALTER TABLE `panier`
 -- AUTO_INCREMENT for table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- Constraints for dumped tables
 --
@@ -612,7 +656,8 @@ ALTER TABLE `jour`
   ADD CONSTRAINT `jour_ibfk_2` FOREIGN KEY (`idActivite`) REFERENCES `activite` (`idActivite`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `jour_ibfk_3` FOREIGN KEY (`idDinner`) REFERENCES `manger` (`idManger`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `jour_ibfk_4` FOREIGN KEY (`idHebergement`) REFERENCES `hebergement` (`idHebergement`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `jour_ibfk_6` FOREIGN KEY (`idSouper`) REFERENCES `manger` (`idManger`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `jour_ibfk_6` FOREIGN KEY (`idSouper`) REFERENCES `manger` (`idManger`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `jour_ibfk_7` FOREIGN KEY (`idLieu`) REFERENCES `lieu` (`idLieu`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `manger`

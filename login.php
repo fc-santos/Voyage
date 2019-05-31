@@ -23,7 +23,9 @@ if (isset($_POST['btnLogin'])) {
     $stmt->execute(['courriel'=>$courriel]);
     $user = $stmt->fetch();
     //$hash = $conn->quote($user->password);
-    $hash = password_hash($user->password, PASSWORD_DEFAULT);
+    $hash = $user->password;
+    // $_SESSION['debug'] = 'hash: '. $hash. '</br>$password: '.$password;
+
     if ($user) {
         if (password_verify($password, $hash)) {
             $_SESSION = [];
