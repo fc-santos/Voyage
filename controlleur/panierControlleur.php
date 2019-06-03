@@ -49,7 +49,7 @@ function enregistrer(){
         lister();
         unset($conn);
 		unset($stmt);
-		echo json_encode($reponse);
+		// echo json_encode($reponse);
     }
 }
 
