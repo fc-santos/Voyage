@@ -16,6 +16,7 @@ var prixTotal = 0;
 
 
 function ajouterAuPanier(idDepart, nbAdultes, nbEnfants){
+  console.log('Entrei no ajouter');
 	var formPanier = new FormData();
   formPanier.append('action','enregistrer');
   formPanier.append('idDepart', idDepart);
@@ -23,7 +24,7 @@ function ajouterAuPanier(idDepart, nbAdultes, nbEnfants){
   formPanier.append('nbEnfants', nbEnfants);
 	$.ajax({
 		type : 'POST',
-		url : 'controller/filmsControleur.php',
+		url : 'controlleur/panierControlleur.php',
 		data : formPanier,
 		dataType : 'json',
 		//async : false,
@@ -35,7 +36,7 @@ function ajouterAuPanier(idDepart, nbAdultes, nbEnfants){
             viewPanier(reponse);
 		},
 		fail : function (err){
-		   
+      console.log('Fail!');
 		}
 	});
 }
