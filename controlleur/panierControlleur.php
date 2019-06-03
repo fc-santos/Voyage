@@ -1,9 +1,6 @@
 <?php
+session_start();
 require "connexionDB.php";
-
-// if (!session_id()) {
-//     @session_start();
-// }
 
 $reponse = array();
 $reponse['panier'] = array();
@@ -11,37 +8,54 @@ $reponse['depart'] = array();
 $reponse['circuit'] = array();
 $reponse['soustotal'] = 0;
 
-// $reponse['resultado'] = "Foi criado";
 
 $idUtilisateur = isset($_SESSION['idUtilisateur']) ? $_SESSION['idUtilisateur'] : 2;
 
-//Contr�leur
+//Controleur
 $action = isset($_POST['action']) ? $_POST['action'] : null;
 
-// $reponse['user'] = $idUtilisateur;
-// $reponse['action'] = $action;
+$reponse['user'] = $idUtilisateur;
 
 switch ($action) {
+    case 'enregistrer' :
+        enregistrer();
+        break;
 
     case "listerPanier" :
-        // $reponse['resultado']= 'Entrou no switch';
          lister();
         break;
+
     case "listerParCategorie" :
-        // $tabRes['resultado']= 'Entrou no switch';
         listerParCategorie();
         break;
+
     case "supprimer" :
         supprimer();
 }
 
+function enregistrer(){
+	global $conn, $reponse, $idUtilisateur;	
+    
+    $idDepart=$_POST['idDepart'];
+	$nbAdultes=$_POST['nbAdultes'];
+    $nbEnfants=$_POST['nbEnfants'];
+    $requete="INSERT INTO panier VALUES(0,?,?,?,?)";
+	try {
+        $stmt = $conn->prepare($requete);
+        $stmt->execute(array($idDepart, $nbAdultes, $nbEnfants, $idUtilisateur));
+    } catch(Exception $e) {
+        $reponse['erreur']="Probleme pour ajouter départ au panier!";
+    }finally {
+        lister();
+        unset($conn);
+		unset($stmt);
+		echo json_encode($reponse);
+    }
+}
+
 function lister() {
 
-    global $reponse;
-
-    global $conn;
-
-    global $idUtilisateur;
+    global $reponse, $conn, $idUtilisateur;
 
     try {
         $stmt = $conn->query('SELECT * FROM panier WHERE idUtilisateur = ' . $idUtilisateur);
@@ -59,20 +73,19 @@ function lister() {
         }
 
     } catch(Exception $e){
-        echo 'deu rim';
+        echo 'Fail to connect!';
         //echo $e->getMessage();
-        $reponse['query'] = 'falhou';
+        $reponse['query'] = 'Falhou';
     }finally{
-        // unset($unModele);
+        unset($conn);
+        unset($stmt);
+        echo json_encode($reponse);
     }
 
 }
 function supprimer(){
-    global $reponse;
     
-    global $conn;
-
-    global $idUtilisateur;
+    global $reponse, $conn, $idUtilisateur;
 
     $idPanier=$_POST['idPanier'];
 
@@ -95,10 +108,10 @@ function supprimer(){
 
     }catch(Exception $e){
     }finally{
-        unset($unModele);
+        unset($conn);
+        unset($stmt);
+        echo json_encode($reponse);
     }
 }
-
-echo json_encode($reponse);
 
 ?>

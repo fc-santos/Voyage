@@ -1,3 +1,11 @@
+$(document).ready(function() {
+  getPanier();
+});
+
+$(document).on('click', 'div .dropdown-menu', function (e) {
+  e.stopPropagation();
+});
+
 
 var request;
 var quantitePanier = 0;
@@ -5,68 +13,141 @@ var contentPanier = [];
 
 var prixTotal = 0;
 
-function ajouterAuPanier(idDepart, prixDepart, dateDepart){
-  var elementTrove = false;
-  prixTotal += prixDepart;
 
-  //verifier panier pour trouver le Depart
-  contentPanier.forEach(function(element){
-    if(element.idDepart == idDepart){
-      element.quantite++;
-      ContentPanier();
-      elementTrove = true;
-    }
-  }); 
 
-  //if depart n'est pas dans le panier ajouter-le
-  if(!elementTrove){
-    quantitePanier++;    
-
-    var taille = allCircuits.length;
-    //console.log(allCircuits)
-    var item = {};
-
-    for(let i = 0; i < taille; i++){
-      if(allCircuits[i].idDepart == idDepart){
-        item.idDepart = allCircuits[i].idDepart;
-        item.idCircuit = allCircuits[i].idCircuit;
-        item.prix = allCircuits[i].prix;
-        item.date = allCircuits[i].date;
-        item.quantite = 1;
-      }
-    }
-
-    contentPanier.push(item);
-    console.log(item);
-    ContentPanier(); 
-  }
- $('#panier').html(" (" + quantitePanier + ") $ " + prixTotal.toFixed(2));
+function ajouterAuPanier(idDepart, nbAdultes, nbEnfants){
+	var formPanier = new FormData();
+  formPanier.append('action','enregistrer');
+  formPanier.append('idDepart', idDepart);
+  formPanier.append('nbAdultes', nbAdultes);
+  formPanier.append('nbEnfants', nbEnfants);
+	$.ajax({
+		type : 'POST',
+		url : 'controller/filmsControleur.php',
+		data : formPanier,
+		dataType : 'json',
+		//async : false,
+		//cache : false,
+		contentType : false,
+		processData : false,
+		success : function (reponse){
+            console.log(reponse);
+            viewPanier(reponse);
+		},
+		fail : function (err){
+		   
+		}
+	});
 }
 
-function supprimer(idDepart, quantite, prix){
-    var updatedPanier = [];
-    prixTotal -= quantite * prix;
-    
-    contentPanier.forEach(function(element){
-      if(element.idDepart != idDepart){
-        updatedPanier.push(element);
-      }else{
-        quantitePanier--;
-      }
-    });
-    contentPanier = updatedPanier;
-    
-    if(contentPanier.length == 0) prixTotal = 0.00; 
-    
-    $('#panier').html(" (" + quantitePanier + ") $ " + prixTotal.toFixed(2));
+function getPanier(){
+  var formPanier = new FormData();
+  formPanier.append('action','listerPanier');
+  $.ajax({
+    type : "post",
+    url : "controlleur/panierControlleur.php",
+    data : formPanier,
+    contentType : false,
+    processData : false,
+    cache : false,
+    dataType : "json", 
+        success : function (reponse){
+                    console.log(reponse);
+                    viewPanier(reponse);
+          
+    },
+    fail : function (err){
+      console.log('Fail!');
+    }
+  });
+}
 
-    $( '.nav-item.dropdown.test' ).click(function(event) {
-      event.stopPropagation();
-      event.preventDefault();      
-    });
-    ContentPanier();
+function viewPanier(infoPanier) {
+	var taille;
+	var rep=`<div class="container">
+                <div class="row">
+                    <div class="col-md-3 col-xs-12">
+                        <span><b>Circuit</b></span>
+                    </div>
+                    <div class="col-md-2 col-xs-12 centerText">
+                        <span><b>Depart</b></span>
+                    </div>
+                    <div class="col-md-1 col-xs-12 centerText">
+                        <span><b>Adults</b></span>
+                    </div>
+                    <div class="col-md-1 col-xs-12 centerText">
+                        <span><b>Enfants</b></span>
+                    </div>
+                    <div class="col-md-2 col-xs-12 centerText">
+                        <span><b>Prix Unitaire</b></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12">
+                        <hr style="border: 0.5px solid grey">
+                    </div>
+                </div>`;
+	taille = infoPanier.panier.length;
+	if(taille > 0){
+		for(var i=0; i<taille; i++){
+			rep += `<div class="row">
+                        <div class="col-md-3 col-xs-12">
+                            ` + infoPanier.circuit[i].titre + `
+                        </div>
+                        <div class="col-md-2 col-xs-12 my-1 centerText">
+                        ` + infoPanier.depart[i].dateDebut + `
+                        </div>
+                        <div class="col-md-1 col-xs-12 my-1 centerText">
+                        ` + infoPanier.panier[i].nbAdultes + `
+                        </div>
+                        <div class="col-md-1 col-xs-12 my-1 centerText">
+                        ` + infoPanier.panier[i].nbEnfants + `
+                        </div>
+                        <div class="col-md-2 col-xs-12 my-1 centerText">
+                        $ ` + infoPanier.depart[i].prix.toFixed(2) + `
+                        </div>
+                        <div class="col-md-3 col-xs-12">
+                            <button type="button" class="btn btn-default" onclick='supprimer(` + infoPanier.panier[i].idPanier + `); getPanier();'><i class="fas fa-trash-alt"></i></button>
+                            <button type="button" class="btn btn-success" onclick=''>Payer Depart</button>
+                        </div>                                  
+                    </div>
+                    <div class="dropdown-divider"></div>`;
+        }
+        rep += 		`<div class="col-md-11 my-1" id='prixTotal'>
+                        <span> Prix Total : </span>$ ` + infoPanier.total.toFixed(2) + `
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-success" onclick=''>Payer Total</button>
+                    </div>
+                </div>`;
+
+        $('#panier').html(" (" + taille + ") $ " + infoPanier.total.toFixed(2));
+	} else {
+		rep = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>";
+	}
+	
+    $('#divPanier').html(rep);
+}
+
+function supprimer(idPanier){
+  var formPanier = new FormData();
+formPanier.append('action','supprimer');
+formPanier.append('idPanier', idPanier);
+$.ajax({
+  type : 'POST',
+  url : 'controlleur/panierControlleur.php',
+  data : formPanier,//leForm.serialize(),
+  contentType : false, //Enlever ces deux directives si vous utilisez serialize()
+  processData : false,
+  dataType : 'json', //text pour le voir en format de string
+  success : function (reponse){//alert(reponse);
+          console.log(reponse);
+          viewPanier(reponse);
+  },
+  fail : function (err){
     
-    
+  }
+});
 }
 
 function acheter(){
@@ -162,78 +243,141 @@ function calculerQuantite(idDepart){
     ContentPanier();
 }
 
-function ContentPanier(){ 
+// function ajouterAuPanier(idDepart, prixDepart, dateDepart){
+//   var elementTrove = false;
+//   prixTotal += prixDepart;
+
+//   //verifier panier pour trouver le Depart
+//   contentPanier.forEach(function(element){
+//     if(element.idDepart == idDepart){
+//       element.quantite++;
+//       ContentPanier();
+//       elementTrove = true;
+//     }
+//   }); 
+
+//   //if depart n'est pas dans le panier ajouter-le
+//   if(!elementTrove){
+//     quantitePanier++;    
+
+//     var taille = allCircuits.length;
+//     //console.log(allCircuits)
+//     var item = {};
+
+//     for(let i = 0; i < taille; i++){
+//       if(allCircuits[i].idDepart == idDepart){
+//         item.idDepart = allCircuits[i].idDepart;
+//         item.idCircuit = allCircuits[i].idCircuit;
+//         item.prix = allCircuits[i].prix;
+//         item.date = allCircuits[i].date;
+//         item.quantite = 1;
+//       }
+//     }
+
+//     contentPanier.push(item);
+//     console.log(item);
+//     ContentPanier(); 
+//   }
+//  $('#panier').html(" (" + quantitePanier + ") $ " + prixTotal.toFixed(2));
+// }
+
+
+// function ContentPanier(){ 
   
-  var montrerContentInPanier;
+//   var montrerContentInPanier;
 
-  if(contentPanier.length != 0){
-    montrerContentInPanier = `<div class="container">
-                                  <div class="row">
-                                    <div class="col-md-2">
-                                        <span><b>idDepart</b></span>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <span><b>idCircuit</b></span>
-                                    </div>
-                                    <div class="col-md-2 centerText">
-                                        <span><b>Quantité</b></span>
-                                    </div>
-                                    <div class="col-md-2 centerText">
-                                        <span><b>Prix</b></span>
-                                    </div>
-                                    <div class="col-md-2 centerText">
-                                        <span><b>Sous-Total</b></span>
-                                    </div>
-                                    <div class="col-md-2 centerText">
-                                      <span><b>Action</b></span>
-                                    </div>
-                                  </div>
-                                  <div class="row">
-                                    <div class="col-md-12">
-                                      <hr style="border: 0.5px solid grey">
-                                    </div>
-                                  </div>
-                                  </div>
-                                `;
-    contentPanier.forEach(function(item){ 
-      sousTotal = item.quantite * item.prix;
-      montrerContentInPanier += `<div class="row">
-                                    <div class="col-md-2 my-1 centerText">
-                                      ` + item.idDepart + `
-                                    </div>
-                                    <div class="col-md-2 my-1 centerText">
-                                      ` + item.idCircuit + `
-                                    </div>
-                                    <div class="col-md-2 my-1 centerText">
-                                      ` + item.quantite + `
-                                    </div>
-                                    <div class="col-md-2 my-1 centerText">
-                                      $ ` + item.prix + `
-                                    </div>                                    
-                                    <div class="col-md-2 my-1 centerText">
-                                      $ ` + sousTotal.toFixed(2) + `
-                                    </div>
-                                    <div class="col-md-2 my-1 centerText">
-                                      <button type="button" class="btn btn-default" onclick='supprimer(`+ item.idDepart + `, ` + item.quantite + `, ` + item.prix + `)'><i class="fas fa-trash-alt"></i></button>
-                                    </div>                                  
-                                    </div>
-                                  <div class="dropdown-divider"></div>`;		
-    })
+//   if(contentPanier.length != 0){
+//     montrerContentInPanier = `<div class="container">
+//                                   <div class="row">
+//                                     <div class="col-md-2">
+//                                         <span><b>idDepart</b></span>
+//                                     </div>
+//                                     <div class="col-md-2">
+//                                         <span><b>idCircuit</b></span>
+//                                     </div>
+//                                     <div class="col-md-2 centerText">
+//                                         <span><b>Quantité</b></span>
+//                                     </div>
+//                                     <div class="col-md-2 centerText">
+//                                         <span><b>Prix</b></span>
+//                                     </div>
+//                                     <div class="col-md-2 centerText">
+//                                         <span><b>Sous-Total</b></span>
+//                                     </div>
+//                                     <div class="col-md-2 centerText">
+//                                       <span><b>Action</b></span>
+//                                     </div>
+//                                   </div>
+//                                   <div class="row">
+//                                     <div class="col-md-12">
+//                                       <hr style="border: 0.5px solid grey">
+//                                     </div>
+//                                   </div>
+//                                   </div>
+//                                 `;
+//     contentPanier.forEach(function(item){ 
+//       sousTotal = item.quantite * item.prix;
+//       montrerContentInPanier += `<div class="row">
+//                                     <div class="col-md-2 my-1 centerText">
+//                                       ` + item.idDepart + `
+//                                     </div>
+//                                     <div class="col-md-2 my-1 centerText">
+//                                       ` + item.idCircuit + `
+//                                     </div>
+//                                     <div class="col-md-2 my-1 centerText">
+//                                       ` + item.quantite + `
+//                                     </div>
+//                                     <div class="col-md-2 my-1 centerText">
+//                                       $ ` + item.prix + `
+//                                     </div>                                    
+//                                     <div class="col-md-2 my-1 centerText">
+//                                       $ ` + sousTotal.toFixed(2) + `
+//                                     </div>
+//                                     <div class="col-md-2 my-1 centerText">
+//                                       <button type="button" class="btn btn-default" onclick='supprimer(`+ item.idDepart + `, ` + item.quantite + `, ` + item.prix + `)'><i class="fas fa-trash-alt"></i></button>
+//                                     </div>                                  
+//                                     </div>
+//                                   <div class="dropdown-divider"></div>`;		
+//     })
 
-    montrerContentInPanier += `<div class="col-md-11 my-1" id='prixTotal'>
-                                <span>Prix Total : </span>$ ` + prixTotal.toFixed(2) + `
-                              </div>
-                              <div class="col-md-3">
-                                <button type="button" class="btn btn-success" onclick='acheter()'>Payer</button>
-                              </div>
-                              </div>`;
-    $('#divPanier').addClass("image-panier");
-  }
-  else{
-    montrerContentInPanier = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>"
-  }
-  $('#divPanier').html(montrerContentInPanier);
+//     montrerContentInPanier += `<div class="col-md-11 my-1" id='prixTotal'>
+//                                 <span>Prix Total : </span>$ ` + prixTotal.toFixed(2) + `
+//                               </div>
+//                               <div class="col-md-3">
+//                                 <button type="button" class="btn btn-success" onclick='acheter()'>Payer</button>
+//                               </div>
+//                               </div>`;
+//     $('#divPanier').addClass("image-panier");
+//   }
+//   else{
+//     montrerContentInPanier = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>"
+//   }
+//   $('#divPanier').html(montrerContentInPanier);
   
-}
+// }
 
+
+// function supprimer(idDepart, quantite, prix){
+//     var updatedPanier = [];
+//     prixTotal -= quantite * prix;
+    
+//     contentPanier.forEach(function(element){
+//       if(element.idDepart != idDepart){
+//         updatedPanier.push(element);
+//       }else{
+//         quantitePanier--;
+//       }
+//     });
+//     contentPanier = updatedPanier;
+    
+//     if(contentPanier.length == 0) prixTotal = 0.00; 
+    
+//     $('#panier').html(" (" + quantitePanier + ") $ " + prixTotal.toFixed(2));
+
+//     $( '.nav-item.dropdown.test' ).click(function(event) {
+//       event.stopPropagation();
+//       event.preventDefault();      
+//     });
+//     ContentPanier();  
+// }
 

@@ -74,7 +74,7 @@ require "./controlleur/connexionDB.php";
                     <ul class="navbar-nav ml-auto">                        
                         <li class="nav-item dropdown test">
                             <div class="nav-link dropdown-toggle" id="navbarDropdownMenuLink0"
-                                onclick="ContentPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                onclick="getPanier()" role="button" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false"><i class="fas fa-shopping-cart"></i>
                                 <span id="panier"> (0) $ 0.00
                                 </span>
