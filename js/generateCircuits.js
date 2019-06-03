@@ -39,7 +39,7 @@ function createCircuits(circuits, isAuthentifie){
                                 <a href="details.php" class="btn btn-offre btn-block">Voir l'offre</a>`
         if(isAuthentifie === 'authentifie'){
                             content += `<div class="text-center">
-                                        <a href="#" class="btn btn-primary mt-2" id="` + element.idDepart + `" onclick='ajouterAuPanier(` + element.idDepart + `, ` + element.prix + `, "` + element.dateDebut + `"); event.preventDefault();'>Ajouter au panier</a>
+                                        <a href="#" class="btn btn-primary mt-2" id="` + element.idDepart + `" onclick='ajouterAuPanier(` + element.idDepart + `, 1 , 0); event.preventDefault();'>Ajouter au panier</a>
                                     </div>`
         }
                                 
