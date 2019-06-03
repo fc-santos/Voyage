@@ -359,7 +359,7 @@ CREATE TABLE `newletter` (
 --
 
 INSERT INTO `newletter` (`idNewletter`, `idUtilisateur`, `titre`, `contenu`, `dateDebut`, `dateFin`) VALUES
-(1, 6, 'Une tempête frappe Milan', 'Les destinations voyage en direction de Milan sont interrompu jusqu\'à nouvelle ordre. Merci de votre compréhension..', '2019-05-16', '2019-05-20'),
+(1, 6, 'Une tempête frappe Milan', 'Les destinations voyage en direction de Milan sont interrompu jusqu à nouvelle ordre. Merci de votre compréhension..', '2019-05-16', '2019-05-20'),
 (2, 6, 'message1', 'problems!!!', '2019-05-21', '2019-05-22'),
 (3, 6, 'Chaleur extreme au bresil', 'Creme soleil obligatoire.', '2019-05-21', '2019-05-22');
 
