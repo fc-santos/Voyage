@@ -20,6 +20,7 @@
 
   <!-- Page level custom scripts -->
   <script src="js/abdel.js"></script>
+  <script src="js/generateMessages.js"></script>
 
 
   <?php
