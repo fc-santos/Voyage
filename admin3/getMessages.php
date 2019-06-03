@@ -11,7 +11,7 @@ $response = [];
 while ($row = $result->fetch()) {
     $idUtilisateur = $row->idUtilisateur;
 
-    $sql1 = "SELECT nom, prenom FROM utilisateur WHERE idUtilisateur = $idUtilisateur";
+    $sql1 = "SELECT nom, prenom, role FROM utilisateur WHERE idUtilisateur = $idUtilisateur";
     $result1 = $conn->query($sql1);
     $row1 = $result1->fetch();
 
@@ -20,6 +20,7 @@ while ($row = $result->fetch()) {
         'idUtilisateur' => $row->idUtilisateur,
         'nomUtilisateur' => $row1->nom,
         'prenomUtilisateur' => $row1->prenom,
+        'role' => $row1->role,
         'titre' => $row->titre,
         'contenu' => $row->contenu,
         'date' => $row->date,
