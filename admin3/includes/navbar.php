@@ -43,9 +43,8 @@
         <span>Administrateurs</span></a>
         <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="buttons.html">Créer Admin</a>
-          <a class="collapse-item" href="cards.html">Modifier Admin</a>
-          <a class="collapse-item" href="cards.html">Supprimer Admin</a>
+          <a class="collapse-item" href="creerAdmin.php">Créer Admin</a>
+          <a class="collapse-item" href="gererAdmin.php">Gérer Admins</a>
         </div>
       </div>
     </li>
