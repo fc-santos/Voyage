@@ -5,32 +5,32 @@ $nav = "index";
 require 'includes/header.php' ?>
 
 <!-- Mettre les styles dans le fichier css -->
-<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel" data-pause="false">
+<div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false">
   <div class="carousel-inner" style="height: 100%">
     <div class="carousel-item active" data-interval="5000" style="height: 100%">
       <img src="assets/images/island.jpg" class="w-100" alt="La plage" style="height: 100%">
       <div class="my-carousel-caption d-none d-md-block">
-        <h1>First slide label</h1>
-        <h3>Nulla vitae elit libero, a pharetra augue mollis interdum.</h3>
+        <h1 class="hero_two text-white">Chaleur, relaxation et beauté</h1>
+        <h3>Les plus belles pages au monde</h3>
       </div>
     </div>
     <div class="carousel-item" data-interval="5000" style="height: 100%">
       <img src="assets/images/mountain.jpg" class="w-100" alt="..." style="height: 100%;">
       <div class="my-carousel-caption d-none d-md-block">
-        <h1>First slide label</h1>
-        <h3>Nulla vitae elit libero, a pharetra augue mollis interdum.</h3>
+        <h1 class="hero_two text-white">Osez l'aventure</h1>
+        <h3>Découvrez la faune et la flore</h3>
       </div>
     </div>
     <div class="carousel-item" data-interval="5000" style="height: 100%">
       <img src="assets/images/village.jpg" class="w-100" alt="..." style="height: 100%">
       <div class="my-carousel-caption d-none d-md-block">
-        <h1>First slide label</h1>
+        <h1 class="hero_two text-white">Découvrez le monde</h1>
         <h3>Nulla vitae elit libero, a pharetra augue mollis interdum.</h3>
       </div>
     </div>
   </div>
   <div class="search-content">
-    <div class="search">
+    <div class="search rounded-pill">
 
     </div>
   </div>
@@ -72,4 +72,7 @@ require 'includes/header.php' ?>
       </div>
     </div>
   </div>
-  <?php include 'includes/footer.php' ?>
+</div>
+
+
+<?php include 'includes/footer.php' ?>

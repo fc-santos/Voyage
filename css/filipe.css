@@ -7,6 +7,10 @@ body {
     background: linear-gradient(to right, #fff, #fff, #fff, #fff, #a9ecff, #76e0ff, #76e0ff, #43d5ff, #10caff, #00ABDC);
 }
 
+.bg-dark-blue {
+    background: #00ABDC;
+}
+
 /*#endregion menu*/
 
 /*#region carousel*/
@@ -27,20 +31,22 @@ body {
     height: 50vh;
 }
 
+
 /*#endregion carousel*/
 
 
 /*#region recherche*/
-.search-content {}
+
+search-content {}
 
 .search {
 
     padding: 0;
-    width: 70%;
-    height: 200px;
-    z-index: 10;
-    background: rgba(0, 0, 0);
+    /*height: 200px;*/
+    /*z-index: 10;*/
+    /*background: rgba(0, 0, 0);*/
 }
+
 
 /*#endregion recherche*/
 
@@ -235,7 +241,7 @@ body {
         position: relative;
         padding: 0;
         width: 70%;
-        height: 200px;
+        height: 100px;
         z-index: 10;
         background: rgba(0, 0, 0, .80);
     }
@@ -245,6 +251,17 @@ body {
     /*#region carousel*/
     #carouselExampleSlidesOnly {
         height: 100vh;
+    }
+
+    .carousel-item:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.1);
     }
 
     /*#endregion carousel*/
