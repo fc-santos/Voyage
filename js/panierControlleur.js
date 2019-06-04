@@ -6,60 +6,41 @@ $(document).on('click', 'div .dropdown-menu', function (e) {
   e.stopPropagation();
 });
 
+// var request;
+// var quantitePanier = 0;
+// var contentPanier = [];
 
-var request;
-var quantitePanier = 0;
-var contentPanier = [];
-
-var prixTotal = 0;
-
-
+// var prixTotal = 0;
 
 function ajouterAuPanier(idDepart, nbAdultes, nbEnfants){
-  console.log('Entrei no ajouter');
-	var formPanier = new FormData();
-  formPanier.append('action','enregistrer');
-  formPanier.append('idDepart', idDepart);
-  formPanier.append('nbAdultes', nbAdultes);
-  formPanier.append('nbEnfants', nbEnfants);
 	$.ajax({
 		type : 'POST',
 		url : 'controlleur/panierControlleur.php',
-		data : formPanier,
-		dataType : 'json',
-		//async : false,
-		//cache : false,
-		contentType : false,
-		processData : false,
-		success : function (reponse){
-            console.log(reponse);
-            viewPanier(reponse);
-		},
-		fail : function (err){
-      console.log('Fail!');
-		}
-	});
+		data : {'action': 'enregistrer', 'idDepart': idDepart, 'nbAdultes' : nbAdultes, 'nbEnfants' : nbEnfants},
+    dataType : 'json'
+  })
+  .done(function(reponse){
+    console.log(reponse);
+    viewPanier(reponse);
+  })
+  .fail(function(jqXHR, textStatus){
+    alert( "Request failed: " + textStatus );
+  });
 }
 
 function getPanier(){
-  var formPanier = new FormData();
-  formPanier.append('action','listerPanier');
+
   $.ajax({
-    type : "post",
+    method : "POST",
     url : "controlleur/panierControlleur.php",
-    data : formPanier,
-    contentType : false,
-    processData : false,
-    cache : false,
-    dataType : "json", 
-        success : function (reponse){
-                    console.log(reponse);
-                    viewPanier(reponse);
-          
-    },
-    fail : function (err){
-      console.log('Fail!');
-    }
+    data : {'action': 'listerPanier'},
+    dataType : "json"})
+  .done(function(reponse){
+    console.log(reponse);
+    viewPanier(reponse);
+  })
+  .fail(function(jqXHR, textStatus){
+    alert( "Request failed: " + textStatus );
   });
 }
 
@@ -131,118 +112,116 @@ function viewPanier(infoPanier) {
 }
 
 function supprimer(idPanier){
-  var formPanier = new FormData();
-formPanier.append('action','supprimer');
-formPanier.append('idPanier', idPanier);
+
 $.ajax({
-  type : 'POST',
+  method : 'POST',
   url : 'controlleur/panierControlleur.php',
-  data : formPanier,//leForm.serialize(),
-  contentType : false, //Enlever ces deux directives si vous utilisez serialize()
-  processData : false,
-  dataType : 'json', //text pour le voir en format de string
-  success : function (reponse){//alert(reponse);
-          console.log(reponse);
-          viewPanier(reponse);
-  },
-  fail : function (err){
-    
-  }
+  data : {'action': 'supprimer', 'idPanier': idPanier},
+  // contentType : false, 
+  // processData : false,
+  dataType : 'json'
+})
+.done(function(reponse){
+  console.log(reponse);
+  viewPanier(reponse);
+})
+.fail(function(jqXHR, textStatus){
+  alert( "Request failed: " + textStatus );
 });
 }
 
-function acheter(){
-  var totalFacture = 0;
+// function acheter(){
+//   var totalFacture = 0;
 
-  var pdf = new jsPDF('p', 'pt', 'letter');
-      var y = 40;
-      var x = 250;
+//   var pdf = new jsPDF('p', 'pt', 'letter');
+//       var y = 40;
+//       var x = 250;
 
-      pdf.setFontSize(20);
-      pdf.setFontType('bold');
-      var text = 'FACTURE';
-      pdf.text(text, x, y); 
+//       pdf.setFontSize(20);
+//       pdf.setFontType('bold');
+//       var text = 'FACTURE';
+//       pdf.text(text, x, y); 
       
-      pdf.setLineWidth(3.0);
-      pdf.line(200, 45, 400, 45);
+//       pdf.setLineWidth(3.0);
+//       pdf.line(200, 45, 400, 45);
 
-      y = 80;
-      x = 100;
+//       y = 80;
+//       x = 100;
 
-      pdf.setFontSize(14);
-      text = 'idDepart'; 
-      pdf.text(text, x, y);      
-      x = 280;
-      text = 'Quantité';
-      pdf.text(text, x, y); 
-      x = 400;
-      text = 'Prix';
-      pdf.text(text, x, y); 
-      x = 480;
-      text = 'Sous-Total';
-      pdf.text(text, x, y); 
+//       pdf.setFontSize(14);
+//       text = 'idDepart'; 
+//       pdf.text(text, x, y);      
+//       x = 280;
+//       text = 'Quantité';
+//       pdf.text(text, x, y); 
+//       x = 400;
+//       text = 'Prix';
+//       pdf.text(text, x, y); 
+//       x = 480;
+//       text = 'Sous-Total';
+//       pdf.text(text, x, y); 
  
-      pdf.setLineWidth(0.5);
-      pdf.line(100, 90, 560, 90);
+//       pdf.setLineWidth(0.5);
+//       pdf.line(100, 90, 560, 90);
        
 
-      pdf.setFontSize(12);
-      pdf.setFontType('normal');
+//       pdf.setFontSize(12);
+//       pdf.setFontType('normal');
     
-      contentPanier.forEach(function(element){
-        //var img = new Image();
-        //img.src = element.image;
+//       contentPanier.forEach(function(element){
+//         //var img = new Image();
+//         //img.src = element.image;
         
-        y += 30; 
-        x = 100;
+//         y += 30; 
+//         x = 100;
 
-        //pdf.addImage(img, 'png', 50, y - 20, 27, 27)
+//         //pdf.addImage(img, 'png', 50, y - 20, 27, 27)
 
-        var sousTotal = element.quantite * element.prix;
-        totalFacture += sousTotal;
+//         var sousTotal = element.quantite * element.prix;
+//         totalFacture += sousTotal;
 
-        text = "" + element.idDepart; 
-        pdf.text(text, x, y);      
-        x = 300;
-        text = "" + element.quantite;
-        pdf.text(text, x, y); 
-        x = 400;
-        text = "$ " + element.prix;
-        pdf.text(text, x, y); 
-        x = 500;
-        text = "$ " + sousTotal.toFixed(2);
-        pdf.text(text, x, y); 
-      })
+//         text = "" + element.idDepart; 
+//         pdf.text(text, x, y);      
+//         x = 300;
+//         text = "" + element.quantite;
+//         pdf.text(text, x, y); 
+//         x = 400;
+//         text = "$ " + element.prix;
+//         pdf.text(text, x, y); 
+//         x = 500;
+//         text = "$ " + sousTotal.toFixed(2);
+//         pdf.text(text, x, y); 
+//       })
 
-      pdf.setLineWidth(0.5);
-      pdf.line(100, y + 15, 560, y + 15);
-      pdf.setFontType('bold');
+//       pdf.setLineWidth(0.5);
+//       pdf.line(100, y + 15, 560, y + 15);
+//       pdf.setFontType('bold');
 
-      y += 30
-      x = 450
-      text = "Total";
-      pdf.text(text, x, y); 
+//       y += 30
+//       x = 450
+//       text = "Total";
+//       pdf.text(text, x, y); 
 
-      pdf.setFontType('normal');
-      x = 500
-      text = "$ "  + totalFacture.toFixed(2); 
-      pdf.text(text, x, y)
+//       pdf.setFontType('normal');
+//       x = 500
+//       text = "$ "  + totalFacture.toFixed(2); 
+//       pdf.text(text, x, y)
       
       
 
-      pdf.save('facture.pdf')
-}
+//       pdf.save('facture.pdf')
+// }
 
-function calculerQuantite(idDepart){
-  contentPanier.forEach(function(element){
-    if(element.idDepart == idDepart){
-      element.quantite++;
-    }
-  });
-  contentPanier = updatedPanier;
+// function calculerQuantite(idDepart){
+//   contentPanier.forEach(function(element){
+//     if(element.idDepart == idDepart){
+//       element.quantite++;
+//     }
+//   });
+//   contentPanier = updatedPanier;
     
-    ContentPanier();
-}
+//     ContentPanier();
+// }
 
 // function ajouterAuPanier(idDepart, prixDepart, dateDepart){
 //   var elementTrove = false;
