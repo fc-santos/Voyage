@@ -120,7 +120,7 @@ function viewPanier(infoPanier) {
                             <input type="hidden" name="currency_code" value="CAD" />
                             <input type="hidden" name="item_name" value="Total des circuits" />
                             <input type="hidden" name="amount" value="` + + infoPanier.total.toFixed(2) + `" />
-                            <input type="image" src="images/paypall_payer.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+                            <input type="image" src="assets/images/paypall_payer.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
                     </form>
                 </div>`;
 
