@@ -1,5 +1,17 @@
  
 $(document).ready(() => {
+  $('input[type=radio][name=inlineRadioOptions]').change(function() {
+    if (this.value == 'creerNouveau') {
+      $('#creerAdminFromMembres').addClass('invisible');
+      $('#creerAdminANouveau').removeClass('invisible');
+
+    }
+    else if (this.value == 'useMembres') {
+      $('#creerAdminANouveau').addClass('invisible');
+      $('#creerAdminFromMembres').removeClass('invisible');
+    }
+  });
+
   lieu = null;
 
   $('#lieu1').on('input', (e) => {
@@ -220,4 +232,5 @@ function prendreLaValeur(element,string,cible,idLieu=0){
     $('#idCircuitChoisi').val(idLieu);
   }
 }
+
 
