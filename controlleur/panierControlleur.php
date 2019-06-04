@@ -6,7 +6,7 @@ $reponse = array();
 $reponse['panier'] = array();
 $reponse['depart'] = array();
 $reponse['circuit'] = array();
-$reponse['soustotal'] = 0;
+$reponse['total'] = 0;
 
 
 $idUtilisateur = isset($_SESSION['idUtilisateur']) ? $_SESSION['idUtilisateur'] : 2;
@@ -47,8 +47,8 @@ function enregistrer(){
         $reponse['erreur']="Probleme pour ajouter départ au panier!";
     }finally {
         lister();
-        unset($conn);
-		unset($stmt);
+        // unset($conn);
+		// unset($stmt);
 		// echo json_encode($reponse);
     }
 }
@@ -94,23 +94,24 @@ function supprimer(){
 
         $stmt = $conn->query('SELECT * FROM panier WHERE idUtilisateur = ' . $idUtilisateur);
 
-        while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $getDepart = $conn->query('SELECT * FROM depart WHERE idDepart = ' . $row->idDepart);
-            $reponse['depart'][] = $getDepart->fetch(PDO::FETCH_OBJ);
+        // while ($row = $stmt->fetch(PDO::FETCH_OBJ)) {
+        //     $getDepart = $conn->query('SELECT * FROM depart WHERE idDepart = ' . $row->idDepart);
+        //     $reponse['depart'][] = $getDepart->fetch(PDO::FETCH_OBJ);
         
-            $getCircuit = $conn->query('SELECT * FROM circuit WHERE idCircuit = ' . $reponse['depart'][count($reponse['depart']) - 1]->idCircuit);
-            $reponse['circuit'][] = $getCircuit->fetch(PDO::FETCH_OBJ);
+        //     $getCircuit = $conn->query('SELECT * FROM circuit WHERE idCircuit = ' . $reponse['depart'][count($reponse['depart']) - 1]->idCircuit);
+        //     $reponse['circuit'][] = $getCircuit->fetch(PDO::FETCH_OBJ);
         
-            $reponse['total'] += ($row->nbAdultes + $row->nbEnfants) * $reponse['depart'][count($reponse['depart']) - 1]->prix;
+        //     $reponse['total'] += ($row->nbAdultes + $row->nbEnfants) * $reponse['depart'][count($reponse['depart']) - 1]->prix;
         
-            $reponse['panier'][] = $row;
-        }
+        //     $reponse['panier'][] = $row;
+        // }
 
     }catch(Exception $e){
     }finally{
+        lister();
         unset($conn);
         unset($stmt);
-        echo json_encode($reponse);
+        // echo json_encode($reponse);
     }
 }
 

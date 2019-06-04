@@ -105,7 +105,8 @@ function viewPanier(infoPanier) {
 
         $('#panier').html(" (" + taille + ") $ " + infoPanier.total.toFixed(2));
 	} else {
-		rep = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>";
+    rep = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>";
+    $('#panier').html(" (0) $ 0.00 ") ;
 	}
 	
     $('#divPanier').html(rep);
@@ -122,6 +123,7 @@ $.ajax({
   dataType : 'json'
 })
 .done(function(reponse){
+  // getPanier();
   console.log(reponse);
   viewPanier(reponse);
 })
