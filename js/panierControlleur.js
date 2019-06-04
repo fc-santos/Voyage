@@ -90,23 +90,43 @@ function viewPanier(infoPanier) {
                         </div>
                         <div class="col-md-3 col-xs-12">
                             <button type="button" class="btn btn-default" onclick='supprimer(` + infoPanier.panier[i].idPanier + `); getPanier();'><i class="fas fa-trash-alt"></i></button>
-                            <button type="button" class="btn btn-success" onclick=''>Payer Depart</button>
+                                <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+                                        <input type="hidden" name="cmd" value="_xclick" />
+                                        <input type="hidden" name="business" value="ouellet135@gmail.com" />
+                                        <input type="hidden" name="currency_code" value="CAD" />
+                                        <input type="hidden" name="item_name" value="` + infoPanier.circuit[i].titre + `" />
+                                        <input type="hidden" name="amount" value="` + infoPanier.depart[i].prix.toFixed(2)/4 + `" />
+                                        <input type="image" src="assets/images/paypall_payer_depot.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+                                </form>
+
+                                <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+                                        <input type="hidden" name="cmd" value="_xclick" />
+                                        <input type="hidden" name="business" value="ouellet135@gmail.com" />
+                                        <input type="hidden" name="currency_code" value="CAD" />
+                                        <input type="hidden" name="item_name" value="` + infoPanier.circuit[i].titre + `" />
+                                        <input type="hidden" name="amount" value="` + infoPanier.depart[i].prix.toFixed(2) + `" />
+                                        <input type="image" src="assets/images/paypall_payer.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+                                </form>
                         </div>                                  
                     </div>
                     <div class="dropdown-divider"></div>`;
         }
-        rep += 		`<div class="col-md-11 my-1" id='prixTotal'>
-                        <span> Prix Total : </span>$ ` + infoPanier.total.toFixed(2) + `
+        rep += 		`<div id='prixTotal' style="float:left">
+                        <span> Prix Total : </span>$ ` + infoPanier.total.toFixed(2) + `	&nbsp;	&nbsp;
                     </div>
-                    <div class="col-md-3">
-                        <button type="button" class="btn btn-success" onclick=''>Payer Total</button>
-                    </div>
+                    <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+                            <input type="hidden" name="cmd" value="_xclick" />
+                            <input type="hidden" name="business" value="ouellet135@gmail.com" />
+                            <input type="hidden" name="currency_code" value="CAD" />
+                            <input type="hidden" name="item_name" value="Total des circuits" />
+                            <input type="hidden" name="amount" value="` + + infoPanier.total.toFixed(2) + `" />
+                            <input type="image" src="images/paypall_payer.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+                    </form>
                 </div>`;
 
         $('#panier').html(" (" + taille + ") $ " + infoPanier.total.toFixed(2));
 	} else {
-    rep = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>";
-    $('#panier').html(" (0) $ 0.00 ") ;
+		rep = "<h4 style='font-style: italic; text-align: center; color: grey;'>Le panier est vide...</h4>";
 	}
 	
     $('#divPanier').html(rep);
@@ -123,7 +143,6 @@ $.ajax({
   dataType : 'json'
 })
 .done(function(reponse){
-  // getPanier();
   console.log(reponse);
   viewPanier(reponse);
 })
