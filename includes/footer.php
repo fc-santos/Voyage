@@ -1,3 +1,25 @@
+<div class="container-fluid bg-dark-blue">
+    <div class="row ml-5">
+        <div class="col-md-4 mt-4">
+            <h2 class="mb-3 text-white">Voyage GoAbroad</h2>
+            <p><a class="text-white" href="#">Règles de confidentialité</a></p>
+            <p><a class="text-white" href="#">Termes et Conditions</a></p>
+        </div>
+        <div class="col-md-4 text-white mt-4">
+            <h2 class="mb-3">Nous joindre</h2>
+            <p><i class="fas fa-phone-square fa-lg"></i><a class="text-white" href="tel:5145551234"> (514) 555-1234</a></p>
+            <p><i class="fas fa-envelope-square fa-lg"></i><a class="text-white" href="mailto:admin@voyage.ga"> admin@voyage.ga</a></p>
+        </div>
+        <div class="col-md-4 mt-4">
+            <h2 class="mb-3 text-white">Navigation</h2>
+            <p><a class="text-white" href="circuits.php">Circuits</a></p>
+            <p><a class="text-white" href="about.php">À propos</a></p>
+            <p><a class="text-white" href="register.php">S'enregistrer</a></p>
+            <p><a class="text-white" href="login.php">Connexion</a></p>
+        </div>
+    </div>
+</div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
