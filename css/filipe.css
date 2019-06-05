@@ -7,8 +7,8 @@ body {
     background: linear-gradient(to right, #fff, #fff, #fff, #fff, #a9ecff, #76e0ff, #76e0ff, #43d5ff, #10caff, #00ABDC);
 }
 
-.bg-dark-blue {
-    background: #00ABDC;
+.bg-dark {
+    background: #3c3c3c;
 }
 
 /*#endregion menu*/
@@ -37,10 +37,9 @@ body {
 
 /*#region recherche*/
 
-search-content {}
+.search-content {}
 
 .search {
-
     padding: 0;
     /*height: 200px;*/
     /*z-index: 10;*/
@@ -98,7 +97,8 @@ search-content {}
 
 .form-title,
 .circuit-description,
-.circuit-details {
+.circuit-details,
+.circuits-populaires {
     background: -webkit-linear-gradient(#00ABDC, #0083a9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -229,7 +229,6 @@ search-content {}
     .search-content {
         display: flex;
         position: absolute;
-        top: 0%;
         left: 0%;
         justify-content: center;
         top: 50%;
@@ -240,10 +239,21 @@ search-content {}
     .search {
         position: relative;
         padding: 0;
-        width: 70%;
-        height: 100px;
+        width: 55%;
+        height: 100%;
         z-index: 10;
         background: rgba(0, 0, 0, .80);
+    }
+
+    .searchBox {
+        font-size: 25px;
+        border-radius: 30px;
+        padding: 7px 20px;
+        width: 100%;
+        border: 2px solid #00ABDC;
+        outline: 0;
+        color: #fff;
+        background: transparent;
     }
 
     /* #endregion recherche*/
@@ -390,7 +400,7 @@ search-content {}
     /*#region circuit page */
 
     .header_circuit {
-        height: 500px;
+        height: 520px;
     }
 
     /*#endregion circuit page*/

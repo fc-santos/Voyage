@@ -1,4 +1,4 @@
-<div class="container-fluid bg-dark-blue">
+<div class="container-fluid bg-dark">
     <div class="row ml-5">
         <div class="col-md-4 mt-4">
             <h2 class="mb-3 text-white">Voyage GoAbroad</h2>
