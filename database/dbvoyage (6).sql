@@ -85,7 +85,7 @@ CREATE TABLE `commande` (
   `idDepart` int(11) NOT NULL,
   `nbAdultes` int(11) DEFAULT '1',
   `nbEnfants` int(11) DEFAULT '0',
-  `resteAPayer` int(11) DEFAULT NULL,
+  `resteAPayer` double DEFAULT NULL,
   `idUtilisateur` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
