@@ -100,7 +100,7 @@ function viewPanier(infoPanier) {
                                         <input type="image" src="assets/images/paypall_payer_depot.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
                                 </form>
 
-                                <form name="_xclick" action="#" onsubmit="payer(this,`+ infoPanier.depart[i].idDepart +`,`+ infoPanier.panier[i].nbAdultes + `,`+ infoPanier.panier[i].nbEnfants +`, 0)">
+                                <form name="_xclick" action="#" onsubmit="payer(this,`+ infoPanier.depart[i].idDepart +`,`+ infoPanier.panier[i].nbAdultes + `,`+ infoPanier.panier[i].nbEnfants +`, 0); supprimer(` + infoPanier.panier[i].idPanier + `)">
                                         <input type="hidden" name="cmd" value="_xclick" />
                                         <input type="hidden" name="business" value="ouellet135@gmail.com" />
                                         <input type="hidden" name="currency_code" value="CAD" />
