@@ -95,7 +95,7 @@ $stmt = $conn->query($query); ?>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
+                                <a class="dropdown-item" href="commande.php"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
                             </div>
