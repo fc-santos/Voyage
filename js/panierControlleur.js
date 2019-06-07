@@ -90,7 +90,8 @@ function viewPanier(infoPanier) {
                         </div>
                         <div class="col-md-3 col-xs-12">
                             <button type="button" class="btn btn-default" onclick='supprimer(` + infoPanier.panier[i].idPanier + `); getPanier();'><i class="fas fa-trash-alt"></i></button>
-                                <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+
+                                <form name="_xclick" action="#" onsubmit="payer(this,`+ infoPanier.depart[i].idDepart +`,`+ infoPanier.panier[i].nbAdultes + `,`+ infoPanier.panier[i].nbEnfants +`,`+ (infoPanier.depart[i].prix.toFixed(2)/4)*3 +`); supprimer(` + infoPanier.panier[i].idPanier + `)">
                                         <input type="hidden" name="cmd" value="_xclick" />
                                         <input type="hidden" name="business" value="ouellet135@gmail.com" />
                                         <input type="hidden" name="currency_code" value="CAD" />
@@ -99,7 +100,7 @@ function viewPanier(infoPanier) {
                                         <input type="image" src="assets/images/paypall_payer_depot.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
                                 </form>
 
-                                <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
+                                <form name="_xclick" action="#" onsubmit="payer(this,`+ infoPanier.depart[i].idDepart +`,`+ infoPanier.panier[i].nbAdultes + `,`+ infoPanier.panier[i].nbEnfants +`, 0); supprimer(` + infoPanier.panier[i].idPanier + `)">
                                         <input type="hidden" name="cmd" value="_xclick" />
                                         <input type="hidden" name="business" value="ouellet135@gmail.com" />
                                         <input type="hidden" name="currency_code" value="CAD" />
@@ -114,14 +115,7 @@ function viewPanier(infoPanier) {
         rep += 		`<div id='prixTotal' style="float:left">
                         <span> Prix Total : </span>$ ` + infoPanier.total.toFixed(2) + `	&nbsp;	&nbsp;
                     </div>
-                    <form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr" method="post">
-                            <input type="hidden" name="cmd" value="_xclick" />
-                            <input type="hidden" name="business" value="ouellet135@gmail.com" />
-                            <input type="hidden" name="currency_code" value="CAD" />
-                            <input type="hidden" name="item_name" value="Total des circuits" />
-                            <input type="hidden" name="amount" value="` + + infoPanier.total.toFixed(2) + `" />
-                            <input type="image" src="assets/images/paypall_payer.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
-                    </form>
+                    
                 </div>`;
 
         $('#panier').html(" (" + taille + ") $ " + infoPanier.total.toFixed(2));
@@ -150,6 +144,27 @@ $.ajax({
   alert( "Request failed: " + textStatus );
 });
 }
+
+function payer(form, idDepart, nbAdultes, nbEnfants, prixPaye){
+    $.ajax({
+		type : 'POST',
+		url : 'controlleur/panierControlleur.php',
+		data : {'action': 'enregistrerCommande', 'idDepart': idDepart, 'nbAdultes': nbAdultes, 'nbEnfants': nbEnfants, 'prixPaye': prixPaye}
+
+  })
+    .done(function(reponse){
+      console.log(reponse);
+  })
+    .fail(function(jqXHR, textStatus){
+      alert( "Request failed: " + textStatus );
+    });
+    
+    form.action = "https://www.paypal.com/us/cgi-bin/webscr";
+    form.method = "post";
+    form.submit();
+}
+
+
 
 // function acheter(){
 //   var totalFacture = 0;

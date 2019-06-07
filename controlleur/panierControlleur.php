@@ -3,6 +3,7 @@ session_start();
 require "connexionDB.php";
 
 $reponse = array();
+$reponse['erreur'] = array();
 $reponse['panier'] = array();
 $reponse['depart'] = array();
 $reponse['circuit'] = array();
@@ -31,6 +32,11 @@ switch ($action) {
 
     case "supprimer" :
         supprimer();
+        break;
+        
+    case "enregistrerCommande" :
+        enregistrerCommande();
+        break;
 }
 
 function enregistrer(){
@@ -112,6 +118,24 @@ function supprimer(){
         unset($conn);
         unset($stmt);
         // echo json_encode($reponse);
+    }
+}
+
+function enregistrerCommande(){
+	global $conn, $reponse, $idUtilisateur;	
+    
+    $idDepart=$_POST['idDepart'];
+	$nbAdultes=$_POST['nbAdultes'];
+    $nbEnfants=$_POST['nbEnfants'];
+    $prixPaye=$_POST['prixPaye'];
+    $requete="INSERT INTO commande VALUES(0,?,?,?,?,?)";
+	try {
+        $stmt = $conn->prepare($requete);
+        $stmt->execute(array($idDepart, $nbAdultes, $nbEnfants, $prixPaye, $idUtilisateur));
+    } catch(Exception $e) {
+        
+    } finally {
+        
     }
 }
 
