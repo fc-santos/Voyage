@@ -28,10 +28,10 @@ $stmt = $conn->query($query); ?>
 </head>
 
 <body style="min-height: 700px;" onload="getCircuits(<?php if (isset($_SESSION['prenom'])) {
-                                                            echo "'authentifie'";
-                                                        } else {
-                                                            echo "'nonAuthentifie'";
-                                                        }  ?>)">
+    echo "'authentifie'";
+} else {
+    echo "'nonAuthentifie'";
+}  ?>)">
     <?php while ($row = $stmt->fetch()) : ?>
         <div class="row fermerNewsletters" style="min-height: 40px; border-botton: 1px solid black; background-color: red; color: white; display: none;" id="newsletter">
             <div class="col-sm-1" style="cursor: pointer;" onclick="fermer()">X</div>

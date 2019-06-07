@@ -33,9 +33,10 @@ if (isset($_POST['btnLogin'])) {
             $_SESSION['prenom'] = $user->prenom;
             $_SESSION['role'] = $user->role;
             if ($_SESSION['role'] == 'Membre') {
+                header('Location: index.php');
                 exit();
             } else {
-                header('Location: circuits.php');
+                //header('Location: admin/index.php');
                 //exit();
             }
         } else {
