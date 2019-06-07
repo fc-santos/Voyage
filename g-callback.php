@@ -44,5 +44,9 @@ if ($user) {
     $_SESSION['role'] = 'Membre';
 }
 
+if ($_SESSION['role'] == 'Admin') {
+    header('Location: admin/index.php');
+    exit();
+}
 header('Location: index.php');
 exit();
