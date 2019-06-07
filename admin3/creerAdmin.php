@@ -47,7 +47,7 @@ if (isset($_POST['creer'])) {
 ?>
 <h4 class="mb-4">Choisissez l'une des options</h4>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="useMembres">
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="useMembres" checked>
         <label class="form-check-label" for="inlineRadio1">À partir des membres</label>
     </div>
     <div class="form-check form-check-inline">
@@ -106,6 +106,12 @@ if (isset($_POST['creer'])) {
             </div>
         </div>
     </form>
+</div>
+
+<div class="Container" id="creerAdminFromMembres">
+    <?php
+    include_once "includes/membres.php";
+    ?>
 </div>
 
 <script>
