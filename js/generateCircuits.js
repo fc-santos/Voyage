@@ -31,15 +31,15 @@ function createCircuits(circuits, isAuthentifie) {
         content += `<div class="col-lg-4 mb-4-sm">
                         <div class="card">
                             <div class="prix">$` + element.prix + `</div>
-                            <img src="assets/images/castle.jpg" class="card-img-top img-fluid img-cover" alt="...">
+                            <img src="assets/images/castle.jpg" class="card-img-top img-fluid img-cover" alt="Image du Circuit">
                             <div class="card-body">
                                 <h5 class="card-title">Card title</h5>
                                 <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
                                 <hr>
-                                <a href="details.php" class="btn btn-success btn-block">Voir l'offre</a>`
+                                <a href="details.php?depart=` + element.idDepart + `" class="btn btn-success btn-block">Voir l'offre</a>`
         if (isAuthentifie === 'authentifie') {
             content += `<div class="text-center">
-                                        <a href="#" class="btn btn-primary mt-2" id="` + element.idDepart + `" onclick='ajouterAuPanier(` + element.idDepart + `, 1 , 0); event.preventDefault();'>Ajouter au panier</a>
+                                        <a href="#" class="btn btn-primary btn-block mt-2" id="` + element.idDepart + `" onclick='ajouterAuPanier(` + element.idDepart + `, 1 , 0); event.preventDefault();'>Ajouter au panier</a>
                                     </div>`
         }
 

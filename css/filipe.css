@@ -98,7 +98,8 @@ body {
 .form-title,
 .circuit-description,
 .circuit-details,
-.circuits-populaires {
+.circuits-populaires,
+.prix-reservation {
     background: -webkit-linear-gradient(#00ABDC, #0083a9);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -155,8 +156,9 @@ body {
 
 .circuit-caption {
     position: absolute;
-    top: 27%;
-    left: 20%;
+    top: 35%;
+    left: 15%;
+    font-size: 2.3em;
     color: #fff;
     text-shadow: 4px 4px 8px #000000;
 }
@@ -211,6 +213,7 @@ body {
     }
 
     /*#endregion circuit cards */
+
 
 }
 
@@ -403,6 +406,15 @@ body {
         height: 520px;
     }
 
+    .circuit-caption {
+        position: absolute;
+        top: 52%;
+        left: 33%;
+        font-size: 2.3em;
+        color: #fff;
+        text-shadow: 4px 4px 8px #000000;
+    }
+
     /*#endregion circuit page*/
 
     /*#region prix cards */
@@ -461,6 +473,11 @@ body {
         text-align: center;
     }
 
+    .btn-block-lg {
+        width: 100%;
+        display: block;
+    }
+
 }
 
 /*taille extra grande*/
@@ -484,4 +501,5 @@ body {
         top: 50%;
         left: 40%;
     }
+
 }
