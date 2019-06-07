@@ -31,7 +31,7 @@ if ($user) {
     $_SESSION['idUtilisateur'] = $user->idUtilisateur;
     $_SESSION['prenom'] = $user->prenom;
     //$_SESSION['nom'] = $user->nom;
-    //$_SESSION['courriel'] = $user->courriel;
+    $_SESSION['courriel'] = $user->courriel;
     $_SESSION['role'] = $user->role;
 } else {
     $stmt1 = $conn->prepare('INSERT INTO utilisateur (prenom, nom, courriel) VALUES (?, ?, ?)');
