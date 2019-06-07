@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('includes/header.php'); 
+include('includes/header.php');
 ?>
 
 
@@ -23,8 +23,7 @@ include('includes/header.php');
                 <h1 class="h4 text-gray-900 mb-4">Login Here!</h1>
                 <?php
 
-                    if(isset($_SESSION['status']) && $_SESSION['status'] !='') 
-                    {
+                    if (isset($_SESSION['status']) && $_SESSION['status'] !='') {
                         echo '<h2 class="bg-danger text-white"> '.$_SESSION['status'].' </h2>';
                         unset($_SESSION['status']);
                     }
@@ -59,5 +58,5 @@ include('includes/header.php');
 
 
 <?php
-include('includes/scripts.php'); 
+include('includes/scripts.php');
 ?>

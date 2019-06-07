@@ -58,3 +58,19 @@
     display: block;
 }
 
+/*Messages bold*/
+.makeBold > * {
+    font-weight: bolder !important;
+}
+
+#dixMessages{
+    height: 80vh;
+    overflow: auto;
+    border-right: 1px solid lightgrey;
+    padding: 10px;
+    margin: 0 10px;
+}
+
+#montreMessage{
+}
+

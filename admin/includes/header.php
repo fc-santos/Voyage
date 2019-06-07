@@ -1,7 +1,15 @@
 <?php
-  /*if ($_SESSION['role'] != 'Admin') {
-      header('location: index.php');
-  }*/
+if (!session_id()) {
+    @session_start();
+}
+
+  if (!isset($_SESSION['role'])) {
+      header('location: ../index.php');
+  } else {
+      if ($_SESSION['role'] != 'Admin') {
+          header('location: ../index.php');
+      }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +37,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="getMessages(4);">
 
   <!-- Page Wrapper -->
   <div id="wrapper">

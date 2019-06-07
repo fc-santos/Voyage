@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require "./controlleur/connexionDB.php";
 
 $query = "SELECT * FROM `newletter` WHERE dateDebut <= NOW() AND dateFin >= NOW()";

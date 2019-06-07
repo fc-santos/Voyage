@@ -1,4 +1,16 @@
 <?php
+  if (!session_id()) {
+      @session_start();
+  }
+
+  if (!isset($_SESSION['role'])) {
+      header('location: ../index.php');
+  } else {
+      if ($_SESSION['role'] != 'Admin') {
+          header('location: ../index.php');
+      }
+  }
+  
     if (isset($_POST['CreerDepart'])) {
         /*if (isset($_SESSION['lieu'])) {
             $lieu = $_SESSION['lieu'];
