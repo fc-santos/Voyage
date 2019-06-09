@@ -23,25 +23,27 @@ $prenom = $userData['givenName'];
 $nom = $userData['familyName'];
 //$_SESSION['picture'] = $userData['picture'];
 
-$query = "SELECT idUtilisateur, prenom, role FROM utilisateur WHERE courriel = ?";
+$query = "SELECT * FROM utilisateur WHERE courriel = ?";
 $stmt = $conn->prepare($query);
 $stmt->execute([$email]);
 $user = $stmt->fetch();
 if ($user) {
     $_SESSION['idUtilisateur'] = $user->idUtilisateur;
     $_SESSION['prenom'] = $user->prenom;
-    //$_SESSION['nom'] = $user->nom;
+    $_SESSION['nom'] = $user->nom;
     $_SESSION['courriel'] = $user->courriel;
     $_SESSION['role'] = $user->role;
 } else {
     $stmt1 = $conn->prepare('INSERT INTO utilisateur (prenom, nom, courriel) VALUES (?, ?, ?)');
     $stmt1->execute([$prenom, $nom, $email]);
-    $stmt2 = $conn->prepare('SELECT idUtilisateur FROM utilisateur WHERE courriel = ?');
+    $stmt2 = $conn->prepare('SELECT * FROM utilisateur WHERE courriel = ?');
     $stmt2->execute([$email]);
     $lastUser = $stmt2->fetch();
     $_SESSION['idUtilisateur'] = $lastUser->idUtilisateur;
-    $_SESSION['prenom'] = $prenom;
-    $_SESSION['role'] = 'Membre';
+    $_SESSION['prenom'] = $lastUser->prenom;
+    $_SESSION['nom'] = $lastUser->nom;
+    $_SESSION['courriel'] = $lastUser->courriel;
+    $_SESSION['role'] = $lastUser->role;
 }
 
 /*if ($_SESSION['role'] == 'Admin') {

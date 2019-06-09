@@ -27,12 +27,13 @@ $stmt = $conn->query($query); ?>
         <?php echo $title; ?>
     </title>
 </head>
+<!-- body style="min-height: 700px;" -->
 
-<body style="min-height: 700px;" onload="getCircuits(<?php if (isset($_SESSION['prenom'])) {
-    echo "'authentifie'";
-} else {
-    echo "'nonAuthentifie'";
-}  ?>)">
+<body onload="getCircuits(<?php if (isset($_SESSION['prenom'])) {
+                                echo "'authentifie'";
+                            } else {
+                                echo "'nonAuthentifie'";
+                            }  ?>)">
     <?php while ($row = $stmt->fetch()) : ?>
         <div class="row fermerNewsletters" style="min-height: 40px; border-botton: 1px solid black; background-color: red; color: white; display: none;" id="newsletter">
             <div class="col-sm-1" style="cursor: pointer;" onclick="fermer()">X</div>
@@ -95,8 +96,7 @@ $stmt = $conn->query($query); ?>
                                 Bonjour <?= $_SESSION['prenom']; ?> <i class="fas fa-caret-down"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#"><i class="fas fa-user-circle"></i> Mon profil</a>
-                                <a class="dropdown-item" href="commande.php"><i class="fas fa-file-invoice-dollar"></i> Mes commandes</a>
+                                <a class="dropdown-item" href="userprofile.php"><i class="fas fa-user-circle"></i> Mon profil</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-sign-out-alt"></i> Déconnecter</a>
                             </div>
