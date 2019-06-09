@@ -3,17 +3,54 @@ session_start();
 $title = "Voyage GoAbroad | Mon compte";
 $nav = "index";
 require 'includes/header.php';
+require_once 'controlleur/connexionDB.php';
 
 if (!isset($_SESSION['prenom'])) {
     header('Location: index.php');
     exit();
 }
 
+$idUser = $_SESSION['idUtilisateur'];
+$erreur = null;
+$succes = null;
+
+
+if (isset($_POST['btnModifier'])) {
+    $inputNom = $_POST['inputNom'];
+    $inputPrenom = $_POST['inputPrenom'];
+    $inputCourriel = $_POST['inputCourriel'];
+    $inputPassword = $_POST['inputPassword'];
+    $lenghtPwd = (int)strlen($inputPassword);
+    if ($lenghtPwd < 8 || $lenghtPwd > 12) {
+        $erreur = "Votre mot de passe doit contenir de 8 à 12 caractères";
+    } else {
+        $hash = password_hash($inputPassword, PASSWORD_DEFAULT);
+        $updateQuery = "UPDATE utilisateur SET prenom = ?, nom = ?, courriel = ?, password = ? WHERE idUtilisateur = ?";
+        $stmt2 = $conn->prepare($updateQuery);
+        $stmt2->execute([$inputPrenom, $inputNom, $inputCourriel, $hash, $idUser]);
+        $_SESSION['nom'] = $inputNom;
+        $_SESSION['prenom'] = $inputPrenom;
+        $_SESSION['courriel'] = $inputCourriel;
+        $succes = "Votre profil a été mis à jour";
+    }
+}
+
 $nom = $_SESSION['nom'];
 $prenom = $_SESSION['prenom'];
 $courriel = $_SESSION['courriel'];
 
-if (isset($_POST['btnModifier'])) { }
+
+$query = "SELECT ct.titre, d.dateDebut, c.nbAdultes, c.nbEnfants, c.resteAPayer FROM circuit as ct
+INNER JOIN depart as d ON ct.idCircuit = d.idCircuit
+INNER JOIN commande as c ON d.idDepart = c.idDepart WHERE c.idUtilisateur = ?";
+$stmt = $conn->prepare($query);
+$stmt->execute([$idUser]);
+$commandes = $stmt->fetchAll(PDO::FETCH_OBJ);
+/*echo '<pre>';
+var_dump($commandes);
+echo '</pre>';
+exit();*/
+
 ?>
 
 <div class="container-fluid py-5 px-5">
@@ -23,13 +60,27 @@ if (isset($_POST['btnModifier'])) { }
             <hr>
         </div>
     </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <?php if ($erreur) : ?>
+                <div id="pwderror" class="alert alert-danger" role="alert">
+                    <?= $erreur ?>
+                </div>
+            <?php endif; ?>
+            <?php if ($succes) : ?>
+                <div id="msgsuccess" class="alert alert-success" role="alert">
+                    <?= $succes ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
     <!-- Icon Cards-->
     <div class="row">
         <div class="col-xl-3 col-sm-6 mb-3">
             <div class="card text-white bg-primary o-hidden h-100">
                 <div class="card-body">
                     <div class="card-body-icon">
-                        <i class="fas fa-user"></i> Votre profil
+                        <i class="fas fa-user"></i> Mon profil
                     </div>
                 </div>
                 <button class="btn card-footer text-white clearfix small z-1" data-toggle="modal" data-target="#profil">
@@ -114,7 +165,8 @@ if (isset($_POST['btnModifier'])) { }
                 <div class="card mb-3">
                     <div class="card-header">
                         <i class="fas fa-table"></i>
-                        Liste des commandes</div>
+                        Liste des commandes
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -122,43 +174,21 @@ if (isset($_POST['btnModifier'])) { }
                                     <tr>
                                         <th>Circuit</th>
                                         <th>Départ</th>
-                                        <th>Nombre d'Adultes</th>
-                                        <th>Nombre d'enfants</th>
-                                        <th>Restant à payer</th>
+                                        <th>Adultes</th>
+                                        <th>Enfants</th>
+                                        <th>Reste à payer</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Circuit</th>
-                                        <th>Depart</th>
-                                        <th>Nombre d'Adultes</th>
-                                        <th>Nombre d'enfants</th>
-                                        <th>Restant à payer</th>
-                                    </tr>
-                                </tfoot>
                                 <tbody>
-                                    <tr>
-                                        <td>Hope Fuentes</td>
-                                        <td>Secretary</td>
-                                        <td>San Francisco</td>
-                                        <td>41</td>
-                                        <td>2010/02/12</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Vivian Harrell</td>
-                                        <td>Financial Controller</td>
-                                        <td>San Francisco</td>
-                                        <td>62</td>
-                                        <td>2009/02/14</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Timothy Mooney</td>
-                                        <td>Office Manager</td>
-                                        <td>London</td>
-                                        <td>37</td>
-                                        <td>2008/12/11</td>
-                                    </tr>
-
+                                    <?php foreach ($commandes as $commande) : ?>
+                                        <tr>
+                                            <td><?= $commande->titre ?></td>
+                                            <td><?= $commande->dateDebut ?></td>
+                                            <td><?= $commande->nbAdultes ?></td>
+                                            <td><?= $commande->nbEnfants ?></td>
+                                            <td>$ <?= $commande->resteAPayer ?></td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -168,7 +198,21 @@ if (isset($_POST['btnModifier'])) { }
         </div>
     </div>
 </div>
-</div>
+
+<script>
+    var pwderror = document.getElementById('pwderror');
+    if (pwderror != null) {
+        setTimeout(function() {
+            pwderror.style.display = 'none'
+        }, 5000);
+    }
+    var msgsuccess = document.getElementById('msgsuccess');
+    if (msgsuccess != null) {
+        setTimeout(function() {
+            msgsuccess.style.display = 'none'
+        }, 5000);
+    }
+</script>
 
 
 
