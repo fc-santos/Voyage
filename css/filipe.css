@@ -34,17 +34,20 @@ body {
 
 /*#endregion carousel*/
 
+.error {
+    color: #fa0000;
+    font-size: 0.8rem;
+}
 
 /*#region recherche*/
 
-.search-content {}
-
-.search {
-    padding: 0;
-    /*height: 200px;*/
-    /*z-index: 10;*/
-    /*background: rgba(0, 0, 0);*/
+.search-content {
+    position: absolute;
 }
+
+.search {}
+
+.searchBox {}
 
 
 /*#endregion recherche*/
@@ -191,6 +194,36 @@ body {
         left: 77%;
         font-size: 1.3em;
     }
+
+    .search-content {
+        display: flex;
+        position: absolute;
+        left: 0%;
+        justify-content: center;
+        top: 40%;
+        min-height: 100%;
+        min-width: 100%;
+    }
+
+    .search {
+        position: relative;
+        padding: 0;
+        width: 90%;
+        height: 100%;
+        z-index: 10;
+        background: rgba(0, 0, 0, .80);
+    }
+
+    .searchBox {
+        font-size: 25px;
+        border-radius: 30px;
+        padding: 7px 20px;
+        width: 100%;
+        border: 2px solid #00ABDC;
+        outline: 0;
+        color: #fff;
+        background: transparent;
+    }
 }
 
 
@@ -214,27 +247,13 @@ body {
 
     /*#endregion circuit cards */
 
-
-}
-
-
-/*taille grande*/
-@media only screen and (min-width: 991px) {
-
-    /*#region menu*/
-    .bg-blue {
-        background: linear-gradient(to right, #fff, #fff, #a9ecff, #76e0ff, #76e0ff, #43d5ff, #10caff, #00ABDC);
-    }
-
-    /*#endregion menu*/
-
     /*#region recherche*/
     .search-content {
         display: flex;
         position: absolute;
         left: 0%;
         justify-content: center;
-        top: 50%;
+        top: 40%;
         min-height: 100%;
         min-width: 100%;
     }
@@ -242,7 +261,7 @@ body {
     .search {
         position: relative;
         padding: 0;
-        width: 55%;
+        width: 80%;
         height: 100%;
         z-index: 10;
         background: rgba(0, 0, 0, .80);
@@ -259,247 +278,293 @@ body {
         background: transparent;
     }
 
-    /* #endregion recherche*/
-
-    /*#region carousel*/
-    #carouselExampleSlidesOnly {
-        height: 100vh;
-    }
-
-    .carousel-item:after {
-        content: "";
-        display: block;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(0, 0, 0, 0.1);
-    }
-
-    /*#endregion carousel*/
-
-    /*#region login form */
-    .box {
-        position: absolute;
-        top: 15%;
-        left: 25%;
-        height: auto;
-        width: 600px;
-        padding: 30px;
-        background: rgba(0, 0, 0, .8);
-        box-sizing: border-box;
-        box-shadow: 0 15px 25px rgba(0, 0, 0.5);
-        border-radius: 10px;
-    }
-
-    .box h2 {
-        margin: 0 0 30px;
-        font-size: 1.5rem;
-        padding: 0;
-        color: #fff;
-        text-align: center;
-    }
-
-    .box .inputBox {
-        position: relative;
-    }
-
-    .box .inputBox input {
-        width: 100%;
-        padding: 10px 0;
-        font-size: 14px;
-        letter-spacing: 1px;
-        color: #fff;
-        margin-bottom: 15px;
-        border: none;
-        border-bottom: 1px solid #fff;
-        outline: none;
-        background: transparent;
-    }
-
-    .box .inputBox label {
-        position: absolute;
-        top: 0;
-        left: 0;
-        letter-spacing: 1px;
-        padding: 10px 0;
-        font-size: 14px;
-        color: #fff;
-        pointer-events: none;
-        transition: .5s;
-    }
-
-    .box .inputBox input:focus~label,
-    .box .inputBox input:valid~label {
-        top: -18px;
-        left: 0;
-        color: #00ABDC;
-        font-size: 12px;
-    }
-
-    .box input[type="submit"] {
-        background: transparent;
-        border: none;
-        outline: none;
-        color: #fff;
-        background: #00ABDC;
-        padding: 10px 20px;
-        cursor: pointer;
-        border-radius: 5px;
-    }
-
-    .box p {
-        font-size: 15px;
-        color: #fff;
-        margin-top: 20px;
-    }
-
-    .box a:hover,
-    .box a:visited,
-    .box a:focus {
-        text-decoration: none;
-    }
-
-    .box input[type="submit"]:focus,
-    .box input[type="submit"]:hover {
-        background: #007698;
-    }
-
-    .error {
-        color: #fa0000;
-        font-size: 0.8rem;
-    }
-
-    .btn-google {
-        color: white;
-        margin-top: 0;
-        background-color: #ea4335;
-    }
-
-    hr.style-one {
-        border: 0;
-        height: 1px;
-        margin-top: 25px;
-        margin-bottom: 0;
-        background-image: linear-gradient(to right, #ccc, #333, #ccc);
-    }
-
-    .or {
-        position: relative;
-        top: -27px;
-        left: 47%;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: #efefefef;
-        line-height: 50px;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    /*#endregion login form */
-
-    /*#region circuit page */
-
-    .header_circuit {
-        height: 520px;
-    }
-
-    .circuit-caption {
-        position: absolute;
-        top: 52%;
-        left: 33%;
-        font-size: 2.3em;
-        color: #fff;
-        text-shadow: 4px 4px 8px #000000;
-    }
-
-    /*#endregion circuit page*/
-
-    /*#region prix cards */
-
-    .img-cover {
-        object-fit: cover;
-        height: 150px;
-    }
-
-    .prix {
-        top: 23%;
-        left: 62%;
-    }
-
-    /*#endregion prix cards */
-
-    /* Panier */
-    .card {
-        margin-bottom: 15px;
-    }
-
-    .modal-body .col-md-3 {
-        padding-bottom: 5px;
-    }
-
-    .modal-body img,
-    .image-panier img {
-        width: 18%;
-    }
-
-    #cart {
-        margin-left: -55rem;
-        width: 70rem;
-    }
-
-    .fa-trash-alt {
-        font-size: 18pt;
-        color: rgba(255, 0, 0, 0.7);
-    }
-
-    #divPanier {
-        max-height: 400px;
-        overflow-y: auto;
-        overflow-x: hidden;
-    }
-
-    #prixTotal {
-        text-align: right;
-    }
-
-    #prixTotal span {
-        font-weight: bold;
-    }
-
-    .centerText {
-        text-align: center;
-    }
-
-    .btn-block-lg {
-        width: 100%;
-        display: block;
-    }
+    /*#endregion recherche/*
 
 }
 
-/*taille extra grande*/
-@media only screen and (min-width: 1200px) {
 
-    /*#region prix cards */
+/*taille grande*/
+    @media only screen and (min-width: 991px) {
 
-    .img-cover {
-        object-fit: cover;
-        height: 150px;
+        /*#region menu*/
+        .bg-blue {
+            background: linear-gradient(to right, #fff, #fff, #a9ecff, #76e0ff, #76e0ff, #43d5ff, #10caff, #00ABDC);
+        }
+
+        /*#endregion menu*/
+
+        /*#region recherche*/
+        .search-content {
+            display: flex;
+            position: absolute;
+            left: 0%;
+            justify-content: center;
+            top: 50%;
+            min-height: 100%;
+            min-width: 100%;
+        }
+
+        .search {
+            position: relative;
+            padding: 0;
+            width: 55%;
+            height: 100%;
+            z-index: 10;
+            background: rgba(0, 0, 0, .80);
+        }
+
+        .searchBox {
+            font-size: 25px;
+            border-radius: 30px;
+            padding: 7px 20px;
+            width: 100%;
+            border: 2px solid #00ABDC;
+            outline: 0;
+            color: #fff;
+            background: transparent;
+        }
+
+        /* #endregion recherche*/
+
+        /*#region carousel*/
+        #carouselExampleSlidesOnly {
+            height: 100vh;
+        }
+
+        .carousel-item:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /*#endregion carousel*/
+
+        /*#region login form */
+        .box {
+            position: absolute;
+            top: 15%;
+            left: 25%;
+            height: auto;
+            width: 600px;
+            padding: 30px;
+            background: rgba(0, 0, 0, .8);
+            box-sizing: border-box;
+            box-shadow: 0 15px 25px rgba(0, 0, 0.5);
+            border-radius: 10px;
+        }
+
+        .box h2 {
+            margin: 0 0 30px;
+            font-size: 1.5rem;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .box .inputBox {
+            position: relative;
+        }
+
+        .box .inputBox input {
+            width: 100%;
+            padding: 10px 0;
+            font-size: 14px;
+            letter-spacing: 1px;
+            color: #fff;
+            margin-bottom: 15px;
+            border: none;
+            border-bottom: 1px solid #fff;
+            outline: none;
+            background: transparent;
+        }
+
+        .box .inputBox label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            letter-spacing: 1px;
+            padding: 10px 0;
+            font-size: 14px;
+            color: #fff;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .box .inputBox input:focus~label,
+        .box .inputBox input:valid~label {
+            top: -18px;
+            left: 0;
+            color: #00ABDC;
+            font-size: 12px;
+        }
+
+        .box input[type="submit"] {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #00ABDC;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .box p {
+            font-size: 15px;
+            color: #fff;
+            margin-top: 20px;
+        }
+
+        .box a:hover,
+        .box a:visited,
+        .box a:focus {
+            text-decoration: none;
+        }
+
+        .box input[type="submit"]:focus,
+        .box input[type="submit"]:hover {
+            background: #007698;
+        }
+
+        .error {
+            color: #fa0000;
+            font-size: 0.8rem;
+        }
+
+        .btn-google {
+            color: white;
+            margin-top: 0;
+            background-color: #ea4335;
+        }
+
+        hr.style-one {
+            border: 0;
+            height: 1px;
+            margin-top: 25px;
+            margin-bottom: 0;
+            background-image: linear-gradient(to right, #ccc, #333, #ccc);
+        }
+
+        .or {
+            position: relative;
+            top: -27px;
+            left: 47%;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #efefefef;
+            line-height: 50px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /*#endregion login form */
+
+        /*#region circuit page */
+
+        .header_circuit {
+            height: 520px;
+        }
+
+        .circuit-caption {
+            position: absolute;
+            top: 52%;
+            left: 33%;
+            font-size: 2.3em;
+            color: #fff;
+            text-shadow: 4px 4px 8px #000000;
+        }
+
+        /*#endregion circuit page*/
+
+        /*#region prix cards */
+
+        .img-cover {
+            object-fit: cover;
+            height: 150px;
+        }
+
+        .prix {
+            top: 23%;
+            left: 62%;
+        }
+
+        /*#endregion prix cards */
+
+        /* Panier */
+        .card {
+            margin-bottom: 15px;
+        }
+
+        .modal-body .col-md-3 {
+            padding-bottom: 5px;
+        }
+
+        .modal-body img,
+        .image-panier img {
+            width: 18%;
+        }
+
+        #cart {
+            margin-left: -55rem;
+            width: 70rem;
+        }
+
+        .fa-trash-alt {
+            font-size: 18pt;
+            color: rgba(255, 0, 0, 0.7);
+        }
+
+        #divPanier {
+            max-height: 400px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        #prixTotal {
+            text-align: right;
+        }
+
+        #prixTotal span {
+            font-weight: bold;
+        }
+
+        .centerText {
+            text-align: center;
+        }
+
+        .btn-block-lg {
+            width: 100%;
+            display: block;
+        }
+
     }
 
-    .prix {
-        top: 23%;
-        left: 67%;
+    /*taille extra grande*/
+    @media only screen and (min-width: 1200px) {
+
+        /*#region prix cards */
+
+        .img-cover {
+            object-fit: cover;
+            height: 150px;
+        }
+
+        .prix {
+            top: 23%;
+            left: 67%;
+        }
+
+        /*#endregion prix cards*/
+
+        .circuit-caption {
+            top: 50%;
+            left: 40%;
+        }
+
     }
-
-    /*#endregion prix cards*/
-
-    .circuit-caption {
-        top: 50%;
-        left: 40%;
-    }
-
-}

@@ -9,21 +9,21 @@ require 'includes/header.php' ?>
   <div class="carousel-inner" style="height: 100%">
     <div class="carousel-item active" data-interval="5000" style="height: 100%">
       <img src="assets/images/island.jpg" class="w-100" alt="La plage" style="height: 100%">
-      <div class="my-carousel-caption d-none d-md-block">
+      <div class="my-carousel-caption d-none d-lg-block">
         <h1 class="hero_two text-white">Chaleur et relaxation</h1>
         <h3>Les plus belles pages</h3>
       </div>
     </div>
     <div class="carousel-item" data-interval="5000" style="height: 100%">
-      <img src="assets/images/mountain.jpg" class="w-100" alt="..." style="height: 100%;">
-      <div class="my-carousel-caption d-none d-md-block">
+      <img src="assets/images/mountain.jpg" class="w-100" alt="Une montagne" style="height: 100%;">
+      <div class="my-carousel-caption d-none d-lg-block">
         <h1 class="hero_two text-white">Osez l'aventure</h1>
         <h3>Découvrez la faune et la flore</h3>
       </div>
     </div>
     <div class="carousel-item" data-interval="5000" style="height: 100%">
-      <img src="assets/images/village.jpg" class="w-100" alt="..." style="height: 100%">
-      <div class="my-carousel-caption d-none d-md-block">
+      <img src="assets/images/village.jpg" class="w-100" alt="Une ville" style="height: 100%">
+      <div class="my-carousel-caption d-none d-lg-block">
         <h1 class="hero_two text-white">Découvrez le monde</h1>
         <h3>Découvrir le monde village par village</h3>
       </div>

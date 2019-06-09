@@ -3,10 +3,10 @@ $(document).ready(function () {
     errorElement: "span",
     rules: {
       prenom: {
-        required: true,
+        required: true
       },
       nom: {
-        required: true,
+        required: true
       },
       courriel: {
         required: true,
@@ -31,7 +31,7 @@ $(document).ready(function () {
         require: "Veuillez indiquer votre prénom"
       },
       nom: {
-        required: "Veuillez indiquer votre nom",
+        required: "Veuillez indiquer votre nom"
       },
       courriel: {
         email: "Le courriel doit être dans le format: abc@example.com"
@@ -46,6 +46,55 @@ $(document).ready(function () {
       }
     }
   });
+
+  $("#formModifier").validate({
+    errorElement: "span",
+    rules: {
+      inputPrenom: {
+        required: true
+      },
+      inputNom: {
+        required: true
+      },
+      inputCourriel: {
+        required: true,
+        email: true
+      },
+      inputPassword: {
+        required: true,
+        password: true,
+        rangelength: [8, 12]
+      },
+      inputConfirmPwd: {
+        required: true,
+        equalTo: "#inputPassword"
+      },
+      errorPlacement: function (error, element) {
+        var name = $(element).attr("name");
+        error.appendTo("#" + name + "-error");
+      }
+    },
+    messages: {
+      inputPrenom: {
+        require: "Veuillez indiquer votre prénom"
+      },
+      inputNom: {
+        required: "Veuillez indiquer votre nom"
+      },
+      inputCourriel: {
+        email: "Le courriel doit être dans le format: abc@example.com"
+      },
+      inputPassword: {
+        required: "Veuillez indiquer votre mot de passe",
+        rangelength: "Votre mot de passe doit contenir entre 8 et 12 caractères"
+      },
+      inputConfirmPwd: {
+        required: "Veuillez confirmer votre mot de passe",
+        equalTo: "Le mot de passe et la confirmation du mot de passe ne correspondent pas"
+      }
+    }
+  });
+
   $("#formConnecter").validate({
     errorElement: "span",
     rules: {

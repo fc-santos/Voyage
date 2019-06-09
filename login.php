@@ -20,7 +20,7 @@ if (isset($_POST['btnLogin'])) {
     $q = "SELECT * FROM utilisateur WHERE courriel = :courriel";
     //$q = "SELECT idUtilisateur, prenom, role FROM utilisateur WHERE courriel = ?";
     $stmt = $conn->prepare($q);
-    $stmt->execute(['courriel'=>$courriel]);
+    $stmt->execute(['courriel' => $courriel]);
     $user = $stmt->fetch();
     //$hash = $conn->quote($user->password);
     $hash = $user->password;
@@ -30,7 +30,9 @@ if (isset($_POST['btnLogin'])) {
         if (password_verify($password, $hash)) {
             $_SESSION = [];
             $_SESSION['idUtilisateur'] = $user->idUtilisateur;
+            $_SESSION['nom'] = $user->nom;
             $_SESSION['prenom'] = $user->prenom;
+            $_SESSION['courriel'] = $user->courriel;
             $_SESSION['role'] = $user->role;
             if ($_SESSION['role'] == 'Membre') {
                 header('Location: index.php');
