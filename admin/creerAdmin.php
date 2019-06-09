@@ -4,6 +4,7 @@ include_once "controlleur/connexionDB.php";
 if (!session_id()) {
     @session_start();
 }
+unset($_SESSION['erreur']);
 
 include_once "includes/header.php";
 include_once "includes/navbar.php";
@@ -38,7 +39,6 @@ if (isset($_POST['creer'])) {
 <?php
     if (isset($_SESSION['erreur'])) {
         echo '<div class="alert alert-danger" role="alert">' . $_SESSION['erreur'] . '</div>';
-        unset($_SESSION['erreur']);
     }
     if (isset($_SESSION['success'])) {
         echo '<div class="alert alert-success" role="alert">' . $_SESSION['success'] . '</div>';
@@ -47,7 +47,9 @@ if (isset($_POST['creer'])) {
 ?>
 <h4 class="mb-4">Choisissez l'une des options</h4>
     <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="useMembres" checked>
+        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="useMembres" <?php if (!isset($_SESSION['erreur'])) {
+    echo 'checked=true';
+}?>>
         <label class="form-check-label" for="inlineRadio1">À partir des membres</label>
     </div>
     <div class="form-check form-check-inline">
@@ -56,7 +58,12 @@ if (isset($_POST['creer'])) {
     </div>
 </div>
 
-<div class="Container invisible" id="creerAdminANouveau">
+<div class="Container <?php if (isset($_SESSION['erreur'])) {
+    echo 'visible2';
+} else {
+    echo 'invisible';
+}
+?>" id="creerAdminANouveau">
     <form class="mt-3" action="creerAdmin.php" method="POST">
         <div id="detailsDepart" class="border mb-3">
             <div class="container pt-3 pb-3">
@@ -108,7 +115,10 @@ if (isset($_POST['creer'])) {
     </form>
 </div>
 
-<div class="Container" id="creerAdminFromMembres">
+<div class="Container <?php if (isset($_SESSION['erreur'])) {
+    echo 'invisible2';
+}
+?>" id="creerAdminFromMembres">
     <?php
     include_once "includes/membres.php";
     ?>
@@ -118,10 +128,18 @@ if (isset($_POST['creer'])) {
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
+    <?php
+        if (isset($_SESSION['erreur'])) {
+            echo 'document.getElementById("inlineRadio2").click()';
+            unset($_SESSION['erreur']);
+        }
+    ?>
 </script>
 
 <?php
   include_once "includes/scripts.php";
   include_once "includes/footer.php";
+
+  unset($_SESSION['erreur']);
   ob_end_flush();
 ?>

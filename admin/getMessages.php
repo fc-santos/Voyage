@@ -4,7 +4,7 @@ if (!session_id()) {
 }
 header('Content-Type: text/json');
 require 'controlleur/connexionDB.php';
-$sql = "SELECT * FROM message ORDER BY date DESC";
+$sql = "SELECT * FROM message ORDER BY messageLu,date DESC";
 
 $result = $conn->query($sql);
 $response = [];

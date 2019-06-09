@@ -50,11 +50,11 @@
     text-decoration: none;
   }
 
-.invisible{
+.invisible, .invisible2{
     display: none;
 }
 
-.visible{
+.visible, .visible2{
     display: block;
 }
 
@@ -71,6 +71,7 @@
     margin: 0 10px;
 }
 
-#montreMessage{
+.yellow{
+    background-color: yellow;
 }
 
