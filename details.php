@@ -1,88 +1,85 @@
 <?php
 session_start();
 $title = "Voyage GoAbroad | Détails";
-include 'includes/header.php'; ?>
+include 'includes/header.php';
+require './controlleur/connexionDB.php';
 
-<div class="container">
+if (isset($_GET['depart'])) {
+    $idDepart = (int)$_GET['depart'];
+    $stmt = $conn->prepare('SELECT c.titre, c.description, d.idDepart, d.prix, d.dateDebut, l.ville, a.description FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN activite as a ON j.idActivite=a.idActivite 
+    INNER JOIN lieu as l ON a.idLieu=l.idLieu WHERE d.idDepart=?');
+    $stmt->execute([$idDepart]);
+    $circuit = $stmt->fetchAll();
+    /*echo '<pre>';
+    var_dump($circuit);
+    echo '</pre>';
+    exit();*/
+}
+
+$compteur = 0;
+
+?>
+
+<div class="container-fluid mb-4">
     <div class="bg-circuit">
         <div class="circuit-caption">
-            <h1 style="font-size: 3.2em;">Nom Circuit</h1>
+            <h1><?= $circuit[0]->titre ?></h1>
         </div>
         <img src="assets/images/village.jpg" class="img-fluid" alt="Image du Circuit">
     </div>
     <div class="mt-4">
         <div class="row">
-            <div class="col-md-9">
+            <div class="col-lg-8">
                 <h3 class="circuit-description">Description du Circuit</h3>
-                <button class="btn btn-primary">Add au panier</button>
                 <hr>
-                <p class="text-justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam repudiandae, inventore illo ratione officiis itaque cum debitis recusandae doloribus aut, sunt, pariatur accusamus nobis mollitia sed. Quod architecto dignissimos illum? Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque dolore nisi dicta corporis dolorum, vel nostrum suscipit. Laborum tempora beatae quibusdam incidunt consectetur. Excepturi est adipisci quia. Sequi, aliquam asperiores?</p>
+                <p class="text-justify"><?= $circuit[0]->description ?></p>
                 <hr>
                 <div class="mt-4">
                     <h3 class="circuit-details mb-4">Détails du Circuit</h3>
                     <div id="accordion" role="tablist">
-                        <div class="jour mb-3">
-                            <div class="" role="tab" id="headingOne">
-                                <h5 class="mb-0">
-                                    <a role="button" class="collapsed text-uppercase" data-parent="#accordion" data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        Jour 1: Lieu <i class="fas fa-angle-down float-right"></i>
-                                    </a>
-                                </h5>
-                            </div>
-                            <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
-                                <div class="card-body">
-                                    Description
+                        <?php foreach ($circuit as $result) : ?>
+                            <?php $compteur = $compteur + 1; ?>
+                            <div class="jour mb-3">
+                                <div class="" role="tab" id="heading<?= $compteur ?>">
+                                    <h5 class="mb-0">
+                                        <a role="button" class="collapsed text-uppercase" data-parent="#accordion" data-toggle="collapse" href="#collapse<?= $compteur ?>" aria-expanded="false" aria-controls="collapse<?= $compteur ?>">
+                                            Jour <?= $compteur ?>: <?= $result->ville ?><i class="fas fa-angle-down float-right"></i>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="collapse<?= $compteur ?>" class="collapse" role="tabpanel" aria-labelledby="heading<?= $compteur ?>">
+                                    <div class="card-body">
+                                        Description
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="jour mb-3">
-                            <div class="" role="tab" id="headingTwo">
-                                <h5 class="mb-0">
-                                    <a role="button" class="collapsed text-uppercase" data-parent="#accordion" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseOne">
-                                        Jour 2: Lieu<i class="fas fa-angle-down float-right"></i>
-                                    </a>
-                                </h5>
-                            </div>
-                            <div id="collapseTwo" class="collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="card-body">
-                                    Description
-                                </div>
-                            </div>
-                        </div>
-                        <div class="jour mb-3">
-                            <div class="" role="tab" id="headingThree">
-                                <h5 class="mb-0">
-                                    <a role="button" class="collapsed text-uppercase" data-parent="#accordion" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseOne">
-                                        Jour 3: Lieu<i class="fas fa-angle-down float-right"></i>
-                                    </a>
-                                </h5>
-                            </div>
-                            <div id="collapseThree" class="collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="card-body">
-                                    Description
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-lg-4">
                 <div class="card mb-5 mb-lg-0 right-side">
                     <div class="card-body">
                         <h5 class="card-title text-muted text-uppercase text-center">Réserver Maintenant</h5>
-                        <h6 class="card-price text-center">$4 999</h6>
+                        <h6 class="prix-reservation h1 text-center">$ <?= $circuit[0]->prix ?></h6>
                         <hr>
                         <ul class="fa-ul">
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Single User</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>5GB Storage</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
-                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Unlimited Private Projects</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Dedicated Phone Support</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Free Subdomain</li>
-                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
+                            <li><span class="fa-li"><i class="fas fa-money-bill"></i></span>Depôt de $500 par pers.</li>
+                            <li><span class="fa-li"><i class="far fa-calendar-alt"></i></span><?php echo $circuit[0]->dateDebut . ' / Nombre de jours: ' . $compteur ?></li>
                         </ul>
-                        <a href="#" class="btn btn-block btn-primary text-uppercase">Button</a>
+                        <form action="">
+                            <div class="form-group">
+                                <label for="nbAdultes">Nombre d'adultes</label>
+                                <input type="number" min="1" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="nbEnfants">Nombre d'enfants</label>
+                                <input type="number" min="1" class="form-control">
+                            </div>
+                            <button type="submit" class="btn btn-warning text-uppercase btn-block-lg"><i class="fab fa-paypal fa-lg"></i> Payer dépôt</button>
+                        </form>
+                        <hr>
+                        <a href="#" class="btn btn-success btn-block-lg text-white text-uppercase" id="<?= $circuit[0]->idDepart ?>" onclick='ajouterAuPanier(<?= $circuit[0]->idDepart ?>, 1 , 0); event.preventDefault();'>Ajouter au panier</a>
                     </div>
                 </div>
             </div>
