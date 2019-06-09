@@ -122,17 +122,14 @@ $stmt = $conn->query($query); ?>
                     <form>
                         <div class="form-group">
                             <label for="titreMessage">Sujet</label>
-                            <input type="text" class="form-control" id="titreMessage">
+                            <input type="text" class="form-control" id="titreMessage" name="titreMessage" required>
                         </div>
                         <div class="form-group">
                             <label for="contenuMessage">Message</label>
-                            <textarea class="form-control" id="contenuMessage" rows="3"></textarea>
+                            <textarea class="form-control" id="contenuMessage" name="contenuMessage" rows="3"></textarea>
                         </div>
+                        <button type="button" class="btn btn-primary">Envoyer</button>
                     </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-primary">Envoyer</button>
                 </div>
             </div>
         </div>
