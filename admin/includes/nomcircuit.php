@@ -40,6 +40,24 @@ if (isset($_POST['ajouterEtape']) || isset($_POST['terminer'])) {
     } else {
         $nomCircuit = "Sans titre";
     }
+
+    $nomImage = $nomCircuit;
+    $dossier = "../assets/images/";
+    if ($_FILES['image']['tmp_name'] !== "") {
+        $tmp = $_FILES['image']['tmp_name'];
+        $fichier = $_FILES['image']['name'];
+        $extension = strrchr($fichier, '.');
+        if ($extension == '.jpg') {
+            $chemin = $dossier . $nomImage . $extension;
+            move_uploaded_file($tmp, $chemin);
+            @unlink($tmp);
+            $image = $chemin;
+        } else {
+            $image = '../assets/images/village.jpg';
+        }
+    } else {
+        $image = '../assets/images/village.jpg';
+    }
     
     if (isset($_POST['descriptionCircuit']) && $_POST['descriptionCircuit'] != "") {
         $descriptionCircuit = $_POST['descriptionCircuit'];
@@ -48,10 +66,17 @@ if (isset($_POST['ajouterEtape']) || isset($_POST['terminer'])) {
     }
     try {
         $sql = "INSERT INTO circuit(titre, description, estActif) VALUES(:titre, :description, 0)";
+        
         $stmt = $conn->prepare($sql);
         $stmt->execute(['titre' => $nomCircuit, 'description' => $descriptionCircuit]);
         $_SESSION['correctNomCircuit'] = true;
         $_SESSION['idCircuit'] = $conn->lastInsertId();
+
+        $sql1 = 'INSERT INTO image(idCircuit, url) VALUES(' . $_SESSION['idCircuit'] . ', :image)';
+        //var_dump($sql1);
+        //exit();
+        $stmt1 = $conn->prepare($sql1);
+        $stmt1->execute(['image' => $image]);
         unset($_POST['ajouterEtape']);
     } catch (Exception $r) {
     }
@@ -68,7 +93,7 @@ if (isset($_POST['terminer'])) {
 ?>
 
 <h2>Créer circuit</h2>
-<form class="mt-3 mb-3" action="creerCircuit.php" method="POST">
+<form class="mt-3 mb-3" action="creerCircuit.php" method="POST" enctype="multipart/form-data">
   <div class="form-group">
     <label for="titrecircuit">Titre</label>
     <input type="text" class="form-control" id="titrecircuit" autocomplete="off" placeholder="Nom du Circuit" name="nomCircuit" value="<?php if (isset($_POST['nomCircuit'])) {
@@ -87,7 +112,7 @@ if (isset($_POST['terminer'])) {
   </div>
   <div class="form-group">
     <label for="imagecircuit">Image</label>
-    <input type="file" id="imagecircuit">
+    <input type="file" id="imagecircuit" name="image" accept=".jpg">
   </div>
   <button type="submit" name="ajouterEtape" class="btn btn-primary">Ajouter des étapes</button>
   <button type="submit" name="terminer" class="btn btn-primary">Terminer</button>
