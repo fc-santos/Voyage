@@ -211,7 +211,13 @@ exit();*/
         setTimeout(function() {
             msgsuccess.style.display = 'none'
         }, 5000);
+        if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+        }
+        location.reload();
+       
     }
+
 </script>
 
 
