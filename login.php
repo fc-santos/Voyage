@@ -8,7 +8,7 @@ require_once 'google.php';
 $loginUrl = $gClient->createAuthUrl();
 $erreur = null;
 
-if (isset($_SESSION['givenName'])) {
+if (isset($_SESSION['prenom'])) {
     header("Location: index.php");
     exit();
 }
@@ -17,11 +17,12 @@ if (isset($_POST['btnLogin'])) {
     //Logique pour voir si l'utilisateur existe dans la BD
     $courriel = $_POST['courrielConnexion'];
     $password = $_POST['mdpConnexion'];
-    $q = "SELECT * FROM utilisateur WHERE courriel = :courriel";
+    $q = "SELECT * FROM utilisateur WHERE courriel = ?";
     //$q = "SELECT idUtilisateur, prenom, role FROM utilisateur WHERE courriel = ?";
     $stmt = $conn->prepare($q);
-    $stmt->execute(['courriel' => $courriel]);
+    $stmt->execute([$courriel]);
     $user = $stmt->fetch();
+    var_dump($user);
     //$hash = $conn->quote($user->password);
     $hash = $user->password;
     // $_SESSION['debug'] = 'hash: '. $hash. '</br>$password: '.$password;
@@ -34,12 +35,13 @@ if (isset($_POST['btnLogin'])) {
             $_SESSION['prenom'] = $user->prenom;
             $_SESSION['courriel'] = $user->courriel;
             $_SESSION['role'] = $user->role;
+            echo $_SESSION['role'];
             if ($_SESSION['role'] == 'Membre') {
                 header('Location: index.php');
                 exit();
             } else {
-                //header('Location: admin/index.php');
-                //exit();
+                header('Location: admin/index.php');
+                exit();
             }
         } else {
             $erreur = 'Mot de passe invalide!';

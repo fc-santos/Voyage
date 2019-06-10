@@ -8,7 +8,7 @@ include 'google.php';
 
 $loginUrl = $gClient->createAuthUrl();
 
-if (isset($_SESSION['givenName'])) {
+if (isset($_SESSION['prenom'])) {
     header("Location: index.php");
     exit();
 }
