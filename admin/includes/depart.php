@@ -22,11 +22,30 @@
         $dateDepart = date('Y-m-d', strtotime($_POST['dateDepart']));
         $nbPersonnes = $_POST['nbPersonnes'];
         $prix = $_POST['prix'];
-        $titrePromotion = $_POST['titrePromotion'];
-        $rabais = $_POST['rabais'];
+
+        if (isset($_POST['titrePromotion']) && $_POST['titrePromotion'] != "") {
+            $titrePromotion = $_POST['titrePromotion'];
+        } else {
+            $titrePromotion = 'none';
+        }
+
+        if (isset($_POST['rabais']) && $_POST['rabais'] != "") {
+            $rabais = $_POST['rabais'];
+        } else {
+            $rabais = 0;
+        }
+
+        if (isset($_POST['departActive'])) {
+            $isActive = '0';
+        } else {
+            $isActive = '1';
+        }
 
         try {
-            $sql = "INSERT INTO `depart`(`idCircuit`, `dateDebut`, `nbPlaces`, `prix`, `titrePromotion`, `rabais`) VALUES ($idCircuit, '$dateDepart', $nbPersonnes, $prix, :titrePromotion, $rabais)";
+            $sql = "INSERT INTO `depart`(`idCircuit`, `dateDebut`, `nbPlaces`, `prix`, `titrePromotion`, `rabais`, `estActif`) VALUES ($idCircuit, '$dateDepart', $nbPersonnes, $prix, :titrePromotion, $rabais, $isActive)";
+
+            /* echo($sql);
+             exit();*/
             $stmt1 = $conn->prepare($sql);
             $stmt1->execute(['titrePromotion'=>$titrePromotion]);
         } catch (Exception $r) {
@@ -70,7 +89,7 @@
                                                 
             </div>
             <div class="row">
-                <div class="col-sm-12 col-md-10 mb-2">
+                <div class="col-sm-12 col-md-8 mb-2">
                     <div class="form-group">
                         <label for="titrePromotion">Titre Promotion</label>
                         <input type="text" class="form-control" id="titrePromotion" autocomplete="off" aria-describedby="textHelp" name="titrePromotion" placeholder="Entrez un titre pour la promotion">     
@@ -81,6 +100,10 @@
                         <label for="rabais">rabais</label>
                         <input type="number" step="0.01" class="form-control" id="rabais" autocomplete="off" aria-describedby="textHelp" name="rabais" placeholder="Rabais">
                     </div>
+                </div>
+                <div class="form-check col-sm-12 col-md-2 mb-2" style="text-align: center; padding-top: 40px">
+                    <input type="checkbox" name="departActive" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Activer</label>
                 </div>
             </div>
             <input type="submit" name="CreerDepart" class="btn btn-primary" value="Créer un départ">

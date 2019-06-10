@@ -41,7 +41,10 @@ if (isset($_POST['ajouterEtape']) || isset($_POST['terminer'])) {
         $nomCircuit = "Sans titre";
     }
 
-    $nomImage = $idCircuit;
+    $stmt2 = $conn->query('SELECT max(idCircuit)AS id FROM circuit');
+    $row = $stmt2->fetch();
+
+    $nomImage = (int)$row->id + 1;
     $dossier = "assets/images/";
     if ($_FILES['image']['tmp_name'] !== "") {
         $tmp = $_FILES['image']['tmp_name'];

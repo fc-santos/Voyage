@@ -25,7 +25,7 @@ if (strlen($q)>0) {
         // output data of each row
         while ($row = $result->fetch_object()) {
             $cleanStr = trim(preg_replace('/\s\s+/', ' ', str_replace("\n", " ", $row->titre)));
-            $liste = $liste . "<p onclick=\"prendreLaValeur(this,'livesearchCircuit1','#circuit1'," . $row->idCircuit . ")\">" . $cleanStr . "</p>";
+            $liste = $liste . "<p onclick=\"prendreLaValeur(this,'livesearchCircuit1','#circuit1'," . utf8_encode($row->idCircuit) . ")\">" . $cleanStr . "</p>";
         }
     } else {
         $liste = '';
