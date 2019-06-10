@@ -16,21 +16,15 @@ $succes = null;
 
 
 if (isset($_POST['btnModifier'])) {
-    $inputNom = $_POST['inputNom'];
-    $inputPrenom = $_POST['inputPrenom'];
-    $inputCourriel = $_POST['inputCourriel'];
     $inputPassword = $_POST['inputPassword'];
     $lenghtPwd = (int)strlen($inputPassword);
     if ($lenghtPwd < 8 || $lenghtPwd > 12) {
         $erreur = "Votre mot de passe doit contenir de 8 à 12 caractères";
     } else {
         $hash = password_hash($inputPassword, PASSWORD_DEFAULT);
-        $updateQuery = "UPDATE utilisateur SET prenom = ?, nom = ?, courriel = ?, password = ? WHERE idUtilisateur = ?";
+        $updateQuery = "UPDATE utilisateur SET password = ? WHERE idUtilisateur = ?";
         $stmt2 = $conn->prepare($updateQuery);
-        $stmt2->execute([$inputPrenom, $inputNom, $inputCourriel, $hash, $idUser]);
-        $_SESSION['nom'] = $inputNom;
-        $_SESSION['prenom'] = $inputPrenom;
-        $_SESSION['courriel'] = $inputCourriel;
+        $stmt2->execute([$hash, $idUser]);
         $succes = "Votre profil a été mis à jour";
     }
 }
@@ -84,7 +78,7 @@ exit();*/
                     </div>
                 </div>
                 <button class="btn card-footer text-white clearfix small z-1" data-toggle="modal" data-target="#profil">
-                    <span class="float-left">Voir détails</span>
+                    <span class="float-left">Modifier mot de passe</span>
                     <span class="float-right">
                         <i class="fas fa-angle-right"></i>
                     </span>
@@ -124,15 +118,15 @@ exit();*/
                 <form id="formModifier" action="" method="post">
                     <div class="form-group">
                         <label for="inputPrenom">Prénom</label>
-                        <input type="text" class="form-control" id="inputPrenom" name="inputPrenom" value="<?= $prenom ?>" required>
+                        <input type="text" class="form-control" id="inputPrenom" name="inputPrenom" value="<?= $prenom ?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="inputNom">Nom</label>
-                        <input type="text" class="form-control" id="inputNom" name="inputNom" value="<?= $nom ?>" required />
+                        <input type="text" class="form-control" id="inputNom" name="inputNom" value="<?= $nom ?>" readonly />
                     </div>
                     <div class="form-group">
                         <label for="inputCourriel">Courriel</label>
-                        <input type="email" class="form-control" id="inputCourriel" name="inputCourriel" value="<?= $courriel ?>" required />
+                        <input type="email" class="form-control" id="inputCourriel" name="inputCourriel" value="<?= $courriel ?>" readonly />
                     </div>
                     <div class="form-group">
                         <label for="inputPassword">Nouveau mot de passe</label>
@@ -211,13 +205,12 @@ exit();*/
         setTimeout(function() {
             msgsuccess.style.display = 'none'
         }, 5000);
-        if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+        if (window.history.replaceState) {
+            window.history.replaceState(null, null, window.location.href);
         }
         location.reload();
-       
-    }
 
+    }
 </script>
 
 
