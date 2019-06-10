@@ -6,14 +6,34 @@ require './controlleur/connexionDB.php';
 
 if (isset($_GET['depart'])) {
     $idDepart = (int)$_GET['depart'];
-    $stmt = $conn->prepare('SELECT c.titre, c.description, d.idDepart, d.prix, d.dateDebut, l.ville, a.description FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN activite as a ON j.idActivite=a.idActivite 
+    $stmt = $conn->prepare('SELECT c.titre, c.description, d.idDepart, d.prix, d.dateDebut, l.ville, a.nomActivite FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN activite as a ON j.idActivite=a.idActivite 
     INNER JOIN lieu as l ON a.idLieu=l.idLieu WHERE d.idDepart=?');
     $stmt->execute([$idDepart]);
-    $circuit = $stmt->fetchAll();
+    $circuitActivite = $stmt->fetchAll();
+
+    $stmt2 = $conn->prepare('SELECT h.nomHebergement FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN hebergement as h ON j.idHebergement=h.idHebergement 
+    INNER JOIN lieu as l ON h.idLieu=l.idLieu WHERE d.idDepart=?');
+    $stmt2->execute([$idDepart]);
+    $circuitHebergement = $stmt2->fetchAll();
+
+    $stmt3 = $conn->prepare('SELECT m.nomManger FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN manger as m ON j.idDinner=m.idManger 
+    INNER JOIN lieu as l ON m.idLieu=l.idLieu WHERE d.idDepart=?');
+    $stmt3->execute([$idDepart]);
+    $circuitDinner = $stmt3->fetchAll();
+
+    $stmt3 = $conn->prepare('SELECT m.nomManger FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN manger as m ON j.idSouper=m.idManger 
+    INNER JOIN lieu as l ON m.idLieu=l.idLieu WHERE d.idDepart=?');
+    $stmt3->execute([$idDepart]);
+    $circuitSouper = $stmt3->fetchAll();
+
+
+
+    
     /*echo '<pre>';
-    var_dump($circuit);
+    var_dump($circuitActivite);
     echo '</pre>';
     exit();*/
+    
 }
 
 $compteur = 0;
@@ -23,7 +43,7 @@ $compteur = 0;
 <div class="container-fluid mb-4">
     <div class="bg-circuit">
         <div class="circuit-caption">
-            <h1><?= $circuit[0]->titre ?></h1>
+            <h1><?= $circuitActivite[0]->titre ?></h1>
         </div>
         <img src="assets/images/village.jpg" class="img-fluid" alt="Image du Circuit">
     </div>
@@ -32,12 +52,12 @@ $compteur = 0;
             <div class="col-lg-8">
                 <h3 class="circuit-description">Description du Circuit</h3>
                 <hr>
-                <p class="text-justify"><?= $circuit[0]->description ?></p>
+                <p class="text-justify"><?= $circuitActivite[0]->description ?></p>
                 <hr>
                 <div class="mt-4">
                     <h3 class="circuit-details mb-4">Détails du Circuit</h3>
                     <div id="accordion" role="tablist">
-                        <?php foreach ($circuit as $result) : ?>
+                        <?php foreach ($circuitActivite as $result) : ?>
                             <?php $compteur = $compteur + 1; ?>
                             <div class="jour mb-3">
                                 <div class="" role="tab" id="heading<?= $compteur ?>">
@@ -49,7 +69,10 @@ $compteur = 0;
                                 </div>
                                 <div id="collapse<?= $compteur ?>" class="collapse" role="tabpanel" aria-labelledby="heading<?= $compteur ?>">
                                     <div class="card-body">
-                                        Description
+                                        <p class="text-muted">Activités : <?php $result->nomActivite ? $result->nomActivite : 'Aucune activité' ?></p>
+                                        <?php foreach($circuitHebergement as $hebergement) : ?>
+                                            <p class="text-muted">Hébergement : <?php $result->nomHebergement ? $result->nomHebergement : 'Aucun hébergement' ?></p>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                             </div>
@@ -61,11 +84,11 @@ $compteur = 0;
                 <div class="card mb-5 mb-lg-0 right-side">
                     <div class="card-body">
                         <h5 class="card-title text-muted text-uppercase text-center">Réserver Maintenant</h5>
-                        <h6 class="prix-reservation h1 text-center">$ <?= $circuit[0]->prix ?></h6>
+                        <h6 class="prix-reservation h1 text-center">$ <?= $circuitActivite[0]->prix ?></h6>
                         <hr>
                         <ul class="fa-ul">
                             <li><span class="fa-li"><i class="fas fa-money-bill"></i></span>Depôt de $500 par pers.</li>
-                            <li><span class="fa-li"><i class="far fa-calendar-alt"></i></span><?php echo $circuit[0]->dateDebut . ' / Nombre de jours: ' . $compteur ?></li>
+                            <li><span class="fa-li"><i class="far fa-calendar-alt"></i></span><?php echo $circuitActivite[0]->dateDebut . ' / Nombre de jours: ' . $compteur ?></li>
                         </ul>
                         <form action="">
                             <div class="form-group">
@@ -79,7 +102,7 @@ $compteur = 0;
                             <button type="submit" class="btn btn-warning text-uppercase btn-block-lg"><i class="fab fa-paypal fa-lg"></i> Payer dépôt</button>
                         </form>
                         <hr>
-                        <a href="#" class="btn btn-success btn-block-lg text-white text-uppercase" id="<?= $circuit[0]->idDepart ?>" onclick='ajouterAuPanier(<?= $circuit[0]->idDepart ?>, 1 , 0); event.preventDefault();'>Ajouter au panier</a>
+                        <a href="#" class="btn btn-success btn-block-lg text-white text-uppercase" id="<?= $circuitActivite[0]->idDepart ?>" onclick='ajouterAuPanier(<?= $circuit[0]->idDepart ?>, 1 , 0); event.preventDefault();'>Ajouter au panier</a>
                     </div>
                 </div>
             </div>
