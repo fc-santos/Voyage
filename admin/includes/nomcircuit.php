@@ -42,21 +42,21 @@ if (isset($_POST['ajouterEtape']) || isset($_POST['terminer'])) {
     }
 
     $nomImage = $nomCircuit;
-    $dossier = "../assets/images/";
+    $dossier = "assets/images/";
     if ($_FILES['image']['tmp_name'] !== "") {
         $tmp = $_FILES['image']['tmp_name'];
         $fichier = $_FILES['image']['name'];
         $extension = strrchr($fichier, '.');
         if ($extension == '.jpg') {
             $chemin = $dossier . $nomImage . $extension;
-            move_uploaded_file($tmp, $chemin);
+            @move_uploaded_file($tmp, "../" . $chemin);
             @unlink($tmp);
             $image = $chemin;
         } else {
-            $image = '../assets/images/village.jpg';
+            $image = 'assets/images/village.jpg';
         }
     } else {
-        $image = '../assets/images/village.jpg';
+        $image = 'assets/images/village.jpg';
     }
     
     if (isset($_POST['descriptionCircuit']) && $_POST['descriptionCircuit'] != "") {
