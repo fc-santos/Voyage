@@ -41,7 +41,7 @@ if (isset($_POST['ajouterEtape']) || isset($_POST['terminer'])) {
         $nomCircuit = "Sans titre";
     }
 
-    $nomImage = $nomCircuit;
+    $nomImage = $idCircuit;
     $dossier = "assets/images/";
     if ($_FILES['image']['tmp_name'] !== "") {
         $tmp = $_FILES['image']['tmp_name'];
