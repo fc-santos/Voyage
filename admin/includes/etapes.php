@@ -13,7 +13,7 @@ if (isset($_GET['idEtape'])) {
 
         while ($row = $stmt->fetch()) {
             $nomEtape = $row->titre;
-            $descriptionEtape = $row->description;
+            $descriptionEtape = $row->descriptionEtape;
         }
     } catch (Exception $r) {
     }
@@ -42,7 +42,7 @@ if (isset($_POST['ajouterJours']) || isset($_POST['terminerEtape'])) {
         $idCircuit = $_SESSION['idCircuit'];
         $ordre = $_SESSION['ordre'];
             
-        $sql3 = "INSERT INTO etape(idCircuit, nom, description, ordre) VALUES($idCircuit, :titre, :description,  $ordre)";
+        $sql3 = "INSERT INTO etape(idCircuit, nom, descriptionEtape, ordre) VALUES($idCircuit, :titre, :description,  $ordre)";
         $stmt3 = $conn->prepare($sql3);
         $stmt3->execute(['titre' => $titreEtape, 'description' => $descriptionEtape]);
         $_SESSION['correctEtape'] = true;

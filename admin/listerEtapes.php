@@ -43,7 +43,7 @@ $stmt = $conn->query('SELECT * FROM etape WHERE idCircuit = ' . $idCircuit);
                             $table .= '              
                                     <tr>
                                         <td>' . $row->nom . '</td>
-                                        <td>' . $row->description . '</td>
+                                        <td>' . $row->descriptionEtape . '</td>
                                         <td style="width: 200px;">
                                             <div class="col-md-12 choix">
                                                 <a href="" data-toggle="modal" data-target="#exampleModal'. $row->idEtape .'"><i class="fa fa-trash" aria-hidden="true" style="color: #ff6666;"></i></a>
