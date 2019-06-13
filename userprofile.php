@@ -15,7 +15,7 @@ $erreur = null;
 $succes = null;
 
 
-if (isset($_POST['btnModifier'])) {
+if (isset($_POST['btnModifierPwd'])) {
     $inputPassword = $_POST['inputPassword'];
     $lenghtPwd = (int)strlen($inputPassword);
     if ($lenghtPwd < 8 || $lenghtPwd > 12) {
@@ -25,13 +25,32 @@ if (isset($_POST['btnModifier'])) {
         $updateQuery = "UPDATE utilisateur SET password = ? WHERE idUtilisateur = ?";
         $stmt2 = $conn->prepare($updateQuery);
         $stmt2->execute([$hash, $idUser]);
-        $succes = "Votre profil a été mis à jour";
+        $succes = "Votre mot de passe a été modifié";
     }
 }
+
+if (isset($_POST['btnUpdate'])) {
+    $inputSexe = $_POST['inputSexe'];
+    $inputAdresse = $_POST['inputAdresse'];
+    $inputVille = $_POST['inputVille'];
+    $inputCodePostal = $_POST['inputCodePostal'];
+    $inputPays = $_POST['inputPays'];
+    $updateQuery = "UPDATE utilisateur SET sexe = ?, adresse = ?, ville = ?, codePostal = ?, pays = ? WHERE idUtilisateur = ?";
+    $stmt2 = $conn->prepare($updateQuery);
+    $stmt2->execute([$inputSexe, $inputAdresse, $inputVille, $inputCodePostal, $inputPays, $idUser]);
+    $succes = "Votre profil a été mis à jour";
+}
+
 
 $nom = $_SESSION['nom'];
 $prenom = $_SESSION['prenom'];
 $courriel = $_SESSION['courriel'];
+$sexe = $_SESSION['sexe'] ? $_SESSION['sexe'] : '';
+$adresse = $_SESSION['adresse'] ? $_SESSION['adresse'] : '';
+$courriel = $_SESSION['courriel'] ? $_SESSION['courriel'] : '';
+$ville = $_SESSION['ville'] ? $_SESSION['ville'] : '';
+$codepostal = $_SESSION['codepostal'] ? $_SESSION['codepostal'] : '';
+$pays = $_SESSION['pays'] ? $_SESSION['pays'] : '';
 
 
 $query = "SELECT ct.titre, d.dateDebut, c.nbAdultes, c.nbEnfants, c.resteAPayer FROM circuit as ct
@@ -83,6 +102,12 @@ exit();*/
                         <i class="fas fa-angle-right"></i>
                     </span>
                 </button>
+                <button class="btn card-footer text-white clearfix small z-1" data-toggle="modal" data-target="#profil2">
+                    <span class="float-left">Mettre à jour profil</span>
+                    <span class="float-right">
+                        <i class="fas fa-angle-right"></i>
+                    </span>
+                </button>
             </div>
         </div>
         <div class="col-xl-3 col-sm-6 mb-3">
@@ -104,18 +129,45 @@ exit();*/
 
 </div>
 
-<!-- Modal Modifier Profil -->
+<!-- Modal Modifier Mot de passe -->
 <div class="modal fade" id="profil" tabindex="-1" role="dialog" aria-labelledby="profilLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="profilLabel">Voici vos informations</h5>
+                <h5 class="modal-title" id="profilLabel">Formulaire Modification mot de passe</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="formModifier" action="" method="post">
+                <form id="formModifierPwd" action="" method="post">
+                    <div class="form-group">
+                        <label for="inputPassword">Nouveau mot de passe</label>
+                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputConfirmPwd">Confirmation mot de passe</label>
+                        <input type="password" class="form-control" id="inputConfirmPwd" name="inputConfirmPwd" required />
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="btnModifierPwd" value="Modifier">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Modifier Profil -->
+<div class="modal fade" id="profil2" tabindex="-1" role="dialog" aria-labelledby="profil2Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profil2Label">Voici vos informations</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formUpdate" action="" method="post">
                     <div class="form-group">
                         <label for="inputPrenom">Prénom</label>
                         <input type="text" class="form-control" id="inputPrenom" name="inputPrenom" value="<?= $prenom ?>" readonly>
@@ -129,14 +181,26 @@ exit();*/
                         <input type="email" class="form-control" id="inputCourriel" name="inputCourriel" value="<?= $courriel ?>" readonly />
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword">Nouveau mot de passe</label>
-                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" required />
+                        <label for="inputSexe">Sexe</label>
+                        <input type="text" class="form-control" id="inputSexe" name="inputSexe" value="<?= $sexe ?>">
                     </div>
                     <div class="form-group">
-                        <label for="inputConfirmPwd">Confirmation mot de passe</label>
-                        <input type="password" class="form-control" id="inputConfirmPwd" name="inputConfirmPwd" required />
+                        <label for="inputAdresse">Adresse</label>
+                        <input type="text" class="form-control" id="inputAdresse" name="inputAdresse" value="<?= $adresse ?>" />
                     </div>
-                    <input class="btn btn-primary" type="submit" name="btnModifier" value="Modifier">
+                    <div class="form-group">
+                        <label for="inputVille">Ville</label>
+                        <input type="text" class="form-control" id="inputVille" name="inputVille" value="<?= $ville ?>">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputCodePostal">Code Postal</label>
+                        <input type="text" pattern="[A-Za-z][0-9][A-Za-z][0-9][A-Za-z][0-9]" class="form-control" id="inputCodePostal" name="inputCodePostal" value="<?= $codepostal ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPays">Pays</label>
+                        <input type="text" class="form-control" id="inputPays" name="inputPays" value="<?= $pays ?>">
+                    </div>
+                    <input class="btn btn-primary" type="submit" name="btnUpdate" value="Mettre à jour">
                 </form>
             </div>
         </div>

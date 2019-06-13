@@ -19,14 +19,16 @@ if (isset($_GET['depart'])) {
     $stmt2->execute([$idDepart]);
     $circuitHebergement = $stmt2->fetchAll();
 
-
-
-    $stmt3 = $conn->prepare('SELECT m.nom FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN manger as m ON j.idDinner=m.idManger 
+    $stmt3 = $conn->prepare('SELECT m.nom, m.siteweb FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN manger as m ON j.idDinner=m.idManger 
     INNER JOIN lieu as l ON m.idLieu=l.idLieu WHERE d.idDepart=?');
     $stmt3->execute([$idDepart]);
     $circuitDinner = $stmt3->fetchAll();
 
-    $stmt3 = $conn->prepare('SELECT m.nom FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN manger as m ON j.idSouper=m.idManger 
+    /*echo '<pre>';
+    var_dump($circuitDinner);
+    echo '</pre>';*/
+
+    $stmt3 = $conn->prepare('SELECT m.nom, m.siteweb FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN manger as m ON j.idSouper=m.idManger 
     INNER JOIN lieu as l ON m.idLieu=l.idLieu WHERE d.idDepart=?');
     $stmt3->execute([$idDepart]);
     $circuitSouper = $stmt3->fetchAll();
@@ -34,10 +36,6 @@ if (isset($_GET['depart'])) {
 
 
 
-    /*echo '<pre>';
-    var_dump($circuitActivite);
-    echo '</pre>';
-    exit();*/
 }
 
 $compteur = 0;
@@ -68,7 +66,7 @@ $i = 0;
                                 <div class="" role="tab" id="heading<?= $compteur ?>">
                                     <h5 class="mb-0">
                                         <a role="button" class="collapsed text-uppercase" data-parent="#accordion" data-toggle="collapse" href="#collapse<?= $compteur ?>" aria-expanded="false" aria-controls="collapse<?= $compteur ?>">
-                                            Jour <?= $compteur ?>: <?= $result->ville ?><i class="fas fa-angle-down float-right"></i>
+                                            Jour <?= $compteur ?>: <?= $result->ville ? $result->ville : '<strong>Aucun lieu</strong>' ?><i class="fas fa-angle-down float-right"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -77,8 +75,8 @@ $i = 0;
                                       
                                         <p class="text-muted">Activité : <?= $result->nom ? $result->nom : 'Aucune activité pour cette journée prévue' ?></p>
                                         <p class="text-muted">Hébergement : <?= $circuitHebergement[$i]->nom ? $circuitHebergement[$i]->nom : 'Aucun hébergement prévu pour cette journée' ?></p>
-                                        <p class="text-muted">Dinner : <?= $circuitDinner[$i]->nom ? $circuitDinner[$i]->nom : 'Aucun place prévue pour le dînner' ?></p>
-                                        <p class="text-muted">Souper : <?= $circuitSouper[$i]->nom ? $circuitSouper[$i]->nom : 'Aucun place prévue pour le souper' ?></p>
+                                        <p class="text-muted">Dinner : <?= $circuitDinner[$i]->nom ? $circuitDinner[$i]->nom : 'Aucun place prévue pour le dînner' ?> | <?= $circuitDinner[$i]->siteweb ?  '<a href="'.$circuitDinner[$i]->siteweb . '" target="_blank">Lien vers le site</a>' : '<strong>aucun lien</strong>'?></p>
+                                        <p class="text-muted">Souper : <?= $circuitSouper[$i]->nom ? $circuitSouper[$i]->nom : 'Aucun place prévue pour le souper' ?> | <?= $circuitSouper[$i]->siteweb ?  '<a href="'.$circuitSouper[$i]->siteweb . '" target="_blank">Lien vers le site</a>' : '<strong>aucun lien</strong>'?></p>
 
                                     </div>
                                 </div>

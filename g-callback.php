@@ -33,6 +33,12 @@ if ($user) {
     $_SESSION['nom'] = $user->nom;
     $_SESSION['courriel'] = $user->courriel;
     $_SESSION['role'] = $user->role;
+    $_SESSION['sexe'] = $user->sexe;
+    $_SESSION['adresse'] = $user->adresse;
+    $_SESSION['ville'] = $user->ville;
+    $_SESSION['codepostal'] = $user->codePostal;
+    $_SESSION['pays'] = $user->pays;
+    $_SESSION['role'] = $user->role;
 } else {
     $stmt1 = $conn->prepare('INSERT INTO utilisateur (prenom, nom, courriel) VALUES (?, ?, ?)');
     $stmt1->execute([$prenom, $nom, $email]);
@@ -43,6 +49,11 @@ if ($user) {
     $_SESSION['prenom'] = $lastUser->prenom;
     $_SESSION['nom'] = $lastUser->nom;
     $_SESSION['courriel'] = $lastUser->courriel;
+    $_SESSION['sexe'] = $lastUser->sexe;
+    $_SESSION['adresse'] = $lastUser->adresse;
+    $_SESSION['ville'] = $lastUser->ville;
+    $_SESSION['codepostal'] = $lastUser->codePostal;
+    $_SESSION['pays'] = $lastUser->pays;
     $_SESSION['role'] = $lastUser->role;
 }
 
