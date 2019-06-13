@@ -34,8 +34,13 @@ if (isset($_POST['btnLogin'])) {
             $_SESSION['nom'] = $user->nom;
             $_SESSION['prenom'] = $user->prenom;
             $_SESSION['courriel'] = $user->courriel;
+            $_SESSION['sexe'] = $user->sexe;
+            $_SESSION['adresse'] = $user->adresse;
+            $_SESSION['ville'] = $user->ville;
+            $_SESSION['codepostal'] = $user->codePostal;
+            $_SESSION['pays'] = $user->pays;
             $_SESSION['role'] = $user->role;
-            echo $_SESSION['role'];
+            //echo $_SESSION['role'];
             if ($_SESSION['role'] == 'Membre') {
                 header('Location: index.php');
                 exit();

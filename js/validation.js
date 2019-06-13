@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
   $("#formEnregistrer").validate({
     errorElement: "span",
     rules: {
@@ -47,19 +48,9 @@ $(document).ready(function () {
     }
   });
 
-  $("#formModifier").validate({
+  $("#formModifierPwd").validate({
     errorElement: "span",
     rules: {
-      inputPrenom: {
-        required: true
-      },
-      inputNom: {
-        required: true
-      },
-      inputCourriel: {
-        required: true,
-        email: true
-      },
       inputPassword: {
         required: true,
         password: true,
@@ -75,15 +66,6 @@ $(document).ready(function () {
       }
     },
     messages: {
-      inputPrenom: {
-        require: "Veuillez indiquer votre prénom"
-      },
-      inputNom: {
-        required: "Veuillez indiquer votre nom"
-      },
-      inputCourriel: {
-        email: "Le courriel doit être dans le format: abc@example.com"
-      },
       inputPassword: {
         required: "Veuillez indiquer votre mot de passe",
         rangelength: "Votre mot de passe doit contenir entre 8 et 12 caractères"
