@@ -6,8 +6,10 @@ require './controlleur/connexionDB.php';
 
 if (isset($_GET['depart'])) {
     $idDepart = (int)$_GET['depart'];
+
     $stmt = $conn->prepare('SELECT c.titre, c.description, d.idDepart, d.prix, d.dateDebut, l.ville, a.nom FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN activite as a ON j.idActivite=a.idActivite 
     INNER JOIN lieu as l ON a.idLieu=l.idLieu WHERE d.idDepart=?');
+
     $stmt->execute([$idDepart]);
     $circuitActivite = $stmt->fetchAll();
 
@@ -72,10 +74,12 @@ $i = 0;
                                 </div>
                                 <div id="collapse<?= $compteur ?>" class="collapse" role="tabpanel" aria-labelledby="heading<?= $compteur ?>">
                                     <div class="card-body">
+                                      
                                         <p class="text-muted">Activité : <?= $result->nom ? $result->nom : 'Aucune activité pour cette journée prévue' ?></p>
                                         <p class="text-muted">Hébergement : <?= $circuitHebergement[$i]->nom ? $circuitHebergement[$i]->nom : 'Aucun hébergement prévu pour cette journée' ?></p>
                                         <p class="text-muted">Dinner : <?= $circuitDinner[$i]->nom ? $circuitDinner[$i]->nom : 'Aucun place prévue pour le dînner' ?></p>
                                         <p class="text-muted">Souper : <?= $circuitSouper[$i]->nom ? $circuitSouper[$i]->nom : 'Aucun place prévue pour le souper' ?></p>
+
                                     </div>
                                 </div>
                             </div>

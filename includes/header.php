@@ -30,10 +30,10 @@ $stmt = $conn->query($query); ?>
 <!-- body style="min-height: 700px;" -->
 
 <body onload="getCircuits(<?php if (isset($_SESSION['prenom'])) {
-                                echo "'authentifie'";
-                            } else {
-                                echo "'nonAuthentifie'";
-                            }  ?>)">
+    echo "'authentifie'";
+} else {
+    echo "'nonAuthentifie'";
+}  ?>); obtenirLangue();">
     <?php while ($row = $stmt->fetch()) : ?>
         <div class="row fermerNewsletters" style="min-height: 40px; border-botton: 1px solid black; background-color: red; color: white; display: none;" id="newsletter">
             <div class="col-sm-1" style="cursor: pointer;" onclick="fermer()">X</div>
@@ -50,13 +50,13 @@ $stmt = $conn->query($query); ?>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mr-4">
-                        <a class="nav-link" onclick="ouvrirMessage()" href="#">Message aux clients</a>
+                        <a id="menuMessageAuxClients" class="nav-link" onclick="ouvrirMessage()" href="#">Message aux clients</a>
                     </li>
                     <li class="nav-item mr-4 <?php if ($nav === 'circuits') : ?>active <?php endif; ?>">
-                        <a class="nav-link" href="circuits.php">Circuits</a>
+                        <a id="menuCircuits" class="nav-link" href="circuits.php">Circuits</a>
                     </li>
                     <li class="nav-item mr-4">
-                        <a class="nav-link" data-toggle="modal" href="" data-target="#contact">
+                        <a id="menuContact" class="nav-link" data-toggle="modal" href="" data-target="#contact">
                             Contact
                         </a>
                     </li>
@@ -65,16 +65,16 @@ $stmt = $conn->query($query); ?>
                         <a class="nav-link" href="contact.php">Contact</a>
                     </li>-->
                     <li class="nav-item <?php if ($nav === 'about') : ?>active <?php endif; ?>">
-                        <a class="nav-link" href="about.php">À propos</a>
+                        <a id="menuAPropos" class="nav-link" href="about.php">À propos</a>
                     </li>
                 </ul>
                 <?php if (!isset($_SESSION['prenom'])) : ?>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item <?php if ($nav === 'login') : ?>active <?php endif; ?>">
-                            <a class="nav-link" href="login.php">Connexion</a>
+                            <a id="menuConnexion" class="nav-link" href="login.php">Connexion</a>
                         </li>
                         <li class="nav-item <?php if ($nav === 'register') : ?>active <?php endif; ?>">
-                            <a class="nav-link" href="register.php">S'enregistrer</a>
+                            <a id="menuSenregistrer" class="nav-link" href="register.php">S'enregistrer</a>
                         </li>
 
                     </ul>
@@ -105,7 +105,11 @@ $stmt = $conn->query($query); ?>
                 <?php endif; ?>
             </div>
         </div>
+        <a href="javascript:obtenirXML('fr');">FR</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="javascript:obtenirXML('en');">EN</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="javascript:obtenirXML('es');">ES</a> 
     </nav>
+
 
 
     <!-- Modal -->
