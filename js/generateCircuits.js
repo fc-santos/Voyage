@@ -11,7 +11,6 @@ function getCircuits(isAuthentifie) {
         if (this.readyState == 4 && this.status == 200) {
             var r = this.responseText;
             circuits = JSON.parse(r);
-            console.log(circuits);
             createCircuits(circuits, isAuthentifie);
         }
     }

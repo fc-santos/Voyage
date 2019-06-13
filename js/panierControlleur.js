@@ -36,7 +36,6 @@ function getPanier(){
     data : {'action': 'listerPanier'},
     dataType : "json"})
   .done(function(reponse){
-    console.log(reponse);
     viewPanier(reponse);
   })
   .fail(function(jqXHR, textStatus){

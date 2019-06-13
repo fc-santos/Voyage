@@ -35,6 +35,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.js"></script>
 <script src="./js/validation.js"></script>
 <script src="./js/scripts.js"></script>
+<script src="./js/langue.js"></script>
 
 </body>
 

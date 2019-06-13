@@ -6,8 +6,7 @@ require './controlleur/connexionDB.php';
 
 if (isset($_GET['depart'])) {
     $idDepart = (int)$_GET['depart'];
-    $stmt = $conn->prepare('SELECT c.titre, c.description, d.idDepart, d.prix, d.dateDebut, l.ville, a.nomActivite FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN activite as a ON j.idActivite=a.idActivite 
-    INNER JOIN lieu as l ON a.idLieu=l.idLieu WHERE d.idDepart=?');
+    $stmt = $conn->prepare('SELECT c.titre, c.description, d.idDepart, d.prix, d.dateDebut, l.ville, a.nom FROM depart as d INNER JOIN circuit as c ON d.idCircuit=c.idCircuit INNER JOIN etape as e ON c.idCircuit=e.idCircuit INNER JOIN jour as j ON e.idEtape=j.idEtape INNER JOIN activite as a ON j.idActivite=a.idActivite INNER JOIN lieu as l ON a.idLieu=l.idLieu WHERE d.idDepart=?');
     $stmt->execute([$idDepart]);
     $circuitActivite = $stmt->fetchAll();
 
@@ -33,7 +32,6 @@ if (isset($_GET['depart'])) {
     var_dump($circuitActivite);
     echo '</pre>';
     exit();*/
-    
 }
 
 $compteur = 0;
@@ -70,7 +68,7 @@ $compteur = 0;
                                 <div id="collapse<?= $compteur ?>" class="collapse" role="tabpanel" aria-labelledby="heading<?= $compteur ?>">
                                     <div class="card-body">
                                         <p class="text-muted">Activités : <?php $result->nomActivite ? $result->nomActivite : 'Aucune activité' ?></p>
-                                        <?php foreach($circuitHebergement as $hebergement) : ?>
+                                        <?php foreach ($circuitHebergement as $hebergement) : ?>
                                             <p class="text-muted">Hébergement : <?php $result->nomHebergement ? $result->nomHebergement : 'Aucun hébergement' ?></p>
                                         <?php endforeach; ?>
                                     </div>
