@@ -36,16 +36,14 @@
         }
 
         if (isset($_POST['departActive'])) {
-            $isActive = '0';
+            $isActive = 0;
         } else {
-            $isActive = '1';
+            $isActive = 1;
         }
 
         try {
             $sql = "INSERT INTO `depart`(`idCircuit`, `dateDebut`, `nbPlaces`, `prix`, `titrePromotion`, `rabais`, `estActif`) VALUES ($idCircuit, '$dateDepart', $nbPersonnes, $prix, :titrePromotion, $rabais, $isActive)";
 
-            /* echo($sql);
-             exit();*/
             $stmt1 = $conn->prepare($sql);
             $stmt1->execute(['titrePromotion'=>$titrePromotion]);
         } catch (Exception $r) {

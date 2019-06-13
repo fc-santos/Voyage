@@ -123,7 +123,7 @@ $stmt = $conn->query($query); ?>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="sendMessage.php" method="POST" >
                         <div class="form-group">
                             <label for="titreMessage">Sujet</label>
                             <input type="text" class="form-control" id="titreMessage" name="titreMessage" required>
@@ -132,7 +132,7 @@ $stmt = $conn->query($query); ?>
                             <label for="contenuMessage">Message</label>
                             <textarea class="form-control" id="contenuMessage" name="contenuMessage" rows="3"></textarea>
                         </div>
-                        <button type="button" class="btn btn-primary">Envoyer</button>
+                        <input type="submit" name="submit" class="btn btn-primary">Envoyer</input>
                     </form>
                 </div>
             </div>
