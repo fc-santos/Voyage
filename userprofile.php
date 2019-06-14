@@ -235,6 +235,7 @@ exit();*/
                                         <th>Adultes</th>
                                         <th>Enfants</th>
                                         <th>Reste à payer</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -245,6 +246,14 @@ exit();*/
                                             <td><?= $commande->nbAdultes ?></td>
                                             <td><?= $commande->nbEnfants ?></td>
                                             <td>$ <?= $commande->resteAPayer ?></td>
+                                            <td><form name="_xclick" action="https://www.paypal.com/us/cgi-bin/webscr">
+                                                <input type="hidden" name="cmd" value="_xclick" />
+                                                <input type="hidden" name="business" value="ouellet135@gmail.com" />
+                                                <input type="hidden" name="currency_code" value="CAD" />
+                                                <input type="hidden" name="item_name" value=<?= $commande->titre ?> />
+                                                <input type="hidden" name="amount" value=<?= $commande->resteAPayer ?> />
+                                                <input type="image" src="assets/images/paypall4.jpg" style="width:10em" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+                                            </form></td>
                                         </tr>
                                     <?php endforeach; ?>
                                 </tbody>
