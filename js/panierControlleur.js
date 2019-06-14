@@ -96,7 +96,7 @@ function viewPanier(infoPanier) {
                                         <input type="hidden" name="currency_code" value="CAD" />
                                         <input type="hidden" name="item_name" value="` + infoPanier.circuit[i].titre + `" />
                                         <input type="hidden" name="amount" value="` + infoPanier.depart[i].prix.toFixed(2)/4 + `" />
-                                        <input type="image" src="assets/images/paypall_payer_depot.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+                                        <input type="image" src="assets/images/paypall2.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
                                 </form>
 
                                 <form name="_xclick" action="#" onsubmit="payer(this,`+ infoPanier.depart[i].idDepart +`,`+ infoPanier.panier[i].nbAdultes + `,`+ infoPanier.panier[i].nbEnfants +`, 0); supprimer(` + infoPanier.panier[i].idPanier + `)">
@@ -105,7 +105,7 @@ function viewPanier(infoPanier) {
                                         <input type="hidden" name="currency_code" value="CAD" />
                                         <input type="hidden" name="item_name" value="` + infoPanier.circuit[i].titre + `" />
                                         <input type="hidden" name="amount" value="` + infoPanier.depart[i].prix.toFixed(2) + `" />
-                                        <input type="image" src="assets/images/paypall_payer.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
+                                        <input type="image" src="assets/images/paypall3.jpg" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" />
                                 </form>
                         </div>                                  
                     </div>
