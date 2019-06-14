@@ -32,8 +32,8 @@ function createCircuits(circuits, isAuthentifie) {
                             <div class="prix">$` + element.prix + `</div>
                             <img src="assets/images/castle.jpg" class="card-img-top img-fluid img-cover" alt="Image du Circuit">
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                                <h5 class="card-title">`+ element.titre + `</h5>
+                                <p class="card-text">`+ element.description.substring(0, 60)+ "..." + `</p>
                                 <hr>
                                 <a href="details.php?depart=` + element.idDepart + `" class="btn btn-success btn-block">Voir l'offre</a>`
         if (isAuthentifie === 'authentifie') {

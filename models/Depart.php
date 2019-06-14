@@ -1,6 +1,7 @@
 <?php
 
-    class Depart {
+    class Depart
+    {
 
         // DB Properties
         private $conn;
@@ -16,16 +17,18 @@
         public $rabais;
         public $estActif;
         
-        public function __construct($db){
+        public function __construct($db)
+        {
             $this->conn = $db;
         }
 
         // GET Departs
-        public function listeDeparts() {
+        public function listeDeparts()
+        {
             
             // Create query
             $query = 'SELECT 
-                    c.titre as circuitName,
+                    c.titre,
                     d.idDepart,
                     d.idCircuit,
                     d.dateDebut,
@@ -47,4 +50,3 @@
             return $stmt;
         }
     }
-    

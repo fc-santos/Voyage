@@ -5,3 +5,7 @@ function fermer(){
 function ouvrirMessage(){
     $(".fermerNewsletters").css("display","block");
 }
+
+$(window).unload(function(){
+    localStorage.clear();
+  });
